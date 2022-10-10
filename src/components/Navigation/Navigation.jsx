@@ -1,11 +1,40 @@
 import s from './Navigation.module.scss';
 
+import { NavItem } from './../NavItem/NavItem';
+
+const navItems = [
+  {
+    id: 1,
+    title: 'Главная',
+    image: '/assets/svg_aside/home.svg',
+  },
+  {
+    id: 2,
+    title: 'Навигатор',
+    image: './assets/svg_aside/explore.svg',
+  },
+  {
+    id: 3,
+    title: 'Подписка',
+    image: './assets/svg_aside/subscriptions.svg',
+  },
+  {
+    id: 4,
+    title: 'Библиотека',
+    image: './assets/svg_aside/library.svg',
+  },
+];
+
 export const Navigation = () => {
   return (
     <aside className={s.aside__nav}>
       <nav className={s.nav__list}>
         <ul className={s.nav__items}>
-          <li className={s.nav__item}>
+          {navItems.map((item) => {
+            return <NavItem key={item.id} item={item} />;
+          })}
+
+          {/* <li className={s.nav__item}>
             <div className={s.nav__icons}>
               <svg
                 width="24"
@@ -19,8 +48,8 @@ export const Navigation = () => {
             <a href="#" className={s.nav__links}>
               Главная
             </a>
-          </li>
-          <li className={s.nav__item}>
+          </li> */}
+          {/* <li className={s.nav__item}>
             <div className={s.nav__icons}>
               <svg
                 width="24"
@@ -75,7 +104,7 @@ export const Navigation = () => {
             <a href="#" className={s.nav__links}>
               Библиотека
             </a>
-          </li>
+          </li> */}
         </ul>
       </nav>
     </aside>

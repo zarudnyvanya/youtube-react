@@ -1,6 +1,51 @@
 import { Button } from '../UI/Button/Button';
 
+import { Genre } from './../Genre/Genre';
+
 import s from './Genres.module.scss';
+
+const genres = [
+  {
+    id: 1,
+    title: 'Все',
+  },
+  {
+    id: 2,
+    title: 'Видеоигры',
+  },
+  {
+    id: 3,
+    title: 'Сейчас в эфире',
+  },
+  {
+    id: 4,
+    title: 'Музыка',
+  },
+  {
+    id: 5,
+    title: 'Джемы',
+  },
+  {
+    id: 6,
+    title: 'Фитнес',
+  },
+  {
+    id: 7,
+    title: 'Кулинария',
+  },
+  {
+    id: 8,
+    title: 'Последние опубликованные видео',
+  },
+  {
+    id: 9,
+    title: 'Просмотрено',
+  },
+  {
+    id: 10,
+    title: 'Новое для вас',
+  },
+];
 
 export const Genres = () => {
   return (
@@ -8,63 +53,9 @@ export const Genres = () => {
       <section className={s.genres}>
         <nav className={s.genres__list}>
           <ul className={s.genres__items}>
-            {/* genres__item genres__white__item */}
-            <li className={s.genres__item}>
-              {/* genres__link genres__white__link */}
-              <a href="#" className={s.genres__link}>
-                Все
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Видеоигры
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Сейчас в эфире
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Музыка
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Джемы
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Экшен и приключения
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Фитнес
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Кулинария
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Последние опубликованные видео
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Просмотрено
-              </a>
-            </li>
-            <li className={s.genres__item}>
-              <a href="#" className={s.genres__link}>
-                Новое для вас
-              </a>
-            </li>
+            {genres.map((genre) => {
+              return <Genre key={genre.id} genre={genre} />;
+            })}
           </ul>
         </nav>
       </section>
