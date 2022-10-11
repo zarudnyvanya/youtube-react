@@ -124,6 +124,7 @@ a {
 
 .aside__nav {
   width: 250px;
+  flex-shrink: 0;
   z-index: 99;
 }
 
@@ -165,8 +166,6 @@ a {
 
 .main__content {
   width: 100%;
-  display: flex;
-  justify-content: center;
 }
 
 .genres {
@@ -211,9 +210,29 @@ a {
   color: #000;
 }
 
+.video__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  cursor: pointer;
+}
+
+.video__item {
+  width: 350px;
+}
+.video__item video {
+  width: 350px;
+}
+
+.video__block {
+  position: relative;
+}
+
 @media (max-width: 1120px) {
   .search {
     width: 300px;
+  }
+  .genres__item:not(:last-child) {
+    margin-top: 12px;
   }
 }
 
