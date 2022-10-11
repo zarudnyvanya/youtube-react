@@ -26,6 +26,13 @@ a{
     display: flex;
 }
 
+.main__content{
+    width: 100%;
+    // display: flex;
+    // justify-content: center;
+    // background-color: aqua;
+}
+
 @media (max-width:1120px){
     .search{
        width: 300px;

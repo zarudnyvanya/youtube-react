@@ -1,0 +1,21 @@
+.video__content{
+
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+}
+.video__wrapper{
+    display: flex;
+     justify-content: center;
+    align-items: center;
+}
+.video__list{
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    cursor: pointer;
+
+}

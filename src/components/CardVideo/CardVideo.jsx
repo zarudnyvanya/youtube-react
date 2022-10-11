@@ -1,10 +1,12 @@
 import s from './CardVideo.module.scss';
 
-export const CardVideo = () => {
+export const CardVideo = ({ videoTitle, videoImage }) => {
   return (
-    <div>
-      <span>IMG</span>
-      <h2>I am card video</h2>
+    <div className={s.video__item}>
+      <div className={s.video__block}>
+        <video src="#" poster={videoImage}></video>
+      </div>
+      <p className={s.desc}>{videoTitle}</p>
     </div>
   );
 };
