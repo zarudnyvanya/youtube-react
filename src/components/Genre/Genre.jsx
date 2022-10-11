@@ -1,15 +1,10 @@
-import { Button } from './../UI/Button/Button';
-
 import s from './Genre.module.scss';
+import { Button } from '../UI/Button/Button';
 
-export const Genre = () => {
+export const Genre = ({ genre }) => {
   return (
-    <div>
-      <ul className={s.list}>
-        <Button>{1}</Button>
-        <Button>{2}</Button>
-        <Button>{3}</Button>
-      </ul>
-    </div>
+    <Button genre={genre} margin={10}>
+      {genre.title}
+    </Button>
   );
 };
