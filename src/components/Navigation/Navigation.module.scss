@@ -1,19 +1,21 @@
 .aside__nav{
-    width: 250px;
+    
     z-index: 99;
-    // overflow-y: auto;
-    // min-width: 12%;
-    // background-color:#000;
-    // height: 93vh;
-    // position: fixed;
-    // top: 56px;
+
+    min-width: 240px;
+    flex-shrink: 0;
+}
+
+.hidden {
+    // display: none;
+    visibility: hidden;
 }
 
 .nav__items{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+
     &:last-child{
         padding-bottom: 10px;
         border-bottom: 1px solid #303030;
@@ -28,7 +30,7 @@
     display: flex;
     align-items: center;
     padding: 8px 24px;
-    
+    // padding-left: 8px;
     &:hover{
 
         background: #303030;
@@ -50,4 +52,5 @@
 .nav__icons{
     display: inline-block;
     margin-right: 24px;
+    padding-left: 8px;
 }

@@ -1,0 +1,11 @@
+.video__item{
+
+    // width: 349px;
+    & video{
+        width: 330px;
+    }
+    margin-bottom: 40px;
+    &:not(:nth-child(4n)){
+        margin-right: 15px;
+    }
+}

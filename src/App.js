@@ -4,14 +4,22 @@ import { Navigation } from './components/Navigation/Navigation';
 import { Genres } from './components/Genres/Genres';
 
 import './App.scss';
+import { useState } from 'react';
 
 function App() {
+  const [navIsOpen, setNavIsOpen] = useState(false);
+
   return (
     <div className="App">
-      <Header />
+      <Header navIsOpen={() => setNavIsOpen(!navIsOpen)} />
+
       <div className="container">
-        <Navigation />
-        <Genres />
+        <Navigation navIsOpen={navIsOpen} />
+
+        <div className="main__content">
+          <Genres />
+          <Home />
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,29 @@
-// .btn {
-//     margin-top: 10px;
-// }
+.genres__item{
+    background: #303030;
+    border: 0.3px solid #AAAAAA;
+    border-radius: 32px;
+    padding: 8px 12px;
+    
+   &:not(:last-child){
+    margin-right: 12px;
+   }
+
+   cursor: pointer;
+}
+
+.genres__active {
+    background-color: #ffffff;
+    
+    a {
+        color: #030303;
+    }
+}
+
+.genres__link{
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    white-space: nowrap;
+}
+
