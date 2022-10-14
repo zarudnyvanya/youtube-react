@@ -144,7 +144,7 @@ a{
     // position: relative;
 }
 .aside__nav{
-    width: 250px;
+    min-width: 240px;
     flex-shrink: 0;
     z-index: 99;
     // overflow-y: auto;
@@ -199,16 +199,10 @@ a{
 }
 .main__content{
     width: 100%;
-    // display: flex;
-    // justify-content: center;
+   
 }
 .genres{
-    // z-index: 88;
-    // position: fixed;
-    // top: 56px;
     width: 100%;
-   
-    
 }
 .genres__list{
     padding: 12px 0;
@@ -251,33 +245,105 @@ a{
      color: #000;
 }
 
-
-.video__list{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.video__content{
     
-    // justify-content: center;
-    // align-items: center;
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #121212;
+}
+.video__wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.video__list{
+   
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
     
     cursor: pointer;
     
 }
+// .video__list{
+   
+//     display: flex;
+//     justify-content: center;
+//     flex-wrap: wrap;
+//     cursor: pointer;
+    
+// }
+
+
 
 .video__item{
     
-  width: 350px;
+    width: 349px;
+    // & video{
+    //     width: inherit;
+    // }
+    margin-bottom: 40px;
+    
+    &:not(:nth-child(4n)){
+        margin-right: 15px;
+    }
+    
+}
 
-
-    & video{
-        width: 350px;
+.block__video{
+    
+    position: relative;
+    width: 100%;
+    
+    & span{
+        position: absolute;
+        background-color: rgba(#000000, 0.7);
+        font-weight: 400;
+        font-size: 10px;
+        line-height: 12px;
+        color: #FFFFFF;
+        padding: 3px 4px;
+        right: 4px;
+        bottom:8px;
+        
+    }
+     & video{
+        height: 100%;
+        width: 349px;
     }
 }
 
-
-.video__block{
-    position: relative;
-
+.video__info{
+    display: flex;
+    padding-top: 12px;
 }
+
+.description{
+    display: flex;
+    flex-direction: column;
+    padding-right: 24px;
+    // max-width: 204px;
+    & p{
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 14px;
+    color: #FFFFFF;
+    margin-bottom: 6px;
+
+    }
+    & span{
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+        color: #AAAAAA;
+    }
+}
+
+.channel{
+    margin-right: 12px;
+}
+
 
 
 @media (max-width:1120px){
@@ -285,7 +351,7 @@ a{
     width: 300px;
  }
 
- .genres__item:not(:last-child){
+ .genres__item{
     margin-top: 12px;
  }
 }
