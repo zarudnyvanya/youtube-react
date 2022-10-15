@@ -1,27 +1,29 @@
 
 .genres{
     width: 100%;
+    overflow-y: hidden;
+    text-align: center;
+    border-top: 1px solid #303030;
+    border-bottom: 1px solid #303030;
 }
 
 
 .genres__list{
+    display:inline-block;
     padding: 12px 0;
-    border-top: 1px solid #303030;
-    border-bottom: 1px solid #303030;
 }
 .genres__items{
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-   
 }
 
 .genres__item{
+    display: flex;
     background: #303030;
     border: 0.3px solid #AAAAAA;
     border-radius: 32px;
     padding: 8px 12px;
-    
+    white-space: nowrap;
    &:not(:last-child){
     margin-right: 12px;
    }
