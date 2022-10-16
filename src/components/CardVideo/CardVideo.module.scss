@@ -1,5 +1,12 @@
-video__item{
-    margin-bottom: 40px;
+// video__item{
+//     margin-bottom: 40px;
+// }
+
+.video__item {
+    margin: 0px 20px 30px 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+    width: 360px;
 }
 
 .block__video{
@@ -57,3 +64,28 @@ video__item{
 .channel{
     margin-right: 12px;
 }
+
+
+@media (max-width: 1760px) {
+    .video__item {
+        width: 30%;
+    }
+}
+
+@media (max-width: 1440px) {
+    .video__item {
+        width: 40%;
+    }
+}
+
+@media (max-width: 1120px) {
+    .video__item {
+        width: 100%;
+    }
+}
+
+// @media (max-width: 1080px) {
+//     .video__item {
+//         width: 100%;
+//     }
+// }

@@ -22,12 +22,18 @@ a{
     
 }
 
+.App {
+    width: 100%;
+}
+
 .container {
+    width: 100%;
     display: flex;
 }
 
 .main__content{
     width: 100%;
+    max-width: calc(100% - 240px);
     // display: flex;
     // justify-content: center;
     // background-color: aqua;
@@ -37,4 +43,7 @@ a{
     .search{
        width: 300px;
     }
+
 }
+
+
