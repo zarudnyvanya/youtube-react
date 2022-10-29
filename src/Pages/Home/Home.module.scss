@@ -1,0 +1,46 @@
+// .video__content{
+//     width: 100%;
+//     max-width: 1680px;
+//     padding-top: 20px;
+//     background-color: #121212;
+// }
+
+// .video__wrapper{
+//     width: 100%;
+// }
+
+// .video__list{
+//     width: 100%;
+//     display: grid;
+//     grid-template-columns: repeat(auto-fill,360px);
+//     justify-content: center;
+//     justify-items: center;
+//     // gap: 15px;
+//     // grid-row-gap: 15px;
+//     grid-column-gap: 15px;
+//     cursor: pointer;
+    
+// }
+
+.video__content {
+    padding: 24px 0px;
+    background-color: #181818;
+}
+
+.video__list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+// @media (max-width: 1415px) {
+//     .video__list {
+//         grid-column-gap: 10px;
+//     }
+// }
+
+// @media (max-width: 1360px) {
+//     .video__list {
+//         // grid-column-gap: 0%;
+//     }
+// }

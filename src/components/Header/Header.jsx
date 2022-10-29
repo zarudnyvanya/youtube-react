@@ -2,12 +2,12 @@ import s from './Header.module.scss';
 
 import user from './../../assets/svg__header/user.png';
 
-export const Header = () => {
+export const Header = ({ navIsOpen }) => {
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
         <div className={s.wrapper__burger__logo}>
-          <button className={s.burger}>
+          <button onClick={navIsOpen} className={s.burger}>
             <svg
               width="24"
               height="24"

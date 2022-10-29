@@ -1,10 +1,17 @@
 import s from './Genre.module.scss';
-import { Button } from '../UI/Button/Button';
 
-export const Genre = ({ genre }) => {
+import cn from 'classnames';
+
+let classNames = cn(s.genres__item, s.genres__active);
+
+export const Genre = ({ genre, genreId, genreIsChecked, onClickGenre }) => {
   return (
-    <Button genre={genre} margin={10}>
-      {genre.title}
-    </Button>
+    <li
+      onClick={onClickGenre}
+      className={`${genreId === genreIsChecked ? classNames : s.genres__item}`}>
+      <a href="#" className={s.genres__link}>
+        {genre.title}
+      </a>
+    </li>
   );
 };
