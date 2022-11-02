@@ -2,7 +2,7 @@ import s from './Header.module.scss';
 
 import user from './../../assets/svg__header/user.png';
 
-export const Header = ({ navIsOpen }) => {
+export const Header = ({ searchValue, onChangeSearchInput, navIsOpen }) => {
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
@@ -71,7 +71,13 @@ export const Header = ({ navIsOpen }) => {
         <div className={s.input__search}>
           <div className={s.input__btn}>
             <div className={s.input__field}>
-              <input type="text" className={s.search} placeholder="Search" />
+              <input
+                onChange={onChangeSearchInput}
+                value={searchValue}
+                type="text"
+                className={s.search}
+                placeholder="Search"
+              />
             </div>
 
             <button className={s.search__btn}>

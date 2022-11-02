@@ -1,7 +1,6 @@
 import s from './CardVideo.module.scss';
 
 export const CardVideo = ({ videoTitle, videoImage, videoOwner }) => {
-  console.log(videoOwner);
   return (
     <div className={s.video__item}>
       <div className={s.block__video}>
