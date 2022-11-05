@@ -164,6 +164,32 @@ a {
   margin-right: 24px;
 }
 
+.aside__mini_nav {
+  width: 72px;
+}
+
+.nav__mini_list {
+  text-align: center;
+}
+
+.nav__mini_links {
+  color: #FFFFFF;
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.nav__mini_item {
+  padding: 16px 0 14px;
+}
+.nav__mini_item:hover {
+  background: #303030;
+}
+
+.nav__mini_icons {
+  margin-bottom: 6px;
+}
+
 .main__content {
   width: 100%;
 }
