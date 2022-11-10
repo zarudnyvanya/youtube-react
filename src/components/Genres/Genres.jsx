@@ -1,18 +1,22 @@
-import cn from 'classnames';
+import cn from 'classnames'
 
-import { useState } from 'react';
+import { useState } from 'react'
 
-import { Genre } from './../Genre/Genre';
-import s from './Genres.module.scss';
+import { Genre } from './../Genre/Genre'
+import s from './Genres.module.scss'
 
-const genresStatic = [
+// const genresStatic = [
+//   {
+//     id: 1,
+//     title: 'Все',
+//   },
+// ]
+
+const genres = [
   {
     id: 1,
     title: 'Все',
   },
-];
-
-const genres = [
   {
     id: 2,
     title: 'Видеоигры',
@@ -49,43 +53,36 @@ const genres = [
     id: 10,
     title: 'Новое для вас',
   },
-];
+]
 
-let classNames = cn(s.genres__item, s.genres__active);
+// let classNames = cn(s.genres__item, s.genres__active)
 
 export const Genres = () => {
-  const [genreIsChecked, setGenreIsChecked] = useState(null);
+  const [genreIsChecked, setGenreIsChecked] = useState(1)
 
   const onSelectGenre = (id) => {
-    console.log(genreIsChecked);
-    setGenreIsChecked(id);
-  };
+    console.log(genreIsChecked)
+    setGenreIsChecked(id)
+  }
 
   return (
     <section className={s.genres}>
       <nav className={s.genres__list}>
         <ul className={s.genres__items}>
-          <li
-            onClick={() => onSelectGenre(null)}
-            className={genreIsChecked === null ? classNames : s.genres__item}>
-            <a href="#" className={s.genres__link}>
-              {genresStatic[0].title}
-            </a>
-          </li>
-
-          {genres.map((genre) => {
+          {genres.map((genre, index) => {
             return (
               <Genre
                 key={genre.id}
                 genre={genre}
+                index={index}
                 genreId={genre.id}
                 genreIsChecked={genreIsChecked}
                 onClickGenre={() => onSelectGenre(genre.id)}
               />
-            );
+            )
           })}
         </ul>
       </nav>
     </section>
-  );
-};
+  )
+}

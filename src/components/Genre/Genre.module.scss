@@ -1,8 +1,12 @@
 .genres__item{
+    display: flex;
+
+
     background: #303030;
-    border: 0.3px solid #AAAAAA;
-    border-radius: 32px;
-    padding: 8px 12px;
+    // border: 0.3px solid #AAAAAA;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
     
    &:not(:last-child){
     margin-right: 12px;
@@ -23,7 +27,7 @@
     color: #FFFFFF;
     font-weight: 400;
     font-size: 14px;
-    line-height: 16px;
+    // line-height: 16px;
     white-space: nowrap;
 }
 

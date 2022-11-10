@@ -1,6 +1,7 @@
-import s from './Navigation.module.scss';
+import s from './Navigation.module.scss'
 
-import { NavItem } from './../NavItem/NavItem';
+import { NavItem } from './../NavItem/NavItem'
+import { NavItemMini } from './../NavItemMini/NavItemMini'
 
 const navItems = [
   {
@@ -23,18 +24,27 @@ const navItems = [
     title: 'Библиотека',
     image: './assets/svg_aside/library.svg',
   },
-];
+]
+
+// ${navIsOpen ? s.hidden : ''}
 
 export const Navigation = ({ navIsOpen }) => {
+  console.log(navIsOpen)
   return (
-    <aside className={`${s.aside__nav} ${navIsOpen ? s.hidden : ''}`}>
+    <aside className={`${s.aside__nav}`}>
       <nav className={s.nav__list}>
         <ul className={s.nav__items}>
-          {navItems.map((item) => {
-            return <NavItem key={item.id} item={item} />;
-          })}
+          {navIsOpen
+            ? navItems.map((item) => {
+                return <NavItem key={item.id} item={item} />
+              })
+            : navItems.map((item) => {
+                return <NavItemMini key={item.id} item={item} />
+              })}
+
+          {/* {navIsOpen ? <h1>qqq</h1> : <h1>wfasfasf</h1>} */}
         </ul>
       </nav>
     </aside>
-  );
-};
+  )
+}

@@ -1,8 +1,8 @@
-import s from './Genre.module.scss';
+import s from './Genre.module.scss'
 
-import cn from 'classnames';
+import cn from 'classnames'
 
-let classNames = cn(s.genres__item, s.genres__active);
+let classNames = cn(s.genres__item, s.genres__active)
 
 export const Genre = ({ genre, genreId, genreIsChecked, onClickGenre }) => {
   return (
@@ -13,5 +13,5 @@ export const Genre = ({ genre, genreId, genreIsChecked, onClickGenre }) => {
         {genre.title}
       </a>
     </li>
-  );
-};
+  )
+}
