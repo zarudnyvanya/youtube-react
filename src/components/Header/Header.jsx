@@ -1,8 +1,9 @@
-import s from './Header.module.scss';
+import s from './Header.module.scss'
 
-import user from './../../assets/svg__header/user.png';
+import user from './../../assets/svg__header/user.png'
+import { User } from '../User/User'
 
-export const Header = ({ searchValue, onChangeSearchInput, navIsOpen }) => {
+export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup }) => {
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
@@ -139,10 +140,10 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen }) => {
           </div>
 
           <div className={s.apps__item}>
-            <img src={user} alt="profile" />
+            <User onPopup={onPopup} />
           </div>
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
