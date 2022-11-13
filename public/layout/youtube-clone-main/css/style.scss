@@ -9,7 +9,7 @@ html,body{
     height: 100vh;
 }
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto Mono", sans-mo;
     background-color: #212121;
     color: #FFFFFF;
 }
@@ -133,10 +133,81 @@ a{
 }
 
 .apps__item{
+    position: relative;
     &:not(:last-child){
         margin-right: 24px;
     }
+
+    & .popup_registr_authoriz{
+        position: fixed;
+        right: 20px;
+        min-width: 200px;
+        background: #181818;
+        border-radius:15px ;
+    }
+
+
 }
+
+.wrapper_popup{
+    //padding: 16px;
+
+}
+
+.user_info{
+    display: flex;
+    align-items: center;
+    padding: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+}
+.user_account{
+    padding: 8px 0;
+}
+.about_user{
+    display: flex;
+    flex-direction:column;
+
+    & .chanel{
+        display: flex;
+        align-items: center;
+        line-height: 2rem;
+        font-weight: 400;
+        cursor: pointer;
+        padding: 4px 16px;
+        &:hover{
+            background: #303030;
+        }
+    }
+
+    & .logout{
+        display: flex;
+        align-items: center;
+        line-height: 2rem;
+        font-weight: 400;
+        cursor: pointer;
+        padding: 4px 16px;
+        margin-bottom: 5px;
+        &:hover{
+            background: #303030;
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .container{
     display: flex;
     // justify-content: space-between;
