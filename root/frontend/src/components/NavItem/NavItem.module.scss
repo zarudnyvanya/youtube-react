@@ -1,0 +1,26 @@
+.nav__item{
+    display: flex;
+    align-items: center;
+    padding: 8px 50px 8px 24px;
+    
+    border-radius: 10px;
+
+    &:hover{
+
+        background: #303030;
+    }
+
+
+}
+.nav__links{
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.nav__icons{
+    display: inline-block;
+    margin-right: 24px;
+    padding-left: 0px;
+}
