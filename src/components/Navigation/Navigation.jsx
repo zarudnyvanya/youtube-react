@@ -41,8 +41,6 @@ export const Navigation = ({ navIsOpen }) => {
             : navItems.map((item) => {
                 return <NavItemMini key={item.id} item={item} />
               })}
-
-          {/* {navIsOpen ? <h1>qqq</h1> : <h1>wfasfasf</h1>} */}
         </ul>
       </nav>
     </aside>

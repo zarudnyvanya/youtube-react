@@ -1,14 +1,16 @@
-import { Header } from './components/Header/Header';
-import { Home } from './Pages/Home/Home';
-import { Navigation } from './components/Navigation/Navigation';
-import { Genres } from './components/Genres/Genres';
+import { Header } from './components/Header/Header'
+import { Home } from './Pages/Home/Home'
+import { Navigation } from './components/Navigation/Navigation'
+import { Genres } from './components/Genres/Genres'
 
-import './App.scss';
-import { useState } from 'react';
+import './App.scss'
+import { useState } from 'react'
+import { Popup } from './components/Popup/Popup'
 
 function App() {
-  const [navIsOpen, setNavIsOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
+  const [navIsOpen, setNavIsOpen] = useState(false)
+  const [popup, setPopup] = useState(false)
+  const [searchValue, setSearchValue] = useState('')
 
   const videos = [
     {
@@ -91,22 +93,25 @@ function App() {
         logo: 'assets/svg__header/user.png',
       },
     },
-  ];
+  ]
 
   const onChangeSearchInput = (event) => {
-    setSearchValue(event.target.value);
-  };
+    setSearchValue(event.target.value)
+  }
 
   const onChangeFiltered = (value) => {
-    console.log('value: ', value);
-  };
+    console.log('value: ', value)
+  }
 
   return (
     <div className="App">
+      {popup ? <Popup /> : 'huy'}
+
       <Header
         onChangeSearchInput={onChangeSearchInput}
         searchValue={searchValue}
         navIsOpen={() => setNavIsOpen(!navIsOpen)}
+        onPopup={() => setPopup(!popup)}
       />
 
       <div className="container">
@@ -124,7 +129,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
