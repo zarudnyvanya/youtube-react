@@ -10,7 +10,7 @@ html, body {
 }
 
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto Mono", sans-mo;
   background-color: #212121;
   color: #FFFFFF;
 }
@@ -114,8 +114,58 @@ a {
   align-items: center;
 }
 
+.apps__item {
+  position: relative;
+}
 .apps__item:not(:last-child) {
   margin-right: 24px;
+}
+.apps__item .popup_registr_authoriz {
+  position: fixed;
+  right: 20px;
+  min-width: 200px;
+  background: #181818;
+  border-radius: 15px;
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.user_account {
+  padding: 8px 0;
+}
+
+.about_user {
+  display: flex;
+  flex-direction: column;
+}
+.about_user .chanel {
+  display: flex;
+  align-items: center;
+  line-height: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 16px;
+}
+.about_user .chanel:hover {
+  background: #303030;
+}
+.about_user .logout {
+  display: flex;
+  align-items: center;
+  line-height: 2rem;
+  font-weight: 400;
+  cursor: pointer;
+  padding: 4px 16px;
+  margin-bottom: 5px;
+}
+.about_user .logout:hover {
+  background: #303030;
 }
 
 .container {
