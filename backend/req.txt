@@ -1,0 +1,10 @@
+Django==4.1.2
+djangorestframework==3.14.0
+Pillow==9.2.0
+asgiref==3.5.2
+sqlparse==0.4.3
+pytz==2020.4
+tzdata==2022.4
+djoser==2.1.0
+django-debug-toolbar==3.7.0
+
