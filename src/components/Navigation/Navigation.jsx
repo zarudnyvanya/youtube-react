@@ -26,10 +26,7 @@ const navItems = [
   },
 ]
 
-// ${navIsOpen ? s.hidden : ''}
-
 export const Navigation = ({ navIsOpen }) => {
-  console.log(navIsOpen)
   return (
     <aside className={`${s.aside__nav}`}>
       <nav className={s.nav__list}>

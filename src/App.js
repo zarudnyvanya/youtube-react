@@ -4,7 +4,7 @@ import { Navigation } from './components/Navigation/Navigation'
 import { Genres } from './components/Genres/Genres'
 
 import './App.scss'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Popup } from './components/Popup/Popup'
 
 function App() {
@@ -99,13 +99,9 @@ function App() {
     setSearchValue(event.target.value)
   }
 
-  const onChangeFiltered = (value) => {
-    console.log('value: ', value)
-  }
-
   return (
     <div className="App">
-      {popup ? <Popup /> : 'huy'}
+      {popup && <Popup onClosePopup={() => setPopup(false)} />}
 
       <Header
         onChangeSearchInput={onChangeSearchInput}
@@ -121,7 +117,6 @@ function App() {
           <Genres />
           <Home
             videos={videos}
-            onChangeFiltered={onChangeFiltered}
             onChangeSearchInput={onChangeSearchInput}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
