@@ -5,7 +5,7 @@ import userImg from './../../assets/svg__header/user.png'
 export const User = ({ onPopup }) => {
   return (
     <>
-      <img onClick={onPopup} src={userImg} alt="profile" />
+      <img className={s.userImg} onClick={onPopup} src={userImg} alt="profile" />
     </>
   )
 }
