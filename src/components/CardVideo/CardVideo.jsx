@@ -1,6 +1,6 @@
-import s from './CardVideo.module.scss';
+import s from './CardVideo.module.scss'
 
-export const CardVideo = ({ videoTitle, videoImage, videoOwner }) => {
+export const CardVideo = ({ videoTitle, videoImage, videoOwner, videoDate }) => {
   return (
     <div className={s.video__item}>
       <div className={s.block__video}>
@@ -16,10 +16,10 @@ export const CardVideo = ({ videoTitle, videoImage, videoOwner }) => {
         <div className={s.description}>
           <p>{videoTitle}</p>
           <span>
-            {videoOwner.username} <br /> 15K Views .1 week ago
+            {videoOwner.name} <br /> 15K Views .{videoDate}
           </span>
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

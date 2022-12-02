@@ -24,7 +24,9 @@ SECRET_KEY = 'django-insecure-bf5g9=54fej+=3^rh0&eany+jpx-l&4svihm+br9emx57!jx!z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+
+]
 INTERNAL_IPS = ['127.0.0.1', ]
 
 # Application definition
@@ -42,8 +44,19 @@ INSTALLED_APPS = [
     'debug_toolbar',
     # 'drf_recaptcha',
     'video_hosting',
-    'users'
+    'users',
+    'corsheaders',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+        'http://localhost:3000/',
+        'http://127.0.0.1:8000/',
+]
+
+CSRF_TRUSTED_ORIGINS = [
+        'http://localhost:3000/',
+        'http://127.0.0.1:8000/',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -174,3 +189,9 @@ DJOSER = {
 
 # DRF_RECAPTCHA_SECRET_KEY = SECRET_KEY
 # Uyy-b5B-Rg3-b2J
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000"
+]

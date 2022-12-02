@@ -28,6 +28,10 @@ def get_streaming_video(request, pk: int):
     response['Content-Length'] = str(content_length)
     response['Cache-Control'] = 'no-cache'
     response['Content-Range'] = content_range
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Max-Age"] = "1000"
+    response["Access-Control-Allow-Headers"] = "X-Requested-With, Content-Type"
     return response
 
 
@@ -43,7 +47,7 @@ class VideoViewSet(viewsets.ModelViewSet):
 
         if self.request.method in ('PUT', 'PATCH'):
             serializer_class = VideoUpdateSerializer
-
+        
         return serializer_class
 
 
