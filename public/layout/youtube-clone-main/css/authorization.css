@@ -18,7 +18,7 @@ a {
   text-decoration: none;
 }
 
-.registration {
+.authorization {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -29,7 +29,7 @@ a {
   padding: 48px 40px 36px 40px;
   border-radius: 8px;
   border: 1px solid #dadce0;
-  min-width: 400px;
+  max-width: 400px;
   min-height: 400px;
   position: relative;
 }
@@ -160,4 +160,4 @@ a {
   background-color: rgba(0, 75, 161, 0.9);
 }
 
-/*# sourceMappingURL=registration.css.map */
+/*# sourceMappingURL=authorization.css.map */
