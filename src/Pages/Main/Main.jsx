@@ -5,7 +5,7 @@ import { Header } from '../../components/Header/Header'
 import { Navigation } from '../../components/Navigation/Navigation'
 import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
-
+import {apiRequest} from "../../utils/api";
 export const Main = () => {
   const [videos, setVideos] = useState([])
   const [navIsOpen, setNavIsOpen] = useState(false)
@@ -13,7 +13,7 @@ export const Main = () => {
   const [searchValue, setSearchValue] = useState('')
 
   useEffect(() => {
-    // apiRequest().then((data) => setVideos(data))
+    apiRequest().then((data) => setVideos(data))
   }, [])
 
   const onChangeSearchInput = (event) => {
