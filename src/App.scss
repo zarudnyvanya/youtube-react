@@ -39,10 +39,12 @@ a{
 
 .main__content{
     width: 100%;
-    max-width: calc(100% - 240px);
-    // display: flex;
-    // justify-content: center;
-    // background-color: aqua;
+    max-width: calc(100% + 240px);
+
+    &-navIsOpen {
+        width: 100%;
+        max-width: calc(100% - 200px);
+    }
 }
 
 @media (max-width:1120px){

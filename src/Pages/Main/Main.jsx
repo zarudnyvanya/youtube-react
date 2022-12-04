@@ -36,7 +36,7 @@ export const Main = () => {
       <div className="container">
         <Navigation navIsOpen={navIsOpen} />
 
-        <div className="main__content">
+        <div className={navIsOpen ? 'main__content-navIsOpen' : 'main__content'}>
           <Genres />
           <Home
             videos={videos}

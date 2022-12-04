@@ -60,6 +60,7 @@ export const Form = () => {
     }
   }
 
+  //api/v1/auth/users
   return (
     <form action="/api/v1/auth/users" className={s.form} method="post">
       <div className={s.form__group}>
