@@ -1,3 +1,5 @@
+
+
 .header{
     width: 100%;
     padding: 10px 16px;
@@ -16,7 +18,7 @@
     display: flex;
     align-items: center;
     // width: 10%;
-    
+
 }
 
 // .wrapper__logo {
@@ -30,7 +32,7 @@
     height: 100%;
     border-radius: 40px;
     border: 0;
-    
+
     cursor: pointer;
     padding: 8px;
 
@@ -48,48 +50,72 @@
 .input__search{
     display: flex;
     align-items: center;
-    height: 38px;
-    
+
+
 }
-    
+
 
 .input__btn{
     display: flex;
 }
 
-.input__field{
-    border-radius: 2px 0px 0px 2px;
-    border: 1px solid #303030;
-}
+//.input__field{
+//    border-radius: 2px 0px 0px 2px;
+//    border: 1px solid #303030;
+//}
 .search{
-  height: 100%;
-  border: none;
-  font-family: inherit;
-  width: 538px;
-  padding: 9px 0px 9px 8px;
+  //height: 100%;
+  //border: none;
+  //font-family: inherit;
+  //width: 538px;
+  //padding: 9px 0px 9px 8px;
+  //background-color: #121212;
+  //color: #fff;
+  //font-size: 18px;
+
+  border-radius: 40px 0 0 40px;
+
+  padding: 10px 10px 10px 20px;
+  border: 1px solid rgba(48,48,48,1);
+  border-right: none;
+
   background-color: #121212;
-  color: #fff;
-  font-size: 18px;
+  width: 500px;
+  outline: none;
+  color: #f1f1f1;
+  position: relative;
   &:focus{
     outline: none;
+    border: 1px solid #1a73e8;
   }
+
   &::placeholder{
+    position: absolute;
+    top: 8px;
     user-select:none;
+    font-size: 18px;
+
   }
 }
 
 .search__btn{
-    border: none;
-    background-color: #303030;
-    border-radius: 0px 2px 2px 0px;
-    border: 1px solid #303030;
-    width: 100%;
-    // height: 100%;
-    display: flex;
-    align-items: center;
-    padding: 8px 20px;
-    
-    cursor: pointer;
+    //border: none;
+    //background-color: #303030;
+    //border-radius: 0px 2px 2px 0px;
+    //border: 1px solid #303030;
+    //width: 100%;
+    //// height: 100%;
+    //display: flex;
+    //align-items: center;
+    //padding: 8px 20px;
+    //
+    //cursor: pointer;
+  border: 1px solid rgba(48,48,48,1);
+  border-radius: 0 40px 40px 0;
+  background-color: rgba(48,48,48,1);
+  cursor: pointer;
+  width: 64px;
+  margin: 0;
 }
 
 .micro__btn{
@@ -104,7 +130,7 @@
 .apps__block{
     display: flex;
     align-items: center;
-   
+
 }
 
 .apps__item{

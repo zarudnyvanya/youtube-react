@@ -4,8 +4,7 @@
 
 .video__item {
     margin: 0px 20px 30px 20px;
-    margin-left: 20px;
-    margin-bottom: 30px;
+
     width: 360px;
 }
 
@@ -48,8 +47,8 @@
     & p{
     font-size: 16px;
     line-height: 22px;
-    font-weight: 600;
-    color: #FFFFFF;
+    font-weight: 400;
+    color: #f1f1f1;
     margin-bottom: 6px;
 
     }
@@ -66,17 +65,17 @@
 }
 
 
-@media (max-width: 1840px) {
-    .video__item {
-        width: 30%;
-    }
-}
-
-@media (max-width: 1440px) {
-    .video__item {
-        width: 40%;
-    }
-}
+//@media (max-width: 1840px) {
+//    .video__item {
+//        width: 30%;
+//    }
+//}
+//
+//@media (max-width: 1440px) {
+//    .video__item {
+//        width: 40%;
+//    }
+//}
 
 @media (max-width: 1120px) {
     .video__item {
