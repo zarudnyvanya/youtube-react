@@ -22,25 +22,46 @@
     
 // }
 
-.video__content {
-    padding: 24px 0px;
+// на флексах если с гридами что то пойдет не так
+//.video__content {
+//    padding: 24px 0px;
+//    background-color: #0f0f0f;
+//}
+//
+//.video__list {
+//    display: flex;
+//    justify-content: center;
+//    flex-wrap: wrap;
+//}
+
+.video__content{
+    width: 100%;
+    padding-top: 20px;
     background-color: #0f0f0f;
 }
-
-.video__list {
-    display: flex;
+.video__wrapper{
+    width: 100%;
+}
+.video__list{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,360px);
     justify-content: center;
-    flex-wrap: wrap;
+    justify-items: center;
+    gap: 15px;
+    cursor: pointer;
+
 }
 
-// @media (max-width: 1415px) {
-//     .video__list {
-//         grid-column-gap: 10px;
-//     }
-// }
 
-// @media (max-width: 1360px) {
-//     .video__list {
-//         // grid-column-gap: 0%;
-//     }
-// }
+ @media (max-width: 1415px) {
+     .video__list {
+         grid-column-gap: 10px;
+     }
+ }
+
+ @media (max-width: 1360px) {
+     .video__list {
+         // grid-column-gap: 0%;
+     }
+ }
