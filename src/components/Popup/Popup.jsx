@@ -1,9 +1,12 @@
 import s from './Popup.module.scss'
 
+import Registration from '../../Pages/Registration/Registration'
+
 import userImg from './../../assets/svg__header/user.png'
 import { forwardRef } from 'react'
 import { useEffect, useRef } from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const Popup = ({ onClosePopup }) => {
   const outsideClick = () => {
@@ -31,7 +34,7 @@ export const Popup = ({ onClosePopup }) => {
                     fill="white"
                   />
                 </svg>{' '}
-                Мой канал
+                <Link to="/registration">Регистрация</Link>
               </div>
 
               <div className={s.logout}>
