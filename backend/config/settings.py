@@ -168,10 +168,10 @@ REST_FRAMEWORK = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'youtube.clone@mail.ru'
-EMAIL_HOST_PASSWORD = 'TsC3uFsbEwZtpQRkqMNt'
+EMAIL_HOST_USER = 'my.youtube_clone@mail.ru'
+EMAIL_HOST_PASSWORD = 'CpB4pr1M3zVuRAWCc071'
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'youtube.clone@mail.ru'
+DEFAULT_FROM_EMAIL = 'my.youtube_clone@mail.ru'
 
 DJOSER = {
     'LOGIN_FIELD': 'email',
