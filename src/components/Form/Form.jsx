@@ -88,7 +88,7 @@ export const Form = () => {
           onBlur={(event) => blurHandler(event)}
           onChange={(event) => passwordHandler(event)}
           value={password}
-          type="text"
+          type="password"
           id="pass"
           name="password"
           className={s.input_authoriz}
