@@ -22,6 +22,10 @@ export const Form = () => {
     }
   }, [emailError, passwordError])
 
+  const handleForm = () => {
+    console.log(email, password)
+  }
+
   const emailHandler = (event) => {
     setEmail(event.target.value)
     const re =
@@ -57,7 +61,7 @@ export const Form = () => {
   }
 
   return (
-    <form action="" className={s.form} method="post">
+    <form action="/api/v1/auth/users" className={s.form} method="post">
       <div className={s.form__group}>
         {/* {emailDirty && emailError && <h2>Неверная почта</h2>} */}
         <input
@@ -84,7 +88,7 @@ export const Form = () => {
           onBlur={(event) => blurHandler(event)}
           onChange={(event) => passwordHandler(event)}
           value={password}
-          type="text"
+          type="password"
           id="pass"
           name="password"
           className={s.input_authoriz}
@@ -106,18 +110,6 @@ export const Form = () => {
           Next
         </button>
       </div>
-      {/* <div className={s.form__group}>
-        <input
-          type="text"
-          id="pass_2"
-          name="password_2"
-          className={s.input_authoriz}
-          placeholder=" "
-        />
-        <label htmlFor="pass_2" className={s.form__label}>
-          Подтвердить
-        </label>
-      </div> */}
     </form>
   )
 }
