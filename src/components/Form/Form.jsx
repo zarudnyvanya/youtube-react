@@ -100,10 +100,10 @@ export const Form = () => {
       </div>
       <div className={s.createacc_futher}>
         <a href="" className={s.log_in}>
-          Войти
+          In
         </a>
         <button type="submit" disabled={!formValid} className={s.futherbtn}>
-          Далее
+          Next
         </button>
       </div>
       {/* <div className={s.form__group}>
