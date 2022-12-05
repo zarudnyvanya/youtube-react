@@ -62,7 +62,7 @@ export const Registration = () => {
               </div>
 
               <h1 className={s.main_title}>Создайте </h1>
-              <h2 className={s.second_title}>Перейдите на YouTube</h2>
+              <h2 className={s.second_title}>Перейдите на </h2>
             </div>
 
             <div className={s.users_block}>
