@@ -61,7 +61,7 @@ export const Form = () => {
   }
 
   return (
-    <form action="/api/v1/auth/users" className={s.form} method="post">
+    <form action="/api/v1/auth/users/" className={s.form} method="post">
       <div className={s.form__group}>
         {/* {emailDirty && emailError && <h2>Неверная почта</h2>} */}
         <input
