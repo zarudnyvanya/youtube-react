@@ -1,17 +1,39 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
 export const Success = () => {
+  // const [token, setToken] = useState('')
+
+  let location = useLocation()
+
   useEffect(() => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ uid: 'MTI', token: 'bfxnbz-beafbf14c28c386801c5ec75c9c7127d' }),
+    const uid = location.pathname.split('/')[2]
+    const token = location.pathname.split('/')[3]
+
+    console.log(location.pathname.split('/'))
+    try {
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ uid: uid, token: token }),
+      }
+
+      fetch('/api/v1/auth/users/activation/', requestOptions)
+        .then((response) => response.json())
+        .then((data) => console.log(data))
+    } catch (err) {
+      console.log('Ошибка:', err)
     }
 
-    fetch('/api/v1/auth/users/activation/', requestOptions)
-      .then((response) => response.json())
-      .then((data) => console.log(data))
+    // console.log(token)
+    // console.log(token.token[0])
+    // console.log(token.token)
   }, [])
 
-  return <h1>Registration successful completed</h1>
+  return (
+    <div>
+      <h1>Registration successful completed</h1>
+      <h2>Token: </h2>
+    </div>
+  )
 }
