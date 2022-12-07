@@ -51,6 +51,14 @@
     gap: 15px;
     cursor: pointer;
 
+    &_video_list_is_wide{
+      display: grid;
+      grid-template-columns: repeat(auto-fill,343px);
+      margin-left: 40px;
+      gap: 15px;
+      cursor: pointer;
+    }
+
 }
 
 

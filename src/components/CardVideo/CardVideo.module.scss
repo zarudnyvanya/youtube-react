@@ -4,8 +4,10 @@
 
 .video__item {
     margin: 0px 20px 30px 20px;
-
     width: 360px;
+    &_video_item_is_wide{
+        width: 343px;
+    }
 }
 
 .block__video{
@@ -18,18 +20,19 @@
         background-color: rgba(#000000, 0.7);
         font-weight: 400;
         font-size: 12px;
-        border-radius: 2px;
+        border-radius: 5px;
         line-height: 12px;
-        color: #FFFFFF;
+        color: #f1f1f1;
         padding: 3px 4px;
-        right: 4px;
-        bottom:7px;
-        
-        
+        right: 7px;
+        bottom:10px;
+
+
     }
      & video{
         height: 100%;
         width: inherit;
+        border-radius: 15px;
     }
 }
 
