@@ -39,6 +39,7 @@ export const Main = () => {
           <Genres />
           <Home
             videos={videos}
+            navIsOpen={navIsOpen}
             onChangeSearchInput={onChangeSearchInput}
             searchValue={searchValue}
             setSearchValue={setSearchValue}

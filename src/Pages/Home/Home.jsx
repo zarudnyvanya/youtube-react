@@ -2,11 +2,11 @@ import { CardVideo } from '../../components/CardVideo/CardVideo'
 
 import s from './Home.module.scss'
 
-export const Home = ({ videos, onChangeFiltered, searchValue, setSearchValue }) => {
+export const Home = ({ videos, onChangeFiltered, searchValue, setSearchValue,navIsOpen }) => {
   return (
     <div className={s.video__content}>
       <div className={s.video__wrapper}>
-        <div className={s.video__list}>
+        <div className={ navIsOpen ? s.video__list : s.video__list_video_list_is_wide }>
           {videos
             .filter((item) => {
               return item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -15,6 +15,7 @@ export const Home = ({ videos, onChangeFiltered, searchValue, setSearchValue }) 
               return (
                 <CardVideo
                   key={video.id}
+                  navIsOpen={navIsOpen}
                   videoTitle={video.title}
                   videoImage={video.image}
                   videoOwner={video.owner}

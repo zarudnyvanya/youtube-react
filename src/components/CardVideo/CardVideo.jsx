@@ -1,9 +1,9 @@
 import s from './CardVideo.module.scss'
 
-export const CardVideo = ({ videoTitle, videoImage, videoOwner, videoDate }) => {
+export const CardVideo = ({ videoTitle, videoImage, videoOwner, videoDate,navIsOpen }) => {
   console.log(videoOwner.banner)
   return (
-    <div className={s.video__item}>
+    <div className={ navIsOpen ? s.video__item : s.video__item_video_item_is_wide }>
       <div className={s.block__video}>
         <video src="#" poster={videoImage}></video>
         <span>23:09</span>
