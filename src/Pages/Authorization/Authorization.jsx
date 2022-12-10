@@ -1,7 +1,7 @@
 import { AuthorizationForm } from '../../components/AuthorizationForm/AuthorizationForm'
 import s from './Authorization.module.scss'
 
-export const Authorization = () => {
+export const Authorization = ({ userToken, onToken }) => {
   return (
     <div className="main_authorization">
       <div class={s.authorization}>
@@ -66,7 +66,7 @@ export const Authorization = () => {
             </div>
 
             <div class={s.users_block}>
-              <AuthorizationForm />
+              <AuthorizationForm userToken={userToken} onToken={onToken} />
             </div>
           </div>
         </div>

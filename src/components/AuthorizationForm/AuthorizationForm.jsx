@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import s from './AuthorizationForm.module.scss'
 
-export const AuthorizationForm = () => {
+export const AuthorizationForm = ({ userToken, onToken }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -21,6 +22,27 @@ export const AuthorizationForm = () => {
       setFormValid(true)
     }
   }, [emailError, passwordError])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const userData = { email, password }
+    // console.log('userData', userData)
+    const response = await fetch('auth/token/login/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify(userData),
+    })
+    const result = await response.json()
+    console.log('result', result.auth_token)
+
+    onToken(result.auth_token)
+    console.log('user', userToken)
+
+    localStorage.setItem('user', userToken)
+  }
 
   const emailHandler = (event) => {
     setEmail(event.target.value)
@@ -48,7 +70,7 @@ export const AuthorizationForm = () => {
   const blurHandler = (event) => {
     console.log(event.target.name)
     switch (event.target.name) {
-      case 'login':
+      case 'email':
         setEmailDirty(true)
         break
       case 'password':
@@ -57,7 +79,7 @@ export const AuthorizationForm = () => {
     }
   }
   return (
-    <form action="" class={s.form} method="post">
+    <form onSubmit={handleSubmit} class={s.form} method="post">
       <div class={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}
@@ -65,7 +87,7 @@ export const AuthorizationForm = () => {
           value={email}
           type="text"
           id="login"
-          name="login"
+          name="email"
           class={s.input_authoriz}
           placeholder=""
         />
