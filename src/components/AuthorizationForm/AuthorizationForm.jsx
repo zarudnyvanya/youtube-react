@@ -39,7 +39,7 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
     console.log('result', result.auth_token)
 
     onToken(result.auth_token)
-    // console.log('user', userToken)
+    console.log('user', userToken)
 
     localStorage.setItem('user', userToken)
   }
