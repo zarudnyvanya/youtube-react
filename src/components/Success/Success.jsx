@@ -25,8 +25,8 @@ export const Success = () => {
       console.log('Ошибка:', err)
     }
 
-    // console.log(token)
-    // console.log(token.token[0])
+    console.log(token)
+    console.log(token.token[0])
     // console.log(token.token)
   }, [])
 
