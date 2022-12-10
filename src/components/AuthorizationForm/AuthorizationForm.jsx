@@ -123,9 +123,12 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
       </a>
 
       <div class={s.createacc_futher}>
-        <a href="" class={s.create_account}>
+        <Link to="/" class={s.create_account}>
+          Назад
+        </Link>
+        <Link to="/registration" class={s.create_account}>
           Создать аккаунт
-        </a>
+        </Link>
         <button disabled={!formValid} class={s.futherbtn}>
           Далее
         </button>
