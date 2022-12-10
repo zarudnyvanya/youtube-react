@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useState } from 'react'
 import s from './RegistrationForm.module.scss'
+import {Link} from "react-router-dom";
 
 export const RegistrationForm = () => {
   const [email, setEmail] = useState('')
@@ -102,9 +103,12 @@ export const RegistrationForm = () => {
         </label>
       </div>
       <div className={s.createacc_futher}>
-        <a href="" className={s.log_in}>
+        <Link to="/authorization" className={s.log_in}>
           In
-        </a>
+        </Link>
+        <Link to="/" class={s.create_account}>
+          Назад
+        </Link>
         <button type="submit" disabled={!formValid} className={s.futherbtn}>
           Next
         </button>
