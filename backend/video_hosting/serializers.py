@@ -4,10 +4,17 @@ from rest_framework import serializers
 from rest_framework.response import Response
 
 from users.models import CustomUser
-from .models import Video, Channel
+from .models import Video, Channel, Category
 
 from django.contrib.auth import get_user_model
+
 User = get_user_model()
+
+
+class CategorySerializer(serializers.PrimaryKeyRelatedField,serializers.ModelSerializer):
+    class Meta:
+        model = Category
+
 
 class CurrentChannelDefault:
     requires_context = True
@@ -23,27 +30,29 @@ class ChannelSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-
-
 class VideoSerializer(serializers.ModelSerializer):
     file = serializers.FileField(
         validators=[FileExtensionValidator(allowed_extensions=['mp4', "mvk"])],
         write_only=True)
     channel = serializers.HiddenField(default=CurrentChannelDefault())
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
-
+    category = CategorySerializer(required=False, many=True, queryset=Category.objects.all())
     def validate(self, attrs):
+        category = attrs['category']
+        if len(category)>3:
+            raise serializers.ValidationError("Можно добавить максимум 3 категории")
+        del attrs['category']
         video = Video(**attrs)
         if video.channel.user.is_block:
             raise serializers.ValidationError("Вы заблокированы")
         if not video.channel.is_active:
             serializers.ValidationError("Канал неактивный, активируйте канал в настройках")
+        attrs['category'] = category
         return attrs
+
     class Meta:
         model = Video
-        fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner']
-
-
+        fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner', 'category']
 
 
 class VideoUpdateSerializer(serializers.ModelSerializer):
