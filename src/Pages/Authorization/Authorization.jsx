@@ -1,21 +1,21 @@
-import { RegistrationForm } from '../../components/RegistrationForm/RegistrationForm'
-import s from './Registration.module.scss'
+import { AuthorizationForm } from '../../components/AuthorizationForm/AuthorizationForm'
+import s from './Authorization.module.scss'
 
-export const Registration = () => {
+export const Authorization = () => {
   return (
-    <div className="main_registration">
-      <div className={s.registration}>
-        <div className={s.container}>
-          <div className={s.wrapper}>
-            <div className={s.header}>
-              <div className="logo">
+    <div className="main_authorization">
+      <div class={s.authorization}>
+        <div class={s.container}>
+          <div class={s.wrapper}>
+            <div class={s.header}>
+              <div class="logo">
                 <svg
                   width="90"
                   height="20"
                   viewBox="0 0 90 20"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg">
-                  <g clipPath="url(#clip0_2_88)">
+                  <g clip-path="url(#clip0_2_88)">
                     <path
                       d="M27.9727 3.12324C27.6435 1.89323 26.6768 0.926623 25.4468 0.597366C23.2197 1.78814e-07 14.285 0 14.285 0C14.285 0 5.35042 1.78814e-07 3.12323 0.597366C1.89323 0.926623 0.926623 1.89323 0.597366 3.12324C1.78814e-07 5.35042 0 10 0 10C0 10 1.78814e-07 14.6496 0.597366 16.8768C0.926623 18.1068 1.89323 19.0734 3.12323 19.4026C5.35042 20 14.285 20 14.285 20C14.285 20 23.2197 20 25.4468 19.4026C26.6768 19.0734 27.6435 18.1068 27.9727 16.8768C28.5701 14.6496 28.5701 10 28.5701 10C28.5701 10 28.5677 5.35042 27.9727 3.12324Z"
                       fill="#FF0000"
@@ -61,12 +61,12 @@ export const Registration = () => {
                 </svg>
               </div>
 
-              <h1 className={s.main_title}>Создайте аккаунт</h1>
-              <h2 className={s.second_title}>Перейдите на YouTube</h2>
+              <h1 class={s.main_title}>Войдите в аккаунт</h1>
+              <h2 class={s.second_title}>Перейдите на YouTube</h2>
             </div>
 
-            <div className={s.users_block}>
-              <RegistrationForm />
+            <div class={s.users_block}>
+              <AuthorizationForm />
             </div>
           </div>
         </div>

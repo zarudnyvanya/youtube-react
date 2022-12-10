@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
-import s from './Form.module.scss'
+import { useState, useEffect } from 'react'
 
-export const Form = () => {
+import s from './AuthorizationForm.module.scss'
+
+export const AuthorizationForm = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -21,10 +21,6 @@ export const Form = () => {
       setFormValid(true)
     }
   }, [emailError, passwordError])
-
-  const handleForm = () => {
-    console.log(email, password)
-  }
 
   const emailHandler = (event) => {
     setEmail(event.target.value)
@@ -50,8 +46,9 @@ export const Form = () => {
   }
 
   const blurHandler = (event) => {
+    console.log(event.target.name)
     switch (event.target.name) {
-      case 'email':
+      case 'login':
         setEmailDirty(true)
         break
       case 'password':
@@ -59,22 +56,20 @@ export const Form = () => {
         break
     }
   }
-
   return (
-    <form action="/api/v1/auth/users/" className={s.form} method="post">
-      <div className={s.form__group}>
-        {/* {emailDirty && emailError && <h2>Неверная почта</h2>} */}
+    <form action="" class={s.form} method="post">
+      <div class={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}
           onChange={(event) => emailHandler(event)}
           value={email}
           type="text"
           id="login"
-          name="email"
-          className={s.input_authoriz}
-          placeholder=" "
+          name="login"
+          class={s.input_authoriz}
+          placeholder=""
         />
-        <label htmlFor="login" className={s.form__label}>
+        <label for="login" class={s.form__label}>
           {emailDirty && emailError ? (
             <p style={{ color: '#eb0052', fontSize: '14px' }}>{emailError}</p>
           ) : (
@@ -82,19 +77,18 @@ export const Form = () => {
           )}
         </label>
       </div>
-      <div className={s.form__group}>
-        {/* {passwordDirty && passwordError && <h2 style={{ color: 'red' }}>Неверный пароль</h2>} */}
+      <div class={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}
           onChange={(event) => passwordHandler(event)}
           value={password}
-          type="password"
+          type="text"
           id="pass"
           name="password"
-          className={s.input_authoriz}
-          placeholder=" "
+          class={s.input_authoriz}
+          placeholder=""
         />
-        <label htmlFor="pass" className={s.form__label}>
+        <label for="pass" class={s.form__label}>
           {passwordDirty && passwordError ? (
             <p style={{ color: '#eb0052', fontSize: '14px' }}>{passwordError}</p>
           ) : (
@@ -102,12 +96,16 @@ export const Form = () => {
           )}
         </label>
       </div>
-      <div className={s.createacc_futher}>
-        <a href="" className={s.log_in}>
-          In
+      <a href="#" class={s.recover_pass}>
+        Забыли адрес электронной почты или пароль?
+      </a>
+
+      <div class={s.createacc_futher}>
+        <a href="" class={s.create_account}>
+          Создать аккаунт
         </a>
-        <button type="submit" disabled={!formValid} className={s.futherbtn}>
-          Next
+        <button disabled={!formValid} class={s.futherbtn}>
+          Далее
         </button>
       </div>
     </form>
