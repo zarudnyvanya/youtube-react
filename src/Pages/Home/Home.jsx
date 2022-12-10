@@ -16,6 +16,8 @@ export const Home = ({ videos, onChangeFiltered, searchValue, setSearchValue,nav
                 <CardVideo
                   key={video.id}
                   navIsOpen={navIsOpen}
+                  videoId={video.id}
+                  videoFile={video.file}
                   videoTitle={video.title}
                   videoImage={video.image}
                   videoOwner={video.owner}

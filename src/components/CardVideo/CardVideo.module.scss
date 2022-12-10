@@ -48,11 +48,22 @@
     
     
     & p{
+
     font-size: 16px;
-    line-height: 22px;
+    line-height: 18px;
     font-weight: 400;
     color: #f1f1f1;
     margin-bottom: 6px;
+
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+
+
 
     }
     & span{
@@ -60,6 +71,8 @@
         line-height: 20px;
         font-weight: 400;
         color: #AAAAAA;
+        word-spacing: -3px;
+
     }
 }
 
