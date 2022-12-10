@@ -62,6 +62,9 @@ class ChannelViewSet(viewsets.ModelViewSet):
         else:
             return Channel.objects.all()
 
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializers_class = CategorySerializer
 
 # class VideoApiList(generics.ListCreateAPIView):
 #     queryset = Video.objects.all()
