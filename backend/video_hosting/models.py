@@ -6,7 +6,12 @@ from users.models import CustomUser
 
 
 # Create your models here.
+class Category(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
 
+    def __str__(self):
+        return self.title
 class Video(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -18,7 +23,7 @@ class Video(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey("Channel", verbose_name="Канал", on_delete=models.CASCADE)
-
+    category = models.ManyToManyField(Category)
     def __str__(self):
         return self.title
 
