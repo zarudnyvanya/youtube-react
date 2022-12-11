@@ -23,25 +23,46 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
     }
   }, [emailError, passwordError])
 
+  useEffect(() => {
+    const authToken = {
+      Authorization: `token ${userToken}`,
+    }
+
+    console.log('userToken ->>>>', userToken)
+
+    if (userToken) {
+      console.log('Auth ->', authToken)
+
+      const getMyself = async () => {
+        const response = await fetch('api/v1/auth/users/me/', {
+          headers: authToken,
+        })
+        const result = await response.json()
+        localStorage.setItem('id', result.id)
+        localStorage.setItem('email', result.email)
+        console.log('Result ->', result)
+      }
+      getMyself()
+    }
+  }, [userToken])
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
     const userData = { email, password }
-    // console.log('userData', userData)
-    const response = await fetch('auth/token/login/', {
+
+    fetch('auth/token/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(userData),
     })
-    const result = await response.json()
-    console.log('result', result.auth_token)
-
-    onToken(result.auth_token)
-    console.log('user', userToken)
-
-    localStorage.setItem('user', userToken)
+      .then((response) => response.json())
+      .then((response) => {
+        localStorage.setItem('user', response.auth_token)
+        onToken(response.auth_token)
+      })
   }
 
   const emailHandler = (event) => {
@@ -80,6 +101,7 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
   }
   return (
     <form onSubmit={handleSubmit} class={s.form} method="post">
+      Token: {userToken}
       <div class={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}
@@ -121,7 +143,6 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
       <a href="#" class={s.recover_pass}>
         Забыли адрес электронной почты или пароль?
       </a>
-
       <div class={s.createacc_futher}>
         <Link to="/" class={s.create_account}>
           Назад

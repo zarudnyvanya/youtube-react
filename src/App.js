@@ -9,27 +9,7 @@ import { Success } from './components/Success/Success'
 import { useEffect, useState } from 'react'
 
 function App() {
-  const [userToken, setUserToken] = useState('')
-  const [userData, setUserData] = useState()
-
-  useEffect(() => {
-    const authToken = {
-      Authorization: `token ${userToken}`,
-    }
-
-    const getMyself = async () => {
-      const response = await fetch('api/v1/auth/users/me/', {
-        headers: authToken,
-      })
-
-      const result = await response.json()
-      setUserData(result)
-    }
-
-    getMyself()
-    // console.log('dasda', userData.id)
-    // localStorage.setItem('id', userData.id)
-  }, [])
+  const [userToken, setUserToken] = useState()
 
   return (
     <div className="App">
