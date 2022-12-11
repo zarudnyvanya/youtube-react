@@ -2,7 +2,7 @@ from django.http import StreamingHttpResponse
 from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import action
 
-from .models import Video
+from .models import Video, Views
 from .serializers import *
 from .services import open_file
 from rest_framework import generics, viewsets, mixins
@@ -10,12 +10,22 @@ from rest_framework import generics, viewsets, mixins
 from users.permissions import IsAuthenticatedOrOwnerOrReadOnly, IsAdminOrReadOnly
 from .permissions import *
 from rest_framework.permissions import SAFE_METHODS
+from django.db import connection
+
+User = get_user_model()
+
+
+def add_view_video(request, pk: int):
+    video = get_object_or_404(Video, pk=pk)
+    video.views.remove(request.user.id)
+    video.views.add(request.user)
 
 
 def get_streaming_video(request, pk: int):
     file, status_code, content_length, content_range = open_file(request, pk)
     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
-
+    if (not content_range):
+        add_view_video(request, pk)
     response['Accept-Ranges'] = 'bytes'
     response['Content-Length'] = str(content_length)
     response['Cache-Control'] = 'no-cache'
@@ -42,8 +52,17 @@ class VideoViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
+
         video = Video.objects.filter(category__in=[pk])
-        print(video)
+        serializer = VideoSerializer(video, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def last_views(self, request):
+        history = Views.objects.filter(user=request.user)
+        video = []
+        for item in history:
+            video.append(item.video)
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 

@@ -42,13 +42,14 @@ class VideoSerializer(serializers.ModelSerializer):
     channel = serializers.HiddenField(default=CurrentChannelDefault())
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
     category = CategoryVideoSerializer(required=False, many=True, queryset=Category.objects.all())
-
+    views = serializers.IntegerField(source='get_count_views', read_only=True)
     def validate(self, attrs):
         category = attrs['category']
         if len(category) > 3:
             raise serializers.ValidationError("Можно добавить максимум 3 категории")
         del attrs['category']
         video = Video(**attrs)
+        print(video.count_views())
         if video.channel.user.is_block:
             raise serializers.ValidationError("Вы заблокированы")
         if not video.channel.is_active:
@@ -58,7 +59,8 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner', 'category']
+        fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner', 'category',
+                  'views']
 
 
 class VideoUpdateSerializer(serializers.ModelSerializer):
