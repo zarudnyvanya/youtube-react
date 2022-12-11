@@ -11,9 +11,15 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 
-class CategorySerializer(serializers.PrimaryKeyRelatedField,serializers.ModelSerializer):
+class CategoryVideoSerializer(serializers.PrimaryKeyRelatedField, serializers.ModelSerializer):
     class Meta:
         model = Category
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
 
 
 class CurrentChannelDefault:
@@ -35,10 +41,11 @@ class VideoSerializer(serializers.ModelSerializer):
         validators=[FileExtensionValidator(allowed_extensions=['mp4', "mvk"])])
     channel = serializers.HiddenField(default=CurrentChannelDefault())
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
-    category = CategorySerializer(required=False, many=True, queryset=Category.objects.all())
+    category = CategoryVideoSerializer(required=False, many=True, queryset=Category.objects.all())
+
     def validate(self, attrs):
         category = attrs['category']
-        if len(category)>3:
+        if len(category) > 3:
             raise serializers.ValidationError("Можно добавить максимум 3 категории")
         del attrs['category']
         video = Video(**attrs)
