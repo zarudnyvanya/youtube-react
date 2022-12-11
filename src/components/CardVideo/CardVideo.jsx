@@ -116,7 +116,7 @@ export const CardVideo = ({
                     </a>
                 </div>
                 <div className={s.description}>
-                    <p>{videoTitle}</p>
+                    <p title={videoTitle}>{videoTitle}</p>
                     <span>
                         {videoOwner.name} <br/> 15K Views • {reDate(videoDate)}
                     </span>
