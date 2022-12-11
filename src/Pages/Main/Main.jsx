@@ -6,16 +6,34 @@ import { Navigation } from '../../components/Navigation/Navigation'
 import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
 
-import { apiRequest } from '../../utils/api'
-
 export const Main = () => {
   const [videos, setVideos] = useState([])
   const [navIsOpen, setNavIsOpen] = useState(false)
   const [popup, setPopup] = useState(false)
   const [searchValue, setSearchValue] = useState('')
+  const [genres, setGenres] = useState(null)
+  const [genreIsChecked, setGenreIsChecked] = useState(0)
 
   useEffect(() => {
-    apiRequest().then((data) => setVideos(data))
+    const apiRequest = async () => {
+      try {
+        const response = await fetch(
+          `/api/v1/video/${genreIsChecked > 0 ? `${genreIsChecked}/category` : ''}`,
+        )
+        const data = await response.json()
+        setVideos(data)
+      } catch (err) {
+        console.log(err)
+      }
+    }
+
+    apiRequest()
+  }, [genreIsChecked])
+
+  useEffect(() => {
+    fetch('/api/v1/category/')
+      .then((res) => res.json())
+      .then((data) => setGenres(data))
   }, [])
 
   const onChangeSearchInput = (event) => {
@@ -25,7 +43,7 @@ export const Main = () => {
   return (
     <>
       {popup && <Popup onClosePopup={() => setPopup(false)} />}
-
+      Genre ID: {genreIsChecked}
       <Header
         onChangeSearchInput={onChangeSearchInput}
         searchValue={searchValue}
@@ -36,7 +54,7 @@ export const Main = () => {
         <Navigation navIsOpen={navIsOpen} />
 
         <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
-          <Genres />
+          <Genres genres={genres} genreIsChecked={genreIsChecked} onGenre={setGenreIsChecked} />
           <Home
             videos={videos}
             navIsOpen={navIsOpen}
