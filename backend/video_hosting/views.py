@@ -12,15 +12,6 @@ from .permissions import *
 from rest_framework.permissions import SAFE_METHODS
 
 
-def get_list_video(request):
-    return render(request, 'video_hosting/home.html', {'video_list': Video.objects.all()})
-
-
-def get_video(request, pk: int):
-    _video = get_object_or_404(Video, id=pk)
-    return render(request, "video_hosting/video.html", {"video": _video})
-
-
 def get_streaming_video(request, pk: int):
     file, status_code, content_length, content_range = open_file(request, pk)
     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
@@ -50,7 +41,7 @@ class VideoViewSet(viewsets.ModelViewSet):
         return serializer_class
 
     @action(detail=True, methods=['get'])
-    def category(self,request, pk=None):
+    def category(self, request, pk=None):
         video = Video.objects.filter(category__in=[pk])
         print(video)
         serializer = VideoSerializer(video, many=True)
@@ -73,7 +64,6 @@ class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
     permission_classes = (IsAdminOrReadOnly,)
-
 
 # class VideoApiList(generics.ListCreateAPIView):
 #     queryset = Video.objects.all()
