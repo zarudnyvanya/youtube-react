@@ -3,6 +3,7 @@ import {useRef,useState} from 'react'
 
 export const CardVideo = ({
                               videoId,
+                              videoView,
                               videoFile,
                               videoTitle,
                               videoImage,
@@ -92,7 +93,33 @@ export const CardVideo = ({
 
 
     }
+    const showViews = (view,arrSklon) => {
+        const viewNew = view
+        const huy = ['тыс.просмотров','млн.просмотров']
+        let str = null
+        let num = null
 
+        if(view >= 1000 && view < 1000000){
+            num = 100
+            str = huy[0]
+        }
+
+        if(view >= 1000000){
+            str = huy[1]
+            num = 100000
+        }
+        if(view >= 1000){
+            return `${Math.floor(view/num)/10} ${str}`
+        }
+
+        view = Math.abs(view) % 100;
+        let n1 = view % 10;
+        if (view > 10 && view < 20) { return `${viewNew} ${arrSklon[2]}`; }
+        if (n1 > 1 && n1 < 5) { return `${viewNew} ${arrSklon[1]}`; }
+        if (n1 === 1) { return `${viewNew} ${arrSklon[0]}`; }
+        return `${viewNew} ${arrSklon[2]}`;
+
+    }
 
 
 
@@ -118,7 +145,7 @@ export const CardVideo = ({
                 <div className={s.description}>
                     <p title={videoTitle}>{videoTitle}</p>
                     <span>
-                        {videoOwner.name} <br/> 15K Views • {reDate(videoDate)}
+                        {videoOwner.name} <br/>{showViews(99909,['просмотр', 'просмотра', 'просмотров'])} • {reDate(videoDate)}
                     </span>
                 </div>
             </div>
