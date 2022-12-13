@@ -32,7 +32,7 @@ class CurrentChannelDefault:
 class ChannelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Channel
-        fields = "__all__"
+        fields = ['name', 'description', 'image', 'banner', 'logo', 'is_active']
         depth = 1
 
 

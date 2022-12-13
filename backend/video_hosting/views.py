@@ -78,6 +78,20 @@ class ChannelViewSet(viewsets.ModelViewSet):
         else:
             return Channel.objects.all()
 
+    def get_instance(self):
+        return Channel.objects.get(user=self.request.user)
+
+    @action(detail=False, methods=['get', 'put', 'patch'])
+    def me(self, request, *args, **kwargs):
+        self.get_object = self.get_instance
+        if request.method == "GET":
+            return self.retrieve(request, *args, **kwargs)
+        elif request.method == "PUT":
+            return self.update(request, *args, **kwargs)
+        elif request.method == "PATCH":
+            return self.partial_update(request, *args, **kwargs)
+
+
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
