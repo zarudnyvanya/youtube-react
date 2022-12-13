@@ -16,6 +16,11 @@ class UserSerializer(serializers.ModelSerializer):
         fields = tuple(User.REQUIRED_FIELDS) + (
             settings.USER_ID_FIELD,
             settings.LOGIN_FIELD,
+            'first_name',
+            'last_name',
+            'gender',
+            'birth_date',
+            'is_block',
         )
         read_only_fields = (settings.LOGIN_FIELD, 'is_block')
 
