@@ -17,6 +17,7 @@ export const Home = ({ videos, searchValue, navIsOpen }) => {
                   key={video.id}
                   navIsOpen={navIsOpen}
                   videoId={video.id}
+                  videoView={video.views}
                   videoFile={video.file}
                   videoTitle={video.title}
                   videoImage={video.image}
