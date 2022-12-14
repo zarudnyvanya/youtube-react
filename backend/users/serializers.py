@@ -78,3 +78,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
                 user.is_active = False
                 user.save(update_fields=["is_active"])
         return user
+
+class TokenSerializer(serializers.ModelSerializer):
+    auth_token = serializers.CharField(source="key")
+    user = UserSerializer()
+    class Meta:
+        model = settings.TOKEN_MODEL
+        fields = ['auth_token', 'user']
