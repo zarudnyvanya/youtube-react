@@ -24,7 +24,7 @@ class Video(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
     channel = models.ForeignKey("Channel", verbose_name="Канал", on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category)
+    category = models.ManyToManyField(Category, related_name="category")
     views = models.ManyToManyField(User, through='Views')
 
     def __str__(self):
@@ -32,12 +32,13 @@ class Video(models.Model):
 
     def get_count_views(self):
         return self.views.count()
+
     class Meta:
         ordering = ('-created_at',)
 
 class Views(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_id")
-    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="video_id")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="view_user")
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="view_video")
     time = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -51,7 +52,14 @@ class Channel(models.Model):
     banner = models.ImageField(upload_to='image/profile/banner/%Y/%m/', null=True)
     logo = models.ImageField(upload_to='image/profile/logo/%Y/%m/', null=True)
     is_active = models.BooleanField(default=0)
+    subscribers = models.ManyToManyField(User, through="Subscribers", related_name='subs')
 
+    def get_count_subscribes(self):
+        return self.subscribers.count()
+
+class Subscribers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sub_user')
+    channel = models.ForeignKey('Channel', on_delete=models.CASCADE, related_name='sub_channel')
 
 @receiver(post_save, sender=CustomUser)
 def create_user_channel(sender, instance, created, **kwargs):
