@@ -1,11 +1,13 @@
-from django.http import StreamingHttpResponse
+from django.http import StreamingHttpResponse, QueryDict
 from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
+from rest_framework.viewsets import GenericViewSet
 
-from .models import Video, Views
+from .models import *
 from .serializers import *
 from .services import open_file
-from rest_framework import generics, viewsets, mixins
+from rest_framework import generics, viewsets, mixins, status
 
 from users.permissions import IsAuthenticatedOrOwnerOrReadOnly, IsAdminOrReadOnly
 from .permissions import *
@@ -52,31 +54,48 @@ class VideoViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
-
         video = Video.objects.filter(category__in=[pk])
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def last_views(self, request):
-        history = Views.objects.filter(user=request.user)
-        video = []
-        for item in history:
-            video.append(item.video)
+        # history = Views.video_set.filter(user=request.user)
+        # history = Views.video.filter(user=request.user)
+        video = Video.objects.filter(views=request.user).order_by('-view_video__time').select_related(
+            'channel').prefetch_related('category').prefetch_related('views').prefetch_related('channel__subscribers')
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
 
-class ChannelViewSet(viewsets.ModelViewSet):
+class ChannelViewSet(mixins.CreateModelMixin,
+                     mixins.RetrieveModelMixin,
+                     mixins.UpdateModelMixin,
+                     mixins.ListModelMixin,
+                     GenericViewSet):
     queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
     def get_queryset(self):
+        if self.action == 'create':
+            raise PermissionDenied()
         if self.action == 'list':
             return Channel.objects.filter(is_active=True)
         else:
             return Channel.objects.all()
+
+    def get_serializer_class(self):
+        if self.action == 'subscribe':
+            return SubscribeSerializer
+        else:
+            return ChannelSerializer
+
+    def get_permissions(self):
+        if self.action in ["follow", 'subscribe'] :
+            return (permissions.IsAuthenticated(),)
+        else:
+            return (IsOwnerOrReadOnly(),)
 
     def get_instance(self):
         return Channel.objects.get(user=self.request.user)
@@ -91,6 +110,30 @@ class ChannelViewSet(viewsets.ModelViewSet):
         elif request.method == "PATCH":
             return self.partial_update(request, *args, **kwargs)
 
+    @action(detail=False, methods=['get'])
+    def subscribers(self, request, *args, **kwargs):
+        channels = Channel.objects.filter(user__in=self.get_instance().subscribers.all()).order_by('subscribers')
+        print(channels)
+        serializer = self.serializer_class(channels, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['post', 'delete'])
+    def subscribe(self, request, pk):
+        if request.method == 'POST':
+            channel = get_object_or_404(Channel, pk=pk)
+            Subscribers.objects.create(user=request.user, channel=channel)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            channel = get_object_or_404(Channel, pk=pk)
+            instance = get_object_or_404(Subscribers, user=request.user, channel=channel)
+            instance.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+    @action(detail=False, methods=['get'])
+    def follow(self, request):
+        channels = Channel.objects.filter(subscribers=request.user)
+        serializer = ChannelSerializer(channels, many=True)
+        return Response(serializer.data)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -98,60 +141,11 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = (IsAdminOrReadOnly,)
 
-# class VideoApiList(generics.ListCreateAPIView):
-#     queryset = Video.objects.all()
-#     serializer_class = VideoSerializer
-#     permission_classes = (IsAuthenticatedOrReadOnly,)
-#
-#
-# class VideoApiDetailView(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Video.objects.all()
-#     serializer_class = VideoSerializer
-#     permission_classes = (IsOwnerOrAdminOrReadOnly,)
-# Ниже нахуй не надо, 2 класса выше делают всю работу
-# class VideoApiView(APIView):
-#     def get(self, request, *args, **kwargs):
-#         pk = kwargs.get('pk', None)
-#         if not pk:
-#             w = Video.objects.all()
-#             return Response({'videos': VideoSerializer(w, many=True).data})
-#
-#         try:
-#             w = Video.objects.get(pk=pk)
-#             return Response(VideoSerializer(w).data)
-#         except:
-#             return Response({"error": "Object does not exists"})
-#
-#     def post(self, request):
-#         serializer = VideoSerializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response({'title': serializer.data})
-#
-#     def put(self, request, *args, **kwargs):
-#         pk = kwargs.get('pk', None)
-#         if not pk:
-#             return Response({'error': "Method PUT not allowed"})
-#         try:
-#             instance = Video.objects.get(pk=pk)
-#         except:
-#             return Response({"error": "Object does not exists"})
-#         serializer = VideoSerializer(data=request.data, instance=instance)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response({'post': serializer.data})
-#
-#     def delete(self, request, *args, **kwargs):
-#         pk = kwargs.get("pk", None)
-#         if not pk:
-#             return Response({'error': 'Method DELETE not allowed'})
-#
-#         try:
-#             Video.objects.get(pk=pk).delete()
-#         except:
-#             return Response({"error": "Object does not exists"})
-#
-#         return Response({'video': 'delete video ' + str(pk)})
-# class VideoApiView(generics.ListAPIView):
-#     queryset = Video.objects.all()
-#     serializer_class = VideoSerializer
+
+class SubscriberViewSet(mixins.CreateModelMixin,
+                        mixins.ListModelMixin,
+                        GenericViewSet):
+    serializer_class = ChannelSerializer
+
+    def get_queryset(self):
+        return Channel.objects.filter(subsribers=self.request.user)

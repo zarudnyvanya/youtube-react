@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.response import Response
 
 from users.models import CustomUser
-from .models import Video, Channel, Category
+from .models import *
 
 from django.contrib.auth import get_user_model
 
@@ -30,10 +30,11 @@ class CurrentChannelDefault:
 
 
 class ChannelSerializer(serializers.ModelSerializer):
+    subscribers = serializers.IntegerField(source="get_count_subscribes", read_only=True)
+
     class Meta:
         model = Channel
-        fields = ['name', 'description', 'image', 'banner', 'logo', 'is_active']
-        depth = 1
+        fields = ['pk','user', 'name', 'description', 'image', 'banner', 'logo', 'is_active', 'subscribers']
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -43,6 +44,7 @@ class VideoSerializer(serializers.ModelSerializer):
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
     category = CategoryVideoSerializer(required=False, many=True, queryset=Category.objects.all())
     views = serializers.IntegerField(source='get_count_views', read_only=True)
+
     def validate(self, attrs):
         category = attrs['category']
         if len(category) > 3:
@@ -67,3 +69,10 @@ class VideoUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
         fields = ['id', 'title', 'description', 'image']
+
+
+class SubscribeSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=CurrentChannelDefault)
+    class Meta:
+        model = Subscribers
+        fields = ['user', "channel"]
