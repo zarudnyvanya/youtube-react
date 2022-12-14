@@ -6,7 +6,7 @@ import { Navigation } from '../../components/Navigation/Navigation'
 import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
 
-export const Main = () => {
+export const Main = ({ userData, isAuth }) => {
   const [videos, setVideos] = useState([])
   const [navIsOpen, setNavIsOpen] = useState(false)
   const [popup, setPopup] = useState(false)
@@ -42,9 +42,10 @@ export const Main = () => {
 
   return (
     <>
-      {popup && <Popup onClosePopup={() => setPopup(false)} />}
-      Genre ID: {genreIsChecked}
+      {popup && <Popup userData={userData} isAuth={isAuth} onClosePopup={() => setPopup(false)} />}
+
       <Header
+        userData={userData}
         onChangeSearchInput={onChangeSearchInput}
         searchValue={searchValue}
         navIsOpen={() => setNavIsOpen(!navIsOpen)}
@@ -61,6 +62,7 @@ export const Main = () => {
             onChangeSearchInput={onChangeSearchInput}
             searchValue={searchValue}
             setSearchValue={setSearchValue}
+            isAuth={isAuth}
           />
         </div>
       </div>

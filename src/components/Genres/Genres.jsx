@@ -16,10 +16,7 @@ const genre = [
 ]
 
 export const Genres = ({ genres, genreIsChecked, onGenre }) => {
-  console.log(genres)
-
   const onSelectGenre = (id) => {
-    console.log(genreIsChecked)
     onGenre(id)
   }
 

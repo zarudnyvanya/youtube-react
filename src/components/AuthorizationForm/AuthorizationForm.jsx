@@ -28,8 +28,6 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
       Authorization: `token ${userToken}`,
     }
 
-    console.log('userToken ->>>>', userToken)
-
     if (userToken) {
       console.log('Auth ->', authToken)
 
@@ -38,9 +36,11 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
           headers: authToken,
         })
         const result = await response.json()
+
         localStorage.setItem('id', result.id)
         localStorage.setItem('email', result.email)
-        console.log('Result ->', result)
+
+        window.location.href = '/'
       }
       getMyself()
     }
@@ -150,7 +150,7 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
         <Link to="/registration" class={s.create_account}>
           Создать аккаунт
         </Link>
-        <button disabled={!formValid} class={s.futherbtn}>
+        <button className={s.next} disabled={!formValid} class={s.futherbtn}>
           Далее
         </button>
       </div>

@@ -98,3 +98,10 @@
   font-weight: 500;
   
 }
+
+.next {
+  cursor: pointer;
+  &:disabled {
+    
+  }
+}
