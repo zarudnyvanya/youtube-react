@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import StreamingHttpResponse, QueryDict
 from django.shortcuts import render, get_object_or_404
 from rest_framework.decorators import action
@@ -52,6 +53,11 @@ class VideoViewSet(viewsets.ModelViewSet):
             serializer_class = VideoUpdateSerializer
         return serializer_class
 
+    def get_permissions(self):
+        if self.action in ['last_views', 'new']:
+            return (permissions.IsAuthenticated(),)
+        return (IsAuthenticatedOrOwnerOrReadOnly(),)
+
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
         video = Video.objects.filter(category__in=[pk])
@@ -64,6 +70,12 @@ class VideoViewSet(viewsets.ModelViewSet):
         # history = Views.video.filter(user=request.user)
         video = Video.objects.filter(views=request.user).order_by('-view_video__time').select_related(
             'channel').prefetch_related('category').prefetch_related('views').prefetch_related('channel__subscribers')
+        serializer = VideoSerializer(video, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=['get'])
+    def new(self, request):
+        video = Video.objects.filter(~Q(views=request.user))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
@@ -92,7 +104,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
             return ChannelSerializer
 
     def get_permissions(self):
-        if self.action in ["follow", 'subscribe'] :
+        if self.action in ["follow", 'subscribe']:
             return (permissions.IsAuthenticated(),)
         else:
             return (IsOwnerOrReadOnly(),)

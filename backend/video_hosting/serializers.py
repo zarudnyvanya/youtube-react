@@ -51,7 +51,6 @@ class VideoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Можно добавить максимум 3 категории")
         del attrs['category']
         video = Video(**attrs)
-        print(video.count_views())
         if video.channel.user.is_block:
             raise serializers.ValidationError("Вы заблокированы")
         if not video.channel.is_active:
