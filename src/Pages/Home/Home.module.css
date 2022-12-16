@@ -1,0 +1,35 @@
+.video__content {
+  width: 100%;
+  padding-top: 20px;
+  background-color: #0f0f0f;
+  text-align: center;
+}
+
+.video__wrapper {
+  width: 100%;
+}
+
+.video__list {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 360px);
+  justify-content: center;
+  justify-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.video__list_video_list_is_wide {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 343px);
+  margin-left: 40px;
+  gap: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 1415px) {
+  .video__list {
+    grid-column-gap: 10px;
+  }
+}
+
+/*# sourceMappingURL=Home.module.css.map */

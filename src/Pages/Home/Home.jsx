@@ -1,7 +1,8 @@
 import { CardVideo } from '../../components/CardVideo/CardVideo'
 
 import s from './Home.module.scss'
-
+import UserSettings from "../../components/UserSettings/UserSettings";
+import {User} from "../../components/User/User";
 export const Home = ({ videos, searchValue, navIsOpen, isAuth }) => {
   return (
     <div className={s.video__content}>

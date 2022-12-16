@@ -2,7 +2,7 @@ import s from './UserSettings.module.scss'
 
 
 
-export const UserSettings = () => {
+const UserSettings = () => {
     return (
         <>
             <aside className={s.nav__block}>
@@ -17,7 +17,7 @@ export const UserSettings = () => {
             <div className={s.wrapper__user__info}>
                 <div className={s.user__info}>
                     <header className={s.header__info}>
-                        <h3 className={stitle__personal-info}>
+                        <h3 className={s.title__personal_info}>
                             Личная информация
                         </h3>
                         <p className={s.description__info}>
@@ -29,13 +29,13 @@ export const UserSettings = () => {
 
                         <ul className={s.basicInformation}>
 
-                            <li className={s.item__info-title}>
-                                <h4 className={s.info-title}>Информация о Вас</h4>
+                            <li className={s.item__info_title}>
+                                <h4 className={s.info_title}>Информация о Вас</h4>
                             </li>
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Логотип</span>
+                                <span className={s.title__person_info}>Логотип</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}> Добавте лого в аккаунт</span>
                                     <span className={s.arrow}>
@@ -51,7 +51,7 @@ export const UserSettings = () => {
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Имя</span>
+                                <span className={s.title__person_info}>Имя</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}>ladick</span>
                                     <span className={s.arrow}>
@@ -67,7 +67,7 @@ export const UserSettings = () => {
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Дата рождения</span>
+                                <span className={s.title__person_info}>Дата рождения</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}>15.04.2002г.</span>
                                     <span className={s.arrow}>
@@ -83,7 +83,7 @@ export const UserSettings = () => {
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Пол</span>
+                                <span className={s.title__person_info}>Пол</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}>Мужской</span>
                                     <span className={s.arrow}>
@@ -99,7 +99,7 @@ export const UserSettings = () => {
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Электронная почта</span>
+                                <span className={s.title__person_info}>Электронная почта</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}>polevskux@gmail.com</span>
                                     <span className={s.arrow}>
@@ -115,7 +115,7 @@ export const UserSettings = () => {
 
                             <li className={s.item__info}>
 
-                                <span className={s.title__person-info}>Пароль</span>
+                                <span className={s.title__person_info}>Пароль</span>
                                 <div className={s.person__description}>
                                     <span className={s.person__info}>**********</span>
                                     <span className={s.arrow}>
@@ -136,3 +136,5 @@ export const UserSettings = () => {
 )
 
 }
+
+export default UserSettings

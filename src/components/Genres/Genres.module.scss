@@ -7,10 +7,29 @@
     // display: flex;
     text-align: center;
     // justify-content: center;
-    padding: 15px 0;
+    padding: 10px 0;
     // border-top: 1px solid #303030;
     // border-bottom: 1px solid #303030;   
-    // overflow-x: auto;   
+    // overflow-x: auto;
+
+    &::-webkit-scrollbar{
+        height: 6px;
+
+    }
+    &::-webkit-scrollbar-track{
+        background-color: #fff;
+        border-radius: 10px;
+        }
+
+    &::-webkit-scrollbar-thumb{
+        background: #464646;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #343434;
+    }
+
 }
 
 .genres__list {

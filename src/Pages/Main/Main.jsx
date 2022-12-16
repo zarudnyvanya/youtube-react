@@ -5,6 +5,9 @@ import { Header } from '../../components/Header/Header'
 import { Navigation } from '../../components/Navigation/Navigation'
 import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
+import Skeleton from '../../components/CardVideo/CardSkeleton'
+import UserSettings from "../../components/UserSettings/UserSettings";
+
 
 export const Main = ({ userData, isAuth }) => {
   const [videos, setVideos] = useState([])
@@ -13,6 +16,8 @@ export const Main = ({ userData, isAuth }) => {
   const [searchValue, setSearchValue] = useState('')
   const [genres, setGenres] = useState(null)
   const [genreIsChecked, setGenreIsChecked] = useState(0)
+  const [isLoading, setIsLoading] = useState(true);
+
 
   useEffect(() => {
     const apiRequest = async () => {
@@ -22,6 +27,7 @@ export const Main = ({ userData, isAuth }) => {
         )
         const data = await response.json()
         setVideos(data)
+        setIsLoading(false)
       } catch (err) {
         console.log(err)
       }
@@ -53,10 +59,15 @@ export const Main = ({ userData, isAuth }) => {
       />
       <div className="container">
         <Navigation navIsOpen={navIsOpen} />
-
+        {/*<UserSettings />*/}
         <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
           <Genres genres={genres} genreIsChecked={genreIsChecked} onGenre={setGenreIsChecked} />
-          <Home
+
+          {
+
+            isLoading ? [...new Array(6)].map((_,Index) => <Skeleton key={Index}/>) :
+
+            <Home
             videos={videos}
             navIsOpen={navIsOpen}
             onChangeSearchInput={onChangeSearchInput}
@@ -64,6 +75,8 @@ export const Main = ({ userData, isAuth }) => {
             setSearchValue={setSearchValue}
             isAuth={isAuth}
           />
+
+          }
         </div>
       </div>
     </>
