@@ -1,8 +1,8 @@
 .nav__item{
     display: flex;
     align-items: center;
-    padding: 8px 0px 8px 24px;
-    
+    padding: 8px 0 8px 24px;
+    border-radius: 10px;
     &:hover{
 
         background: #303030;
@@ -20,5 +20,5 @@
 .nav__icons{
     display: inline-block;
     margin-right: 24px;
-    padding-left: 0px;
+    padding-left: 0;
 }
