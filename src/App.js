@@ -8,6 +8,7 @@ import './App.scss'
 import { Success } from './components/Success/Success'
 import { useEffect, useState } from 'react'
 import { Logout } from './components/Logout/Logout'
+import UserSettings from "./components/UserSettings/UserSettings";
 
 function App() {
   const [userData, setUserData] = useState()
@@ -49,6 +50,9 @@ function App() {
           element={<Authorization userToken={userToken} onToken={setUserToken} />}
         />
         <Route path="/activate/:uid/:token/" element={<Success />} />
+
+        <Route path="/userSettings" element={<UserSettings />} />
+
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>

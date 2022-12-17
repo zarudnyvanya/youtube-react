@@ -1,0 +1,24 @@
+.wrapper__popup__settings {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+}
+
+.popup__window {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: 1px solid #303030;
+}
+
+.popup__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=popupSettings.css.map */

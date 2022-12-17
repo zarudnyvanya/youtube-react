@@ -20,10 +20,11 @@ export const Main = ({ userData, isAuth }) => {
 
 
   useEffect(() => {
+    setIsLoading(true)
     const apiRequest = async () => {
       try {
         const response = await fetch(
-          `/api/v1/video/${genreIsChecked > 0 ? `${genreIsChecked}/category` : ''}`,
+          `/api/v1/video/${genreIsChecked > 0 ? `${genreIsChecked}/category/` : ''}`,
         )
         const data = await response.json()
         setVideos(data)
@@ -47,6 +48,7 @@ export const Main = ({ userData, isAuth }) => {
   }
 
   return (
+      <div className='overlay'>
     <>
       {popup && <Popup userData={userData} isAuth={isAuth} onClosePopup={() => setPopup(false)} />}
 
@@ -59,7 +61,7 @@ export const Main = ({ userData, isAuth }) => {
       />
       <div className="container">
         <Navigation navIsOpen={navIsOpen} />
-        {/*<UserSettings />*/}
+
         <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
           <Genres genres={genres} genreIsChecked={genreIsChecked} onGenre={setGenreIsChecked} />
 
@@ -80,5 +82,6 @@ export const Main = ({ userData, isAuth }) => {
         </div>
       </div>
     </>
+</div>
   )
 }
