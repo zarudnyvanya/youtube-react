@@ -7,7 +7,10 @@ import {Popup} from '../../components/Popup/Popup'
 import {Home} from '../Home/Home'
 import Skeleton from '../../components/CardVideo/CardSkeleton'
 
-export const Main = ({userData, isAuth}) => {
+
+import doRequest from '../../components/doRequest/doRequest'
+
+export const Main = ({ userData, isAuth }) => {
     const [videos, setVideos] = useState([])
 
     // const [viewedVideos, setViewedVideos] = useState([])
@@ -19,26 +22,29 @@ export const Main = ({userData, isAuth}) => {
     const [isLoading, setIsLoading] = useState(true)
     // const [userToken, setUserToken] = useState()
 
-    const doRequest = (url) => {
-        // userData нет при первом запросе. пофикси из-за этого не берется токен
-        let headers = {}
-        try {
-            headers = {
-                Authorization: `token ${userData.userToken}`,
-            }
-        } catch {
-            console.log("userToken not found")
-        }
+    // const doRequest = (url) => {
+    //     // userData нет при первом запросе. пофикси из-за этого не берется токен
+    //
+    //     let headers = {}
+    //     if(userData) {
+    //         headers = {
+    //             Authorization: `token ${userData.userToken}`,
+    //         }
+    //     }else{
+    //         console.error('User date is undefined')
+    //     }
+    //     try {
+    //         return fetch(url, {headers: headers})
+    //     } catch {
+    //         console.log('error_request')
+    //     }
+    // }
 
-        try {
-            return fetch(url, {headers: headers})
-        } catch {
-            console.log('error_request')
-        }
-    }
     useEffect(() => {
+        let url = '/api/v1/video/'
+        if(userData){
             const apiRequest = async () => {
-                let url = '/api/v1/video/'
+
                 if (genreIsChecked === 100) {
                     url = url + "last_views/"
                 } else if (genreIsChecked === 101) {
@@ -46,14 +52,17 @@ export const Main = ({userData, isAuth}) => {
                 } else if (genreIsChecked > 0) {
                     url = url + genreIsChecked + '/category/'
                 }
-                const response = await doRequest(url)
+                const response = await doRequest(url,userData)
                 const data = await response.json()
 
                 setVideos(data)
                 setIsLoading(false)
             }
             apiRequest()
-        }, [genreIsChecked]
+        }
+
+
+        }, [genreIsChecked,userData]
     )
     // useEffect(() => {
     //   const apiLastViewed = async () => {
@@ -121,7 +130,7 @@ export const Main = ({userData, isAuth}) => {
                     onPopup={() => setPopup(!popup)}
                 />
                 <div className="container">
-                    <Navigation navIsOpen={navIsOpen}/>
+                    <Navigation navIsOpen={navIsOpen} userData={userData}/>
 
                     <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
                         <Genres
@@ -134,7 +143,7 @@ export const Main = ({userData, isAuth}) => {
                         />
 
                         {isLoading ? (
-                            [...new Array(6)].map((_, Index) => <Skeleton key={Index}/>)
+                            [...new Array(8)].map((_, Index) => <Skeleton key={Index}/>)
                         ) : (
                             <Home
                                 videos={videos}

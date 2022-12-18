@@ -10,6 +10,10 @@ import { useEffect, useState } from 'react'
 import { Logout } from './components/Logout/Logout'
 import UserSettings from './components/UserSettings/UserSettings'
 
+
+
+
+
 function App() {
   const [userData, setUserData] = useState()
   const [isAuth, setIsAuth] = useState(false)
@@ -23,7 +27,7 @@ function App() {
     setUserEmail(localStorage.getItem('email'))
     setUserId(localStorage.getItem('id'))
 
-    if ((userToken, userEmail, userId)) {
+    if ((userToken, userEmail , userId)) {
       setUserData({
         userToken,
         userEmail,
