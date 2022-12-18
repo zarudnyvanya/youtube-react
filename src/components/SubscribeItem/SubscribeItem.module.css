@@ -1,0 +1,27 @@
+.subscription__item {
+  display: flex;
+  align-items: center;
+  padding: 4px 24px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.subscription__item img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+.subscription__item p {
+  max-width: 116px;
+  color: #f1f1f1;
+  font-size: 14px;
+  line-height: 2rem;
+  font-weight: 400;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.subscription__item:hover {
+  background: #303030;
+}
+
+/*# sourceMappingURL=SubscribeItem.module.css.map */

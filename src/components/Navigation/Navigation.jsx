@@ -2,6 +2,11 @@ import s from './Navigation.module.scss'
 
 import { NavItem } from './../NavItem/NavItem'
 import { NavItemMini } from './../NavItemMini/NavItemMini'
+import {useEffect,useState} from "react";
+import doRequest from "../doRequest/doRequest";
+import SubscribeItem from "../SubscribeItem/SubscribeItem";
+
+
 
 const navItems = [
   {
@@ -26,7 +31,23 @@ const navItems = [
   },
 ]
 
-export const Navigation = ({ navIsOpen }) => {
+export const Navigation = ({ navIsOpen, userData }) => {
+
+  const [subPerson, setSubPerson] = useState([]);
+
+  useEffect(()=>{
+    if(userData){
+      const apiRequest = async () => {
+        const response = await doRequest("api/v1/channel/follow/", userData)
+        const data = await response.json()
+        console.log('dataaaaa', data)
+        setSubPerson(data)
+      }
+      apiRequest()
+    }
+
+  },[userData])
+  console.log('subPerson',subPerson)
   return (
     <aside className={`${s.aside__nav}`}>
       <nav className={s.nav__list}>
@@ -40,6 +61,22 @@ export const Navigation = ({ navIsOpen }) => {
               })}
         </ul>
       </nav>
+
+      {navIsOpen ?
+      <div className={s.wrapper__subscription}>
+        <h1 className={s.title__sub}>Подписки</h1>
+        <ul className={s.subscription__list}>
+          {
+          subPerson.map((obj)=>{
+            return <SubscribeItem image={obj.logo} nameChanel={obj.name} />
+          })
+          }
+        </ul>
+      </div>
+          : ''
+      }
+
+
     </aside>
   )
 }
