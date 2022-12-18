@@ -13,45 +13,55 @@ const genre = [
     title: 'Все',
     description: 'Все',
   },
-]
-
-const viewed = [
-  {
-    id: 6,
+    {
+    id: 100,
     title: 'Просмотренные',
     description: 'Просмотренные',
   },
+    {
+    id: 101,
+    title: 'Новое',
+    description: 'Новое',
+  },
 ]
 
+// const viewed = [
+//   {
+//     id: 6,
+//     title: 'Просмотренные',
+//     description: 'Просмотренные',
+//   },
+// ]
+
 export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth, userData }) => {
-  const [onViewed, setOnViewed] = useState(false)
-
-  useEffect(() => {
-    setOnViewed(false)
-
-    if (userData) {
-      const authToken = {
-        Authorization: `token ${userData.userToken}`,
-      }
-
-      if (userData.userToken) {
-        const getMyself = async () => {
-          const response = await fetch('api/v1/video/last_views/', {
-            headers: authToken,
-          })
-          const result = await response.json()
-          setVideos(result)
-        }
-
-        getMyself()
-      }
-    }
-  }, [onViewed, userData])
-
-  const onClickViewed = () => {
-    console.log('clickekdke')
-    setOnViewed(true)
-  }
+  // // const [onViewed, setOnViewed] = useState(false)
+  //
+  // useEffect(() => {
+  //   setOnViewed(false)
+  //
+  //   if (userData) {
+  //     const authToken = {
+  //       Authorization: `token ${userData.userToken}`,
+  //     }
+  //
+  //     if (userData.userToken) {
+  //       const getMyself = async () => {
+  //         const response = await fetch('api/v1/video/last_views/', {
+  //           headers: authToken,
+  //         })
+  //         const result = await response.json()
+  //         setVideos(result)
+  //       }
+  //
+  //       getMyself()
+  //     }
+  //   }
+  // }, [onViewed, userData])
+  //
+  // const onClickViewed = () => {
+  //   console.log('clickekdke')
+  //   setOnViewed(true)
+  // }
 
   const onSelectGenre = (id) => {
     onGenre(id)
@@ -100,16 +110,16 @@ export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth, use
                 />
               )
             })} */}
-          {userData && (
-            <li
-              onClick={onClickViewed}
-              // className={`${genreId === genreIsChecked ? classNames : s.genres__item}`}
-            >
-              <a href="#" className={s.genres__link}>
-                {viewed[0].title}
-              </a>
-            </li>
-          )}
+          {/*{userData && (*/}
+          {/*  <li*/}
+          {/*    onClick={onClickViewed}*/}
+          {/*    // className={`${genreId === genreIsChecked ? classNames : s.genres__item}`}*/}
+          {/*  >*/}
+          {/*    <a href="#" className={s.genres__link}>*/}
+          {/*      {viewed[0].title}*/}
+          {/*    </a>*/}
+          {/*  </li>*/}
+          {/*)}*/}
         </ul>
       </nav>
     </section>
