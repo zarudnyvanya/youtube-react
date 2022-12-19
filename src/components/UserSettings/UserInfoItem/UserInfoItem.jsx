@@ -1,10 +1,10 @@
 import s from './UserInfoItem.module.scss'
 
-const UserInfoItem = ({ title, description }) => {
+const UserInfoItem = ({ title, description, onClick }) => {
   console.log(title)
 
   return (
-    <li className={s.item__info}>
+    <li className={s.item__info} onClick={()=>onClick(true)}>
       <span className={s.title__person_info}>{title}</span>
       <div className={s.person__description}>
         <span className={s.person__info}>{description}</span>
