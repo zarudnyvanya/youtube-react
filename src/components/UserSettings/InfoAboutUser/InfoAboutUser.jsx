@@ -2,7 +2,7 @@ import s from './InfoAboutUser.module.scss'
 
 import UserInfoItem from '../UserInfoItem/UserInfoItem'
 
-const InfoAboutUser = ({ userData = {} }) => {
+const InfoAboutUser = ({ userData = {}, onClickHandler }) => {
   // const fieldsSettings = [
   //   {
   //     title: 'Логотип',
@@ -42,12 +42,12 @@ const InfoAboutUser = ({ userData = {} }) => {
         </li>
         {fieldsSettings.map((field, index) => {
           return (
-            <UserInfoItem key={index} title={userData.userId} description={userData.userEmail} />
+            <UserInfoItem key={index} title={userData.userId} description={userData.userEmail} onClick={(isOpen)=> onClickHandler(isOpen)} />
           )
         })}
       </ul>
     </div>
   )
 }
-
+// onClickHandler(true)
 export default InfoAboutUser

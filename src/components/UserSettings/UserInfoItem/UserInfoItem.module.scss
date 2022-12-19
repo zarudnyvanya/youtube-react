@@ -9,7 +9,7 @@
   &:not(:last-child){
     border-bottom: 1px solid #303030;
   }
-
+  cursor: pointer;
   &:hover{
 
     background-color: rgba(54, 54, 54, 0.2);
@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  cursor: pointer;
+
 
 }
 
