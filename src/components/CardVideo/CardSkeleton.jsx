@@ -6,7 +6,7 @@ const Skeleton = (props) => (
 
         <ContentLoader
             className={s.video__item__skeleton}
-            speed={3}
+            speed={1}
             width={341}
             height={293}
             viewBox="0 0 341 293"

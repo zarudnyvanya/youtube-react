@@ -1,5 +1,4 @@
 
-
 .overlay{
   background-color: rgba(0,0,0,0.8);
   position: fixed;
@@ -8,18 +7,18 @@
   bottom: 0;
   right: 0;
   z-index: 100;
-
-
 }
 
 .wrapper__popup{
-  width: 100%;
-  min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
+  position: absolute;
+  z-index: 200;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
 }
 .wrapper__title{

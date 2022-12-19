@@ -4,31 +4,15 @@ import {useRef, useEffect, useState} from "react";
 
 const SettingsPopup = ({ isOpen, setIsOpen }) => {
 
-    const sortRef = useRef();
-    const handleOutsideClick = (event) => {
-        const path = event.path || (event.composedPath && event.composedPath());
-        if (!path.includes(sortRef.current)) {
-
-
-            setIsOpen(!isOpen);
-            console.log('isopen',isOpen)
-        }
-
-    };
-
-    useEffect(() => {
-        document.body.addEventListener('click', handleOutsideClick);
-    }, []);
-
     return (
-        <div className={s.modal}  ref={sortRef}>
-
+        <>
+        <div className={s.overlay}  onClick={()=>setIsOpen(!isOpen)}></div>
                 <div className={s.wrapper__popup}>
                     <h1 className={s.wrapper__title}>Имя</h1>
                     <form method='post' className={s.wrapper__info}>
-                        <div className={s.info__block}>
+                        <div className={s.info__block} >
                             <label className={s.info__label__content}>
-                                <h2 className={s.info__title__content}>Имя</h2>
+                                <h2 className={s.info__title__content} >Имя</h2>
                                 <div className={s.input__button}>
                                     <input type='text' className={s.info__content}
                                            value='Ladick'
@@ -49,8 +33,8 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
                         </div>
                     </form>
                 </div>
+        </>
 
-        </div>
 )
 
 }

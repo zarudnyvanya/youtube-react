@@ -9,12 +9,15 @@
 }
 
 .wrapper__popup {
-  width: 100%;
-  min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 200;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .wrapper__title {
