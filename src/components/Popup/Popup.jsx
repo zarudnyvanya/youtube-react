@@ -7,8 +7,11 @@ import { forwardRef } from 'react'
 import { useEffect, useRef } from 'react'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
-export const Popup = ({ onClosePopup, userData, isAuth }) => {
+export const Popup = ({ onClosePopup, isAuth }) => {
+  const userData = useSelector((state) => state.user.userData)
+
   const outsideClick = () => {
     onClosePopup()
   }
@@ -19,7 +22,7 @@ export const Popup = ({ onClosePopup, userData, isAuth }) => {
         <div className="wrapper_popup">
           <div className={s.user_info}>
             <img src={userImg} alt="profile" />
-            <span>{userData && userData.userEmail ? userData.userEmail : 'Anonymous'}</span>
+            <span>{userData && userData.email ? userData.email : 'Anonymous'}</span>
           </div>
 
           <div className={s.user_account}>

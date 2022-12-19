@@ -13,12 +13,12 @@ const genre = [
     title: 'Все',
     description: 'Все',
   },
-    {
+  {
     id: 100,
     title: 'Просмотренные',
     description: 'Просмотренные',
   },
-    {
+  {
     id: 101,
     title: 'Новое',
     description: 'Новое',
@@ -33,36 +33,7 @@ const genre = [
 //   },
 // ]
 
-export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth, userData }) => {
-  // // const [onViewed, setOnViewed] = useState(false)
-  //
-  // useEffect(() => {
-  //   setOnViewed(false)
-  //
-  //   if (userData) {
-  //     const authToken = {
-  //       Authorization: `token ${userData.userToken}`,
-  //     }
-  //
-  //     if (userData.userToken) {
-  //       const getMyself = async () => {
-  //         const response = await fetch('api/v1/video/last_views/', {
-  //           headers: authToken,
-  //         })
-  //         const result = await response.json()
-  //         setVideos(result)
-  //       }
-  //
-  //       getMyself()
-  //     }
-  //   }
-  // }, [onViewed, userData])
-  //
-  // const onClickViewed = () => {
-  //   console.log('clickekdke')
-  //   setOnViewed(true)
-  // }
-
+export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth }) => {
   const onSelectGenre = (id) => {
     onGenre(id)
   }

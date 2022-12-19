@@ -1,9 +1,22 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import s from './AuthorizationForm.module.scss'
+import { setUserData } from '../../redux/slices/userDataSlice'
+import { setUserToken } from '../../redux/slices/userDataSlice'
+import { setUserId } from '../../redux/slices/userDataSlice'
+import { setUserEmail } from '../../redux/slices/userDataSlice'
 
-export const AuthorizationForm = ({ userToken, onToken }) => {
+import s from './AuthorizationForm.module.scss'
+import { useDispatch, useSelector } from 'react-redux'
+
+export const AuthorizationForm = () => {
+  const dispatch = useDispatch()
+
+  const userData = useSelector((state) => state.user.userData)
+  const userToken = useSelector((state) => state.user.userToken)
+  const userId = useSelector((state) => state.user.userId)
+  const userEmail = useSelector((state) => state.user.userEmail)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -37,8 +50,21 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
         })
         const result = await response.json()
 
-        localStorage.setItem('id', result.id)
-        localStorage.setItem('email', result.email)
+        console.log('dispatch ---> resul', result)
+        console.log('dispatch ---> ID', result.id)
+        console.log('dispatch ---> email', result.email)
+
+        const data = {
+          id: result.id,
+          email: result.email,
+          firstName: result.first_name,
+          lastName: result.last_name,
+        }
+
+        console.log('data usera ->', data)
+
+        dispatch(setUserData(data))
+        // dispatch(setUserData(result.email))
 
         window.location.href = '/'
       }
@@ -51,6 +77,8 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
 
     const userData = { email, password }
 
+    console.log('handle user data -<<', userData)
+
     fetch('auth/token/login/', {
       method: 'POST',
       headers: {
@@ -61,7 +89,8 @@ export const AuthorizationForm = ({ userToken, onToken }) => {
       .then((response) => response.json())
       .then((response) => {
         localStorage.setItem('user', response.auth_token)
-        onToken(response.auth_token)
+        // onToken(response.auth_token)
+        dispatch(setUserToken(response.auth_token))
       })
   }
 

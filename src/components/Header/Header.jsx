@@ -3,7 +3,7 @@ import s from './Header.module.scss'
 import user from './../../assets/svg__header/user.png'
 import { User } from '../User/User'
 
-export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup, userData }) => {
+export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup }) => {
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
@@ -140,7 +140,7 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup, u
           </div>
 
           <div className={s.apps__item}>
-            <User userData={userData} onPopup={onPopup} />
+            <User onPopup={onPopup} />
           </div>
         </div>
       </div>
