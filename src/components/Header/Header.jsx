@@ -2,6 +2,7 @@ import s from './Header.module.scss'
 
 import user from './../../assets/svg__header/user.png'
 import { User } from '../User/User'
+import {Link} from "react-router-dom";
 
 export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup }) => {
   return (
@@ -19,7 +20,7 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup })
             </svg>
           </button>
 
-          <div className={s.wrapper__logo}>
+          <Link to='/' className={s.wrapper__logo} >
             <svg
               width="90"
               height="20"
@@ -67,7 +68,7 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup })
                 </clipPath>
               </defs>
             </svg>
-          </div>
+          </Link>
         </div>
         <div className={s.input__search}>
           <div className={s.input__btn}>

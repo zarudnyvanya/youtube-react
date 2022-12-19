@@ -1,10 +1,11 @@
 import s from './UserInfoItem.module.scss'
 
-const UserInfoItem = ({ title, description, onClick }) => {
-  console.log(title)
 
+const UserInfoItem = ({ title, description, isOpen,setIsOpen }) => {
+  // console.log(title)
+    console.log('userInfo ',isOpen)
   return (
-    <li className={s.item__info} onClick={()=>onClick(true)}>
+    <li className={s.item__info} onClick={()=>setIsOpen(!isOpen)}>
       <span className={s.title__person_info}>{title}</span>
       <div className={s.person__description}>
         <span className={s.person__info}>{description}</span>
@@ -22,5 +23,4 @@ const UserInfoItem = ({ title, description, onClick }) => {
     </li>
   )
 }
-
 export default UserInfoItem

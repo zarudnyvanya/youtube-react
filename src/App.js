@@ -63,7 +63,7 @@ function App() {
         <Route path="/authorization" element={<Authorization userToken={userToken} />} />
         <Route path="/activate/:uid/:token/" element={<Success />} />
 
-        {/* <Route path="/userSettings" element={<UserSettings userData={userData} />} /> */}
+         <Route path="/userSettings" element={<UserSettings />} />
 
         <Route path="/logout" element={<Logout />} />
       </Routes>

@@ -2,7 +2,7 @@ import s from './InfoAboutUser.module.scss'
 
 import UserInfoItem from '../UserInfoItem/UserInfoItem'
 
-const InfoAboutUser = ({ userData = {}, onClickHandler }) => {
+const InfoAboutUser = ({ userData = {}, isOpen ,setIsOpen }) => {
   // const fieldsSettings = [
   //   {
   //     title: 'Логотип',
@@ -32,7 +32,7 @@ const InfoAboutUser = ({ userData = {}, onClickHandler }) => {
 
   const fieldsSettings = [{}]
 
-  console.log('dadadad', userData.userId)
+  // console.log('dadadad', userData.userId)
 
   return (
     <div className={s.wrapper__basicInformation}>
@@ -42,7 +42,7 @@ const InfoAboutUser = ({ userData = {}, onClickHandler }) => {
         </li>
         {fieldsSettings.map((field, index) => {
           return (
-            <UserInfoItem key={index} title={userData.userId} description={userData.userEmail} onClick={(isOpen)=> onClickHandler(isOpen)} />
+            <UserInfoItem key={index} title={userData.userId} description={userData.userEmail} isOpen={isOpen} setIsOpen={setIsOpen} />
           )
         })}
       </ul>

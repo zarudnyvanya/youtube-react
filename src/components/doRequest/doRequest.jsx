@@ -1,5 +1,6 @@
-const doRequest = (url, userToken = null) => {
-  // userData нет при первом запросе. пофикси из-за этого не берется токен
+
+const doRequest = (url,userToken=null) => {
+
   let headers = {}
   try {
     headers = {
