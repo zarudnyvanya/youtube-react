@@ -19,10 +19,10 @@ def crop_center_v2(pil_img,format=(1,1)) -> Image:
     crop_width, crop_height = pil_img.size
     div = width/height
     if div < format[0]/format[1]:
-        x = (width*format[1]) / (height(format[0]))
+        x = (width*format[1]) / (height*format[0])
         crop_height = height*x
     elif (div>format[0]/format[1]):
-        x = (height*format[0])/(width/format[1])
+        x = (height*format[0])/(width*format[1])
         crop_width = width*x
 
     return pil_img.crop(((width - crop_width) // 2,

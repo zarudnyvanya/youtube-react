@@ -36,6 +36,12 @@ class Video(models.Model):
     def get_count_views(self):
         return self.views.count()
 
+    def save(self, *args, **kwargs):
+        super(Video, self).save(*args, **kwargs)
+        if self.image:
+            image = Image.open(self.image.path)
+            image = crop_center_v2(image, (16, 9))
+            image.save(self.image.path)
     class Meta:
         ordering = ('-created_at',)
 
@@ -64,7 +70,7 @@ class Channel(models.Model):
         super(Channel, self).save(*args, **kwargs)
         if self.logo:
             image = Image.open(self.logo.path)
-            image = crop_center_v2(image, (16,9))
+            image = crop_center_v2(image, (1,1))
             image.save(self.logo.path)
 
 
