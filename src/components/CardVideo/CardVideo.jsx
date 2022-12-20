@@ -1,6 +1,6 @@
 import s from './CardVideo.module.scss'
 import { useRef, useState } from 'react'
-
+import userLogo from '../../assets/svg__header/user.png'
 export const CardVideo = ({
   videoId,
   videoView,
@@ -129,7 +129,7 @@ export const CardVideo = ({
       <div className={s.video__info}>
         <div className={s.channel}>
           <a href="#" className={s.channel__link}>
-            <img src={videoOwner.logo} alt="profile" />
+            <img src={videoOwner.logo ? videoOwner.logo : userLogo } alt="profile" style={{width:'42px',height:'42px'}}/>
           </a>
         </div>
         <div className={s.description}>
@@ -140,6 +140,7 @@ export const CardVideo = ({
           </span>
         </div>
       </div>
+
     </div>
   )
 }
