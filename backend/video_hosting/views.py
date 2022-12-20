@@ -64,10 +64,14 @@ class VideoViewSet(viewsets.ModelViewSet):
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
+    @action(detail=True, methods=['get'])
+    def channel(self, request, pk=None):
+        video = Video.objects.filter(channel=pk)
+        serializer = VideoSerializer(video, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, methods=['get'])
     def last_views(self, request):
-        # history = Views.video_set.filter(user=request.user)
-        # history = Views.video.filter(user=request.user)
         video = Video.objects.filter(views=request.user).order_by('-view_video__time').select_related(
             'channel').prefetch_related('category').prefetch_related('views').prefetch_related('channel__subscribers')
         serializer = VideoSerializer(video, many=True)
