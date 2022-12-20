@@ -46,17 +46,19 @@ INSTALLED_APPS = [
     'video_hosting',
     'users',
     'corsheaders',
+
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 CORS_ALLOWED_ORIGINS = [
-        'http://localhost:3000/',
-        'http://127.0.0.1:8000/',
+    'http://localhost:3000/',
+    'http://127.0.0.1:8000/',
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-        'http://localhost:3000/',
-        'http://127.0.0.1:8000/',
-    ]
+    'http://localhost:3000/',
+    'http://127.0.0.1:8000/',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -177,7 +179,6 @@ EMAIL_HOST_USER = 'my.youtube_clone@mail.ru'
 EMAIL_HOST_PASSWORD = 'CpB4pr1M3zVuRAWCc071'
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'my.youtube_clone@mail.ru'
-
 
 DOMAIN = 'localhost:3000'
 SITE_NAME = 'YouTube_Clone'

@@ -1,10 +1,12 @@
+from PIL import Image
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
-# Create your models here.
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import UserManager
+
+from config.services import crop_center, crop_center_v2
+
 
 class CustomUserManager(UserManager):
 
@@ -27,6 +29,8 @@ class CustomUserManager(UserManager):
         assert extra_fields['is_staff']
         assert extra_fields['is_superuser']
         return self._create_user(email, password, **extra_fields)
+
+
 class CustomUser(AbstractUser):
     username = None
     email = models.EmailField(unique=True)
@@ -34,9 +38,8 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
 
     GENDERS = (
-    ('m', "Мужчина"),
-    ('f', "Женщина"))
-
+        ('m', "Мужчина"),
+        ('f', "Женщина"))
 
     gender = models.CharField(choices=GENDERS, max_length=1, default='')
     birth_date = models.DateField(default="2000-09-12")
@@ -49,3 +52,10 @@ class CustomUser(AbstractUser):
         return self.username
 
     objects = CustomUserManager()
+
+    def save(self, *args, **kwargs):
+        super(CustomUser, self).save(*args, **kwargs)
+        if self.image:
+            image = Image.open(self.image.path)
+            image = crop_center_v2(image)
+            image.save(self.image.path)
