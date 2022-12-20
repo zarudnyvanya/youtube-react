@@ -1,8 +1,11 @@
+from PIL import Image
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from config.services import crop_center, crop_center_v2
 from users.models import CustomUser
 
 User = get_user_model()
@@ -56,6 +59,14 @@ class Channel(models.Model):
 
     def get_count_subscribes(self):
         return self.subscribers.count()
+
+    def save(self, *args, **kwargs):
+        super(Channel, self).save(*args, **kwargs)
+        if self.logo:
+            image = Image.open(self.logo.path)
+            image = crop_center_v2(image, (16,9))
+            image.save(self.logo.path)
+
 
 class Subscribers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sub_user')
