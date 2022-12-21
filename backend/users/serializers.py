@@ -11,22 +11,18 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
-    firstName = serializers.CharField(source="first_name")
-    secondName = serializers.CharField(source="second_name")
-    isBlock = serializers.BooleanField(source="is_block")
-    birthDate = serializers.DateField(source="birth_date")
     class Meta:
         model = User
         fields = tuple(User.REQUIRED_FIELDS) + (
             settings.USER_ID_FIELD,
             settings.LOGIN_FIELD,
-            'firstName',
-            'lastName',
+            'first_name',
+            'last_name',
             'gender',
-            'birthDate',
-            'isBlock',
+            'birth_date',
+            'is_block',
         )
-        read_only_fields = (settings.LOGIN_FIELD, 'isBlock')
+        read_only_fields = (settings.LOGIN_FIELD, 'is_block')
 
     def update(self, instance, validated_data):
         email_field = get_user_email_field_name(User)
@@ -45,16 +41,12 @@ class UserCreateSerializer(serializers.ModelSerializer):
         "cannot_create_user": settings.CONSTANTS.messages.CANNOT_CREATE_USER_ERROR
     }
 
-    firstName = serializers.CharField(source="first_name")
-    secondName = serializers.CharField(source="second_name")
-    birthDate = serializers.DateField(source="birth_date")
-
     class Meta:
         model = User
         fields = tuple(CustomUser.REQUIRED_FIELDS) + (
             settings.LOGIN_FIELD,
             settings.USER_ID_FIELD,
-            "password", 'firstName', 'lastName', 'gender', 'birthDate'
+            "password", 'first_name', 'last_name', 'gender', 'birth_date'
         )
 
     def validate(self, attrs):
@@ -88,8 +80,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 class TokenSerializer(serializers.ModelSerializer):
-    authToken = serializers.CharField(source="key")
+    auth_token = serializers.CharField(source="key")
     user = UserSerializer()
     class Meta:
         model = settings.TOKEN_MODEL
-        fields = ['authToken', 'user']
+        fields = ['auth_token', 'user']
