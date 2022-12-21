@@ -31,10 +31,11 @@ class CurrentChannelDefault:
 
 class ChannelSerializer(serializers.ModelSerializer):
     subscribers = serializers.IntegerField(source="get_count_subscribes", read_only=True)
+    isActive = serializers.BooleanField(source='is_active')
 
     class Meta:
         model = Channel
-        fields = ['pk','user', 'name', 'description', 'image', 'banner', 'logo', 'is_active', 'subscribers']
+        fields = ['pk','user', 'name', 'description', 'image', 'banner', 'logo', 'isActive', 'subscribers']
 
 
 class VideoSerializer(serializers.ModelSerializer):
