@@ -4,7 +4,7 @@ const initialState = {
   userData: {
     id: '',
     email: '',
-    firstName: '',
+    first_name: '',
     lastName: '',
   },
   userToken: '',

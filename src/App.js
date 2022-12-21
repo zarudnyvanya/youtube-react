@@ -42,7 +42,7 @@ function App() {
         const data = {
           id: result.id,
           email: result.email,
-          firstName: result.first_name,
+          first_name: result.first_name,
           lastName: result.last_name,
         }
 
@@ -63,7 +63,7 @@ function App() {
         <Route path="/authorization" element={<Authorization userToken={userToken} />} />
         <Route path="/activate/:uid/:token/" element={<Success />} />
 
-         <Route path="/userSettings" element={<UserSettings />} />
+        <Route path="/userSettings" element={<UserSettings />} />
 
         <Route path="/logout" element={<Logout />} />
       </Routes>
