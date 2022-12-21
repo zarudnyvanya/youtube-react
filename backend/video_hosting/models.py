@@ -9,6 +9,8 @@ from config.services import crop_center, crop_center_v2
 from users.models import CustomUser
 
 User = get_user_model()
+
+
 # Create your models here.
 class Category(models.Model):
     title = models.CharField(max_length=100)
@@ -16,6 +18,8 @@ class Category(models.Model):
 
     def __str__(self):
         return self.title
+
+
 class Video(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -29,6 +33,7 @@ class Video(models.Model):
     channel = models.ForeignKey("Channel", verbose_name="Канал", on_delete=models.CASCADE)
     category = models.ManyToManyField(Category, related_name="category")
     views = models.ManyToManyField(User, through='Views')
+    likes = models.ManyToManyField(User, related_name='likes', through="Likes")
 
     def __str__(self):
         return self.title
@@ -36,14 +41,19 @@ class Video(models.Model):
     def get_count_views(self):
         return self.views.count()
 
+    def get_count_likes(self):
+        return self.likes.count()
+
     def save(self, *args, **kwargs):
         super(Video, self).save(*args, **kwargs)
         if self.image:
             image = Image.open(self.image.path)
             image = crop_center_v2(image, (16, 9))
             image.save(self.image.path)
+
     class Meta:
         ordering = ('-created_at',)
+
 
 class Views(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="view_user")
@@ -52,6 +62,12 @@ class Views(models.Model):
 
     class Meta:
         ordering = ('-time',)
+
+
+class Likes(models.Model):
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, related_name='video', on_delete=models.CASCADE)
+
 
 class Channel(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
@@ -70,13 +86,14 @@ class Channel(models.Model):
         super(Channel, self).save(*args, **kwargs)
         if self.logo:
             image = Image.open(self.logo.path)
-            image = crop_center_v2(image, (1,1))
+            image = crop_center_v2(image, (1, 1))
             image.save(self.logo.path)
 
 
 class Subscribers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sub_user')
     channel = models.ForeignKey('Channel', on_delete=models.CASCADE, related_name='sub_channel')
+
 
 @receiver(post_save, sender=CustomUser)
 def create_user_channel(sender, instance, created, **kwargs):

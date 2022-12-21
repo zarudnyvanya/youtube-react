@@ -44,6 +44,7 @@ class VideoSerializer(serializers.ModelSerializer):
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
     category = CategoryVideoSerializer(required=False, many=True, queryset=Category.objects.all())
     views = serializers.IntegerField(source='get_count_views', read_only=True)
+    likes = serializers.IntegerField(source='get_count_likes', read_only=True)
 
     def validate(self, attrs):
         category = attrs['category']
@@ -61,7 +62,7 @@ class VideoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video
         fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner', 'category',
-                  'views']
+                  'views', 'likes']
 
 
 class VideoUpdateSerializer(serializers.ModelSerializer):
