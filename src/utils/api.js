@@ -9,3 +9,19 @@
 //     console.log(err)
 //   }
 // }
+
+// export const doRequest = (url,userToken=null) => {
+//     let headers = {}
+//     try {
+//       headers = {
+//         Authorization: `token ${userToken}`,
+//       }
+//     } catch (err) {
+//       console.error('User date is undefined', err)
+//     }
+//     try {
+//       return fetch(url, { headers: headers }, body: JSON.stringify(user))
+//     } catch {
+//       console.log('error_request')
+//     }
+//   }
