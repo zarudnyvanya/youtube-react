@@ -54,9 +54,12 @@ class VideoViewSet(viewsets.ModelViewSet):
         return serializer_class
 
     def get_permissions(self):
-        if self.action in ['last_views', 'new']:
+        if self.action in ['last_views', 'new', 'like']:
             return (permissions.IsAuthenticated(),)
         return (IsAuthenticatedOrOwnerOrReadOnly(),)
+
+    def get_instance(self, pk=None):
+        return get_object_or_404(Video, pk=pk)
 
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
@@ -82,6 +85,23 @@ class VideoViewSet(viewsets.ModelViewSet):
         video = Video.objects.filter(~Q(views=request.user))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
+
+    @action(detail=True, methods=['get', 'post', 'delete'])
+    def like(self, request, pk=None):
+        self.get_object = self.get_instance(pk)
+        like = Likes.objects.filter(video=self.get_object, user=request.user).exists()
+        subscribe = Subscribers.objects.filter(user=request.user, channel=self.get_object.channel).exists()
+        if request.method == "GET":
+            return Response({'like': like,
+                             'subscribe': subscribe})
+        elif request.method == "POST":
+            if not like:
+                self.get_object.likes.add(request.user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        elif request.method == "DELETE":
+            if like:
+                self.get_object.likes.remove(request.user)
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class ChannelViewSet(mixins.CreateModelMixin,
@@ -133,17 +153,21 @@ class ChannelViewSet(mixins.CreateModelMixin,
         serializer = self.serializer_class(channels, many=True)
         return Response(serializer.data)
 
-    @action(detail=True, methods=['post', 'delete'])
+    @action(detail=True, methods=['get','post', 'delete'])
     def subscribe(self, request, pk):
+        channel = get_object_or_404(Channel, pk=pk)
+        subscribe = Subscribers.objects.filter(user=request.user, channel=channel).exists()
         if request.method == 'POST':
-            channel = get_object_or_404(Channel, pk=pk)
-            Subscribers.objects.create(user=request.user, channel=channel)
+            if not subscribe:
+                Subscribers.objects.create(user=request.user, channel=channel)
             return Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            channel = get_object_or_404(Channel, pk=pk)
-            instance = get_object_or_404(Subscribers, user=request.user, channel=channel)
-            instance.delete()
+        elif request.method=="DELETE":
+            if subscribe:
+                instance = get_object_or_404(Subscribers, user=request.user, channel=channel)
+                instance.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+        elif request.method=="GET":
+            return Response({"subscribe":subscribe})
 
     @action(detail=False, methods=['get'])
     def follow(self, request):
