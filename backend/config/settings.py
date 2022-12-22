@@ -173,12 +173,12 @@ REST_FRAMEWORK = {
     ),
 }
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = 'my.youtube_clone@mail.ru'
-EMAIL_HOST_PASSWORD = 'CpB4pr1M3zVuRAWCc071'
-EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = 'my.youtube_clone@mail.ru'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.mail.ru'
+# EMAIL_HOST_USER = 'my.youtube_clone@mail.ru'
+# EMAIL_HOST_PASSWORD = 'CpB4pr1M3zVuRAWCc071'
+# EMAIL_PORT = 587
+# DEFAULT_FROM_EMAIL = 'my.youtube_clone@mail.ru'
 
 DOMAIN = 'localhost:3000'
 SITE_NAME = 'YouTube_Clone'
@@ -187,8 +187,8 @@ DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}',
     'USERNAME_RESET_CONFIRM_URL': 'username/reset/confirm/{uid}/{token}',
     'ACTIVATION_URL': 'activate/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'SEND_CONFIRMATION_EMAIL': True,
+    'SEND_ACTIVATION_EMAIL': False,
+    'SEND_CONFIRMATION_EMAIL': False,
     'SERIALIZERS': {
         'user_create': 'users.serializers.UserCreateSerializer',
         'user': 'users.serializers.UserSerializer',
