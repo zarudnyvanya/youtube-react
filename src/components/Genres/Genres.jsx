@@ -25,15 +25,7 @@ const genre = [
   },
 ]
 
-// const viewed = [
-//   {
-//     id: 6,
-//     title: 'Просмотренные',
-//     description: 'Просмотренные',
-//   },
-// ]
-
-export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth }) => {
+export const Genres = ({ genres, genreIsChecked, onGenre, setVideos }) => {
   const onSelectGenre = (id) => {
     onGenre(id)
   }
@@ -67,30 +59,6 @@ export const Genres = ({ genres, genreIsChecked, onGenre, setVideos, isAuth }) =
                 />
               )
             })}
-
-          {/* {isAuth &&
-            viewed.map((genre, index) => {
-              return (
-                <Genre
-                  key={genre.id}
-                  genre={genre}
-                  index={index + 1}
-                  genreId={genre.id}
-                  genreIsChecked={genreIsChecked}
-                  onClickGenre={() => onSelectGenre(genre.id)}
-                />
-              )
-            })} */}
-          {/*{userData && (*/}
-          {/*  <li*/}
-          {/*    onClick={onClickViewed}*/}
-          {/*    // className={`${genreId === genreIsChecked ? classNames : s.genres__item}`}*/}
-          {/*  >*/}
-          {/*    <a href="#" className={s.genres__link}>*/}
-          {/*      {viewed[0].title}*/}
-          {/*    </a>*/}
-          {/*  </li>*/}
-          {/*)}*/}
         </ul>
       </nav>
     </section>

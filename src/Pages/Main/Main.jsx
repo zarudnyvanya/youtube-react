@@ -10,8 +10,7 @@ import Skeleton from '../../components/CardVideo/CardSkeleton'
 import doRequest from '../../components/doRequest/doRequest'
 import { useSelector } from 'react-redux'
 
-export const Main = ({ isAuth }) => {
-  // const userData = useSelector((state) => state.user.userData)
+export const Main = () => {
   const userToken = useSelector((state) => state.user.userToken)
 
   const [videos, setVideos] = useState([])
@@ -59,7 +58,7 @@ export const Main = ({ isAuth }) => {
   return (
     <div className="overlay">
       <>
-        {popup && <Popup isAuth={isAuth} onClosePopup={() => setPopup(false)} />}
+        {popup && <Popup onClosePopup={() => setPopup(false)} />}
 
         <Header
           onChangeSearchInput={onChangeSearchInput}
@@ -72,7 +71,6 @@ export const Main = ({ isAuth }) => {
 
           <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
             <Genres
-              isAuth={isAuth}
               genres={genres}
               genreIsChecked={genreIsChecked}
               onGenre={setGenreIsChecked}
@@ -88,7 +86,6 @@ export const Main = ({ isAuth }) => {
                 onChangeSearchInput={onChangeSearchInput}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
-                isAuth={isAuth}
               />
             )}
           </div>

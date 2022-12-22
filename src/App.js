@@ -4,7 +4,7 @@ import { Main } from './Pages/Main/Main'
 import { Registration } from './Pages/Registration/Registration'
 import { Authorization } from './Pages/Authorization/Authorization'
 
-import { setUserData, setUserToken } from './redux/slices/userDataSlice'
+import { setUserData, setUserToken, setIsAuth } from './redux/slices/userDataSlice'
 
 import { Success } from './components/Success/Success'
 import { useEffect, useState } from 'react'
@@ -13,21 +13,23 @@ import UserSettings from './components/UserSettings/UserSettings'
 import { useDispatch, useSelector } from 'react-redux'
 
 import './App.scss'
+import UserChannel from './Pages/UserChannel/UserChannel'
 
 function App() {
   const dispatch = useDispatch()
 
   const userData = useSelector((state) => state.user.userData)
   const userToken = useSelector((state) => state.user.userToken)
+  const isAuth = useSelector((state) => state.user.isAuth)
 
-  const [isAuth, setIsAuth] = useState(false)
+  // const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
-    setIsAuth(false)
+    dispatch(setIsAuth(false))
     dispatch(setUserToken(localStorage.getItem('user')))
 
     if (userToken) {
-      setIsAuth(true)
+      dispatch(setIsAuth(true))
 
       const authToken = {
         Authorization: `token ${userToken}`,
@@ -58,8 +60,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Main isAuth={isAuth} />} />
+        <Route path="/" element={<Main />} />
         <Route path="/registration" element={<Registration />} />
+        <Route path="/channel" element={<UserChannel />} />
         <Route path="/authorization" element={<Authorization userToken={userToken} />} />
         <Route path="/activate/:uid/:token/" element={<Success />} />
 
