@@ -14,10 +14,6 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
   console.log('fiarstName', firstName)
   const [value, setValue] = useState(firstName)
 
-  //   useEffect(() => {
-  //     console.log('userData change')
-  //   }, [userData, firstName])
-
   const changeLogin = (e) => {
     e.preventDefault()
 
@@ -34,6 +30,7 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
       console.error('User date is undefined', err)
     }
     try {
+      console.log('zapros')
       const request = fetch('api/v1/auth/users/me/', {
         method: 'PATCH',
         headers: headers,
@@ -43,7 +40,7 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
       request
         .then((response) => response.json())
         .then((data) => {
-          console.log('data otver', data)
+          console.log('data otvet', data)
           dispatch(setUserData(data))
         })
     } catch {
@@ -90,6 +87,5 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
     </>
   )
 }
-// <div className={s.overlay}>
 
 export default SettingsPopup
