@@ -2,7 +2,6 @@
   width: 100%;
   padding-top: 20px;
   background-color: #0f0f0f;
-  text-align: center;
 }
 
 .video__wrapper {
@@ -24,6 +23,11 @@
   margin-left: 40px;
   gap: 15px;
   cursor: pointer;
+}
+@media (max-width: 1540px) {
+  .video__list_video_list_is_wide {
+    margin: 0 auto;
+  }
 }
 
 @media (max-width: 1415px) {

@@ -9,12 +9,12 @@
 
 
 .user__chanel{
-    font-family: "Roboto Mono", sans-mo;
     padding: 16px calc((100% - 1120px)/2) 4px calc((100% - 1300px)/2);
-    //1284px
-  
-  }
-  
+}
+.container {
+  width: 100%;
+  display: flex;
+}
   
   
   .header__chanel{
@@ -27,13 +27,15 @@
   
     & .header__leftpart__chanel{
       display: flex;
+
+      & .logo__chanel{
+        width: 80px;
+        height: 80px;
+        margin: 0 24px 0 0;
+      }
     }
   
-    & .logo__chanel{
-      width: 80px;
-      height: 80px;
-      margin: 0 24px 0 0;
-    }
+
   
     & .name__sub__chanel {
       display: flex;
@@ -105,7 +107,11 @@
     }
   
   }
-  
+  .option__search{
+    background-color: transparent;
+    border:none;
+    outline: none;
+  }
   
   
   

@@ -17,29 +17,29 @@ const UserChannel = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div className={s.container}>
         <Navigation />
-        <main class={s.main__content}>
-          <div class={s.user__chanel}>
-            <div class={s.header__chanel}>
-              <div class={s.header__leftpart__chanel}>
-                <img src="assets/svg__header/user.png" alt="logo" class="logo__chanel" />
+        <main className={s.main__content}>
+          <div className={s.user__chanel}>
+            <div className={s.header__chanel}>
+              <div className={s.header__leftpart__chanel}>
+                <img src="assets/svg__header/user.png" alt="logo" className={s.logo__chanel} />
 
-                <div class={s.name__sub__chanel}>
+                <div className={s.name__sub__chanel}>
                   <h1>Владислав Полевских</h1>
-                  <p class={s.subscribers}>1.000.000.000 подписчиков</p>
+                  <p className={s.subscribers}>1.000.000.000 подписчиков</p>
                 </div>
               </div>
 
-              <div class={s.manager__wrapper}>
-                <a href="#" class={s.video__management}>
+              <div className={s.manager__wrapper}>
+                <a href="#" className={s.video__management}>
                   Управление видео
                 </a>
               </div>
             </div>
 
-            <div class={s.select__options__chanel}>
-              <nav class={s.options__chanel}>
+            <div className={s.select__options__chanel}>
+              <nav className={s.options__chanel}>
                 {/* option__item option__main option__item-current */}
 
                 {options.map((option, index) => {
@@ -57,15 +57,15 @@ const UserChannel = () => {
                   )
                 })}
 
-                <div class={s.option__item}>
-                  <button>
+                <div className={s.option__item}>
+                  <button className={s.option__search}>
                     <img src="assets/svg__header/search.svg" alt="" />
                   </button>
                 </div>
               </nav>
             </div>
 
-            <div class="content__chanel"></div>
+            <div className={s.content__chanel}></div>
           </div>
         </main>
       </div>

@@ -58,7 +58,16 @@
       margin-left: 40px;
       gap: 15px;
       cursor: pointer;
+
+      @media (max-width: 1540px) {
+        &{
+          margin: 0 auto;
+        }
+      }
+
     }
+
+
 
 }
 
@@ -69,8 +78,3 @@
      }
  }
 
- @media (max-width: 1360px) {
-     .video__list {
-         // grid-column-gap: 0%;
-     }
- }
