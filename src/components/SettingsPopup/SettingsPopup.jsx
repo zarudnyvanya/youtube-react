@@ -11,12 +11,12 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
   const firstName = useSelector((state) => state.user.userData.first_name)
   const userToken = useSelector((state) => state.user.userToken)
 
-  console.log('fiarstName', firstName)
+
   const [value, setValue] = useState(firstName)
+
 
   const changeLogin = (e) => {
     e.preventDefault()
-
     let headers = {}
 
     try {
@@ -38,14 +38,16 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
       })
 
       request
-        .then((response) => response.json())
-        .then((data) => {
+          .then((response) => response.json())
+      .then((data) => {
           console.log('data otvet', data)
           dispatch(setUserData(data))
-        })
+      })
+
     } catch {
       console.log('error_request')
     }
+
   }
 
   return (
@@ -55,9 +57,8 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
         <h1 className={s.wrapper__title}>Имя</h1>
         <form method="post" className={s.wrapper__info}>
           <div className={s.info__block}>
-            <h1>Name: {firstName}</h1>
             <label className={s.info__label__content}>
-              <h2 className={s.info__title__content}>Имя</h2>
+              <h2 className={s.info__title__content}>{firstName}</h2>
               <div className={s.input__button}>
                 <input
                   onChange={(e) => setValue(e.target.value)}

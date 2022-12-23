@@ -3,14 +3,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: background 0.3s;
+  transition: background-color 0.3s;
   cursor: pointer;
-}
-.item__info:not(:last-child) {
-  border-bottom: 1px solid #303030;
 }
 .item__info:hover {
   background-color: rgba(54, 54, 54, 0.2);
+}
+.item__info:not(:last-child) {
+  border-bottom: 1px solid #303030;
 }
 
 .title__person_info {

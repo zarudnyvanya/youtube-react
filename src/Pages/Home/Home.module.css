@@ -15,7 +15,6 @@
   justify-content: center;
   justify-items: center;
   gap: 15px;
-  cursor: pointer;
 }
 .video__list_video_list_is_wide {
   display: grid;
