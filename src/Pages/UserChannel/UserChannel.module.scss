@@ -9,7 +9,7 @@
 
 
 .user__chanel{
-    padding: 16px calc((100% - 1120px)/2) 4px calc((100% - 1300px)/2);
+    padding: 16px calc((100% - 1100px)/2) 4px calc((100% - 1100px)/2);
 }
 .container {
   width: 100%;
@@ -112,6 +112,17 @@
     border:none;
     outline: none;
   }
+
+.content__chanel{
+  padding: 20px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill,343px);
+  justify-content: center;
+  justify-items: center;
+  gap: 15px;
+  cursor: pointer;
+}
   
   
   
