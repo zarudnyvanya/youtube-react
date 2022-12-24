@@ -1,5 +1,6 @@
 import s from './CardVideo.module.scss'
 import { useRef, useState } from 'react'
+import { Link } from 'react-router-dom'
 import userLogo from '../../assets/svg__header/user.png'
 export const CardVideo = ({
   videoId,
@@ -131,9 +132,9 @@ export const CardVideo = ({
       </div>
       <div className={s.video__info}>
         <div className={s.channel}>
-          <a href="#" className={s.channel__link}>
+          <Link to="/channel" channelPk={videoOwner.pk} className={s.channel__link}>
             <img src={videoOwner.logo ? videoOwner.logo : userLogo } alt="profile" style={{width:'42px',height:'42px'}}/>
-          </a>
+          </Link>
         </div>
         <div className={s.description}>
           <p title={videoTitle}>{videoTitle}</p>

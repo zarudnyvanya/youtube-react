@@ -15,7 +15,7 @@ import { CardVideo } from '../../components/CardVideo/CardVideo'
 
 const options = ['Главная', 'Плейлисты', 'Каналы', 'О канале']
 
-const UserChannel = () => {
+const UserChannel = ({channelPk}) => {
   const dispatch = useDispatch()
 
   const userData = useSelector((state) => state.user.userData)
@@ -27,33 +27,18 @@ const UserChannel = () => {
   const [value, setValue] = useState(0)
   const [userId, setUserId] = useState()
 
+
+
   useEffect(() => {
     setIsLoading(true)
-    const url = 'api/v1/channel/me/'
-
-    const getUserVideos = async () => {
-      const response = await doRequest(url, userToken)
-      const data = await response.json()
-
-      console.log(data)
-      dispatch(setUserChannel(data))
-
-      // setVideos(data)
-      // setIsLoading(false)
-    }
-    getUserVideos()
-    // console.log(req)
-  }, [userToken])
-
-  useEffect(() => {
     try {
-      fetch(`api/v1/video/${userChannel.pk}/channel/`)
+      console.log(channelPk)
+      fetch(`api/v1/video/${channelPk}/channel/`)
         .then((res) => res.json())
-        .then((data) => dispatch(setUserVideos(data)))
 
       setIsLoading(false)
     } catch {}
-  }, [userChannel, userToken])
+  }, [userToken])
 
   const onOption = (index) => {
     setValue(index)
