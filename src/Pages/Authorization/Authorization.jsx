@@ -66,7 +66,7 @@ export const Authorization = ({ userToken, onToken }) => {
             </div>
 
             <div class={s.users_block}>
-              <AuthorizationForm userToken={userToken} onToken={onToken} />
+              <AuthorizationForm />
             </div>
           </div>
         </div>

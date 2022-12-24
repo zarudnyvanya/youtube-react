@@ -7,22 +7,19 @@ import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
 import Skeleton from '../../components/CardVideo/CardSkeleton'
 
+import { setNavIsOpen } from './../../redux/slices/navigationSlice'
 import doRequest from '../../components/doRequest/doRequest'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 export const Main = () => {
   const userToken = useSelector((state) => state.user.userToken)
+  const navIsOpen = useSelector((state) => state.navigation.navIsOpen)
+  const popup = useSelector((state) => state.userPopup.popup)
+  const genreIsChecked = useSelector((state) => state.genres.genreIsChecked)
 
   const [videos, setVideos] = useState([])
-
-  // const [viewedVideos, setViewedVideos] = useState([])
-  const [navIsOpen, setNavIsOpen] = useState(false)
-  const [popup, setPopup] = useState(false)
   const [searchValue, setSearchValue] = useState('')
-  const [genres, setGenres] = useState(null)
-  const [genreIsChecked, setGenreIsChecked] = useState(0)
   const [isLoading, setIsLoading] = useState(true)
-  // const [userToken, setUserToken] = useState()
 
   useEffect(() => {
     let url = '/api/v1/video/'
@@ -45,12 +42,6 @@ export const Main = () => {
     }
   }, [genreIsChecked, userToken])
 
-  useEffect(() => {
-    fetch('/api/v1/category/')
-      .then((res) => res.json())
-      .then((data) => setGenres(data))
-  }, [])
-
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value)
   }
@@ -58,31 +49,21 @@ export const Main = () => {
   return (
     <div className="overlay">
       <>
-        {popup && <Popup onClosePopup={() => setPopup(false)} />}
+        {popup && <Popup />}
 
-        <Header
-          onChangeSearchInput={onChangeSearchInput}
-          searchValue={searchValue}
-          navIsOpen={() => setNavIsOpen(!navIsOpen)}
-          onPopup={() => setPopup(!popup)}
-        />
+        <Header onChangeSearchInput={onChangeSearchInput} searchValue={searchValue} />
+
         <div className="container">
-          <Navigation navIsOpen={navIsOpen} />
+          <Navigation />
 
           <div className={navIsOpen ? 'main__content' : 'main__content-nav'}>
-            <Genres
-              genres={genres}
-              genreIsChecked={genreIsChecked}
-              onGenre={setGenreIsChecked}
-              setVideos={setVideos}
-            />
+            <Genres setVideos={setVideos} />
 
             {isLoading ? (
               [...new Array(8)].map((_, Index) => <Skeleton key={Index} />)
             ) : (
               <Home
                 videos={videos}
-                navIsOpen={navIsOpen}
                 onChangeSearchInput={onChangeSearchInput}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}

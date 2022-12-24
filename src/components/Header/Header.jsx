@@ -1,15 +1,22 @@
 import s from './Header.module.scss'
 
+import { setNavIsOpen } from '../../redux/slices/navigationSlice'
+
 import user from './../../assets/svg__header/user.png'
 import { User } from '../User/User'
-import {Link} from "react-router-dom";
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup }) => {
+export const Header = ({ searchValue, onChangeSearchInput }) => {
+  const dispatch = useDispatch()
+
+  const navIsOpen = useSelector((state) => state.navigation.navIsOpen)
+
   return (
     <header className={s.header}>
       <div className={s.header__inner}>
         <div className={s.wrapper__burger__logo}>
-          <button onClick={navIsOpen} className={s.burger}>
+          <button onClick={() => dispatch(setNavIsOpen(!navIsOpen))} className={s.burger}>
             <svg
               width="24"
               height="24"
@@ -20,7 +27,7 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup })
             </svg>
           </button>
 
-          <Link to='/' className={s.wrapper__logo} >
+          <Link to="/" className={s.wrapper__logo}>
             <svg
               width="90"
               height="20"
@@ -141,7 +148,7 @@ export const Header = ({ searchValue, onChangeSearchInput, navIsOpen, onPopup })
           </div>
 
           <div className={s.apps__item}>
-            <User onPopup={onPopup} />
+            <User />
           </div>
         </div>
       </div>

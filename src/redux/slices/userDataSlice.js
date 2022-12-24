@@ -8,7 +8,7 @@ const initialState = {
     lastName: '',
     gender: '',
     birth_date: '',
-    image: ''
+    image: '',
   },
   userChannel: {
     pk: null,

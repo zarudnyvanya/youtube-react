@@ -1,10 +1,13 @@
+import { useSelector } from 'react-redux'
 import s from './Genre.module.scss'
 
 import cn from 'classnames'
 
 let classNames = cn(s.genres__item, s.genres__active)
 
-export const Genre = ({ genre, genreId, genreIsChecked, onClickGenre }) => {
+export const Genre = ({ genre, genreId, onClickGenre }) => {
+  const genreIsChecked = useSelector((state) => state.genres.genreIsChecked)
+
   return (
     <li
       onClick={onClickGenre}

@@ -1,16 +1,21 @@
-import s from './UserSettings.module.scss'
+import { useSelector } from 'react-redux'
+import { useState, useRef, useEffect } from 'react'
+
+import { Popup } from '../Popup/Popup'
+import { Header } from '../Header/Header'
+
 import NavSettings from './NavSettings/NavSettings'
 import InfoAboutUser from './InfoAboutUser/InfoAboutUser'
-import { Header } from '../Header/Header'
 import SettingsPopup from '../SettingsPopup/SettingsPopup'
-import { useState, useRef, useEffect } from 'react'
+
+import s from './UserSettings.module.scss'
 const UserSettings = ({ userData }) => {
   const [isOpen, setIsOpen] = useState(false)
-
+  const popup = useSelector((state) => state.userPopup.popup)
   return (
     <>
       {isOpen && <SettingsPopup isOpen={isOpen} setIsOpen={setIsOpen} />}
-
+      {popup && <Popup />}
       <Header />
 
       <div className="container">

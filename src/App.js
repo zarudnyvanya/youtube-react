@@ -14,16 +14,12 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
-import doRequest from "./components/doRequest/doRequest";
+import doRequest from './components/doRequest/doRequest'
 
 function App() {
   const dispatch = useDispatch()
 
-  const userData = useSelector((state) => state.user.userData)
   const userToken = useSelector((state) => state.user.userToken)
-  const isAuth = useSelector((state) => state.user.isAuth)
-
-  // const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
     dispatch(setIsAuth(false))
@@ -36,21 +32,7 @@ function App() {
         const response = await doRequest('api/v1/auth/users/me/', userToken)
         const result = await response.json()
 
-        // const data = result
-
-
-            //{
-      //           id: result.id,
-      //           email: result.email,
-      //           first_name: result.first_name,
-      //           lastName: result.last_name,
-            //
-            //         }
-
-
-
         dispatch(setUserData(result))
-        console.log('user redux ->', userData)
       }
       getMyself()
     }
@@ -61,12 +43,9 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/channel" element={<UserChannel />} />
-        <Route path="/authorization" element={<Authorization userToken={userToken} />} />
-        <Route path="/activate/:uid/:token/" element={<Success />} />
-
+        <Route path="/channel/" element={<UserChannel />} />
+        <Route path="/authorization" element={<Authorization />} />
         <Route path="/userSettings" element={<UserSettings />} />
-
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>

@@ -9,7 +9,6 @@ export const CardVideo = ({
   videoImage,
   videoOwner,
   videoDate,
-  navIsOpen,
 }) => {
   const [videoDuration, setVideoDuration] = useState(0)
 
@@ -41,7 +40,6 @@ export const CardVideo = ({
   const handleLoadedMetadata = () => {
     const video = videoEl.current
     if (video) {
-      //Math.floor(duration / 60) + ':' + (m < 10 ? '0' : '') + m
       setVideoDuration(reDuration(video.duration))
     }
   }
@@ -116,12 +114,9 @@ export const CardVideo = ({
 
   return (
     <div className={s.video__item}>
-      {/*{navIsOpen ? s.video__item : s.video__item_video_item_is_wide}*/}
       <div className={s.block__video}>
-        {/*{navIsOpen ? s.block__video__poster__wide : s.block__video__poster}*/}
         <video
           className={s.block__video__poster}
-
           src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
           poster={videoImage}
           ref={videoEl}
@@ -132,7 +127,11 @@ export const CardVideo = ({
       <div className={s.video__info}>
         <div className={s.channel}>
           <a href="#" className={s.channel__link}>
-            <img src={videoOwner.logo ? videoOwner.logo : userLogo } alt="profile" style={{width:'42px',height:'42px'}}/>
+            <img
+              src={videoOwner.logo ? videoOwner.logo : userLogo}
+              alt="profile"
+              style={{ width: '42px', height: '42px' }}
+            />
           </a>
         </div>
         <div className={s.description}>
@@ -143,7 +142,6 @@ export const CardVideo = ({
           </span>
         </div>
       </div>
-
     </div>
   )
 }

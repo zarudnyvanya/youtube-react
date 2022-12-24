@@ -1,13 +1,15 @@
 import cn from 'classnames'
 import { useEffect } from 'react'
 
+import { setGenres, setGenresId } from './../../redux/slices/genresSlice'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import { Genre } from './../Genre/Genre'
 import s from './Genres.module.scss'
+import { useSelector, useDispatch } from 'react-redux'
 
-const genre = [
+const genresBase = [
   {
     id: 0,
     title: 'Все',
@@ -25,23 +27,31 @@ const genre = [
   },
 ]
 
-export const Genres = ({ genres, genreIsChecked, onGenre, setVideos }) => {
+export const Genres = () => {
+  const dispatch = useDispatch()
+  const genres = useSelector((state) => state.genres.genres)
+
   const onSelectGenre = (id) => {
-    onGenre(id)
+    dispatch(setGenresId(id))
   }
+
+  useEffect(() => {
+    fetch('/api/v1/category/')
+      .then((res) => res.json())
+      .then((data) => dispatch(setGenres(data)))
+  }, [])
 
   return (
     <section className={s.genres}>
       <nav className={s.genres__list}>
         <ul className={s.genres__items}>
-          {genre.map((genre, index) => {
+          {genresBase.map((genre, index) => {
             return (
               <Genre
                 key={genre.id}
                 genre={genre}
                 index={index + 1}
                 genreId={genre.id}
-                genreIsChecked={genreIsChecked}
                 onClickGenre={() => onSelectGenre(genre.id)}
               />
             )
@@ -54,7 +64,6 @@ export const Genres = ({ genres, genreIsChecked, onGenre, setVideos }) => {
                   genre={genre}
                   index={index}
                   genreId={genre.id}
-                  genreIsChecked={genreIsChecked}
                   onClickGenre={() => onSelectGenre(genre.id)}
                 />
               )

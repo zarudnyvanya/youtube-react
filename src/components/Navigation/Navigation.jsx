@@ -5,7 +5,7 @@ import { NavItemMini } from './../NavItemMini/NavItemMini'
 import { useEffect, useState } from 'react'
 import doRequest from '../doRequest/doRequest'
 import SubscribeItem from '../SubscribeItem/SubscribeItem'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 const navItems = [
   {
@@ -30,8 +30,9 @@ const navItems = [
   },
 ]
 
-export const Navigation = ({ navIsOpen }) => {
+export const Navigation = () => {
   const userToken = useSelector((state) => state.user.userToken)
+  const navIsOpen = useSelector((state) => state.navigation.navIsOpen)
 
   const [subPerson, setSubPerson] = useState([])
 

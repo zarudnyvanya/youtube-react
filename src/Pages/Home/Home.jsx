@@ -4,14 +4,13 @@ import s from './Home.module.scss'
 import UserSettings from '../../components/UserSettings/UserSettings'
 import { User } from '../../components/User/User'
 import { useSelector } from 'react-redux'
-export const Home = ({ videos, searchValue, navIsOpen }) => {
+export const Home = ({ videos, searchValue }) => {
   const isAuth = useSelector((state) => state.user.isAuth)
 
   return (
     <div className={s.video__content}>
       <div className={s.video__wrapper}>
         <div className={s.video__list}>
-            {/*{navIsOpen ? s.video__list : s.video__list_video_list_is_wide}*/}
           {isAuth ? (
             videos
               .filter((item) => {
@@ -21,7 +20,6 @@ export const Home = ({ videos, searchValue, navIsOpen }) => {
                 return (
                   <CardVideo
                     key={video.id}
-                    navIsOpen={navIsOpen}
                     videoId={video.id}
                     videoView={video.views}
                     videoFile={video.file}
