@@ -1,19 +1,28 @@
+const doRequest = (url, userToken, method = "GET", obj = null) => {
 
-const doRequest = (url,userToken=null) => {
+    let headers = {}
+    try {
+        headers = {
+            'Content-type': 'application/json; charset=UTF-8',
+            Accept: 'application/json',
+            Authorization: `token ${userToken}`,
+        }
 
-  let headers = {}
-  try {
-    headers = {
-      Authorization: `token ${userToken}`,
+    } catch (err) {
+        console.error('User date is undefined', err)
     }
-  } catch (err) {
-    console.error('User date is undefined', err)
-  }
-  try {
-    return fetch(url, { headers: headers })
-  } catch {
-    console.log('error_request')
-  }
+    let data = {headers: headers}
+        if (obj) {
+
+            data.body = JSON.stringify(obj)
+            data.method = method
+        }
+    try {
+            console.log(data.headers.method)
+        return fetch(url, data)
+    } catch {
+        console.log('error_request')
+    }
 }
 
 export default doRequest

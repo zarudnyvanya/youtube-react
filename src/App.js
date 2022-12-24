@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
+import doRequest from "./components/doRequest/doRequest";
 
 function App() {
   const dispatch = useDispatch()
@@ -31,14 +32,8 @@ function App() {
     if (userToken) {
       dispatch(setIsAuth(true))
 
-      const authToken = {
-        Authorization: `token ${userToken}`,
-      }
-
       const getMyself = async () => {
-        const response = await fetch('api/v1/auth/users/me/', {
-          headers: authToken,
-        })
+        const response = await doRequest('api/v1/auth/users/me/', userToken)
         const result = await response.json()
 
         // const data = result

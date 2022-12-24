@@ -3,6 +3,7 @@ import s from './SettingsPopup.module.scss'
 
 import { setUserData } from '../../redux/slices/userDataSlice'
 import { useEffect, useState } from 'react'
+import doRequest from "../doRequest/doRequest";
 
 const SettingsPopup = ({ isOpen, setIsOpen }) => {
   const dispatch = useDispatch()
@@ -17,25 +18,10 @@ const SettingsPopup = ({ isOpen, setIsOpen }) => {
 
   const changeLogin = (e) => {
     e.preventDefault()
-    let headers = {}
-
-    try {
-      headers = {
-        'Content-type': 'application/json; charset=UTF-8',
-        method: 'PATCH',
-        Accept: 'application/json',
-        Authorization: `token ${userToken}`,
-      }
-    } catch (err) {
-      console.error('User date is undefined', err)
-    }
+    let obj = {'first_name': value}
     try {
       console.log('zapros')
-      const request = fetch('api/v1/auth/users/me/', {
-        method: 'PATCH',
-        headers: headers,
-        body: JSON.stringify({ first_name: value }),
-      })
+      const request = doRequest('api/v1/auth/users/me/', userToken,"PATCH", obj)
 
       request
           .then((response) => response.json())
