@@ -71,6 +71,8 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+
+    'config.middleware.BadRequest'
 ]
 
 ROOT_URLCONF = 'config.urls'
