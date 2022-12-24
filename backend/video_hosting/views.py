@@ -128,7 +128,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
             return ChannelSerializer
 
     def get_permissions(self):
-        if self.action in ["follow", 'subscribe']:
+        if self.action in ["follow", 'subscribe','me']:
             return (permissions.IsAuthenticated(),)
         else:
             return (IsOwnerOrReadOnly(),)

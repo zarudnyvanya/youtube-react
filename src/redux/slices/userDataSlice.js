@@ -6,6 +6,9 @@ const initialState = {
     email: '',
     first_name: '',
     lastName: '',
+    gender: '',
+    birth_date: '',
+    image: ''
   },
   userChannel: {
     pk: null,

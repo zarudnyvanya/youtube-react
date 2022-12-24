@@ -10,7 +10,8 @@ export const Home = ({ videos, searchValue, navIsOpen }) => {
   return (
     <div className={s.video__content}>
       <div className={s.video__wrapper}>
-        <div className={navIsOpen ? s.video__list : s.video__list_video_list_is_wide}>
+        <div className={s.video__list}>
+            {/*{navIsOpen ? s.video__list : s.video__list_video_list_is_wide}*/}
           {isAuth ? (
             videos
               .filter((item) => {
