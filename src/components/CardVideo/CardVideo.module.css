@@ -1,0 +1,76 @@
+.block__video {
+  position: relative;
+  width: 100%;
+}
+.block__video span {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.7);
+  font-weight: 400;
+  font-size: 12px;
+  border-radius: 5px;
+  line-height: 12px;
+  color: #f1f1f1;
+  padding: 3px 4px;
+  right: 7px;
+  bottom: 10px;
+}
+.block__video__poster__wide {
+  width: 100%;
+  border-radius: 15px;
+}
+.block__video__poster {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.video__info {
+  display: flex;
+  padding-top: 12px;
+  padding-right: 22px;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+}
+.description p {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: 400;
+  color: #f1f1f1;
+  margin-bottom: 6px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.description span {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #AAAAAA;
+  word-spacing: -3px;
+}
+
+.channel {
+  margin-right: 12px;
+}
+
+.video__block__skeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-content: center;
+  justify-items: center;
+}
+
+.video__item__skeleton {
+  margin: 0 0 0 60px;
+}
+
+@media (max-width: 1120px) {
+  .video__item {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=CardVideo.module.css.map */

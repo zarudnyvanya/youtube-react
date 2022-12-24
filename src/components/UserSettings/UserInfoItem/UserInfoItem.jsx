@@ -29,14 +29,14 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
 
   }, [userToken])
 
-  useEffect(() => {
-    try {
-      fetch(`api/v1/video/${userChannel.pk}/channel/`)
-          .then((res) => res.json())
-          .then((data) => dispatch(setUserVideos(data)))
-
-    } catch {}
-  }, [userChannel, userToken])
+  // useEffect(() => {
+  //   try {
+  //     fetch(`api/v1/video/${userChannel.pk}/channel/`)
+  //         .then((res) => res.json())
+  //         .then((data) => dispatch(setUserVideos(data)))
+  //
+  //   } catch {}
+  // }, [userChannel, userToken])
 
   console.log(userChannel)
     const fieldsSettings = [
@@ -46,11 +46,11 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
       },
       {
         title: 'Дата рождения',
-        description: userChannel.description
+        description: userData.birth_date
       },
       {
         title: 'Пол',
-        // description: userChannel.gender
+        description: userData.gender
       },
       {
         title: 'Электронная почта',
@@ -59,7 +59,7 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
       },
       {
         title: 'Пароль',
-        // description: userChannel.password
+
       },
     ]
 

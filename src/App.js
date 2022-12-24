@@ -41,16 +41,20 @@ function App() {
         })
         const result = await response.json()
 
-        const data = {
-          id: result.id,
-          email: result.email,
-          first_name: result.first_name,
-          lastName: result.last_name,
-        }
+        // const data = result
 
-        console.log(data)
 
-        dispatch(setUserData(data))
+            //{
+      //           id: result.id,
+      //           email: result.email,
+      //           first_name: result.first_name,
+      //           lastName: result.last_name,
+            //
+            //         }
+
+
+
+        dispatch(setUserData(result))
         console.log('user redux ->', userData)
       }
       getMyself()
