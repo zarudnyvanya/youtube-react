@@ -6,11 +6,18 @@ import user from './../../assets/svg__header/user.png'
 import { User } from '../User/User'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { setVideoUpload } from '../../redux/slices/videoUploadSlice'
 
 export const Header = ({ searchValue, onChangeSearchInput }) => {
   const dispatch = useDispatch()
 
+  const isOpenVideoUpload = useSelector((state) => state.videoUpload.isOpenVideoUpload)
   const navIsOpen = useSelector((state) => state.navigation.navIsOpen)
+
+  const onVideoUpload = () => {
+    dispatch(setVideoUpload(!isOpenVideoUpload))
+    console.log('dasda')
+  }
 
   return (
     <header className={s.header}>
@@ -121,6 +128,7 @@ export const Header = ({ searchValue, onChangeSearchInput }) => {
         <div className={s.apps__block}>
           <div className={s.apps__item}>
             <svg
+              onClick={onVideoUpload}
               width="24"
               height="24"
               viewBox="0 0 24 24"
