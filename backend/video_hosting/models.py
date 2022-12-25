@@ -26,7 +26,7 @@ class Video(models.Model):
     image = models.ImageField(upload_to='image/%Y/%m/%d/')
     file = models.FileField(
         upload_to='video/%Y/%m/%d/',
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mvk"])],
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv"])],
 
     )
     created_at = models.DateTimeField(auto_now_add=True)
