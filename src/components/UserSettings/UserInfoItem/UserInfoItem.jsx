@@ -38,7 +38,22 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
   //   } catch {}
   // }, [userChannel, userToken])
 
-  console.log(userChannel)
+  const refactorDate = (date)=> {
+    let FullDate = new Date(date)
+    let reMonth = FullDate.getMonth()+1
+    let reDate = FullDate.getDate()
+    let reYear = FullDate.getFullYear()
+    if(reMonth < 10){
+      reMonth = '0' + reMonth
+    }
+    if(reDate < 10){
+      reDate = '0' + reDate
+    }
+
+    return `${reDate}.${reMonth}.${reYear}`
+
+  }
+
     const fieldsSettings = [
       {
         title: 'Имя',
@@ -46,7 +61,7 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
       },
       {
         title: 'Дата рождения',
-        description: userData.birth_date
+        description: refactorDate(userData.birth_date)
       },
       {
         title: 'Пол',
@@ -57,11 +72,10 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
         description: userData.email
 
       },
-      {
-        title: 'Пароль',
-
-      },
     ]
+    const outputPassword =  {
+      title: 'Пароль',
+    }
 
   return (
       <>
@@ -104,6 +118,24 @@ const UserInfoItem = ({ isOpen,setIsOpen }) => {
 
 
     }
+        <li className={s.item__info} onClick={()=>setIsOpen(!isOpen)}>
+          <span className={s.title__person_info}>Пароль</span>
+          <div className={s.person__description}>
+            <span className={s.person__info}>*******</span>
+            <span className={s.arrow}>
+              <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  fill="white"
+                  viewBox="0 0 24 24">
+                <polygon points="7.293 4.707 14.586 12 7.293 19.293 8.707 20.707 17.414 12 8.707 3.293 7.293 4.707" />
+              </svg>
+            </span>
+          </div>
+        </li>
+
+
       </>
   )
 }

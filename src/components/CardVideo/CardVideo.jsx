@@ -79,7 +79,7 @@ export const CardVideo = ({
 
     return Math.floor(dateYear) + ' years ago'
   }
-  const showViews = (view, arrSklon) => {
+  const showViews = (view, arrSklon=['просмотр', 'просмотра', 'просмотров']) => {
     const viewNew = view
     const huy = ['тыс.просмотров', 'млн.просмотров']
     let str = null
@@ -138,7 +138,7 @@ export const CardVideo = ({
           <p title={videoTitle}>{videoTitle}</p>
           <span>
             {videoOwner.name} <br />
-            {showViews(videoView, ['просмотр', 'просмотра', 'просмотров'])} • {reDate(videoDate)}
+            {showViews(videoView)} • {reDate(videoDate)}
           </span>
         </div>
       </div>

@@ -1,20 +1,11 @@
-// video__item{
-//     margin-bottom: 40px;
-// }
 
-.video__item {
-    //margin: 0 10px 30px 10px;
-    //max-width: 360px;
-    //&_video_item_is_wide{
-    //    width: 343px;
-    //}
-}
+
 
 .block__video{
     
     position: relative;
     width: 100%;
-    
+    cursor: pointer;
     & span{
         position: absolute;
         background-color: rgba(#000000, 0.7);
@@ -29,16 +20,11 @@
 
 
     }
-     &__poster__wide{
-         width: 100%;
-        border-radius: 15px;
-        //height: 202px;
-    }
 
     &__poster{
         width: 100%;
         border-radius: 15px;
-        //height: 193px;
+
 
     }
 }
@@ -52,10 +38,10 @@
 .description{
     display: flex;
     flex-direction: column;
-    
+
     
     & p{
-
+    cursor: pointer;
     font-size: 16px;
     line-height: 18px;
     font-weight: 400;
@@ -78,7 +64,7 @@
         font-weight: 400;
         color: #AAAAAA;
         word-spacing: -3px;
-
+        cursor: pointer;
     }
 }
 

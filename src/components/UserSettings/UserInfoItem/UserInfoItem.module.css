@@ -7,7 +7,7 @@
   cursor: pointer;
 }
 .item__info:hover {
-  background-color: rgba(54, 54, 54, 0.2);
+  background-color: rgba(54, 54, 54, 0.3);
 }
 .item__info:not(:last-child) {
   border-bottom: 1px solid #303030;

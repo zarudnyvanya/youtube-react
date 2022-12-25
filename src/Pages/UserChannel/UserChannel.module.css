@@ -58,10 +58,11 @@
   padding: 14px 0;
 }
 .select__options__chanel .options__chanel {
-  width: 50%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  overflow-y: hidden;
+  padding: 0 0 10px 0;
 }
 .select__options__chanel .options__chanel .option__item {
   padding: 10px 20px;
@@ -71,8 +72,8 @@
   font-weight: 400;
   letter-spacing: 1px;
   text-transform: uppercase;
-  word-break: break-word;
   cursor: pointer;
+  white-space: nowrap;
 }
 .select__options__chanel .options__chanel .active {
   border-bottom: 3px solid #c2c2c2;
@@ -91,10 +92,10 @@
 }
 
 .content__chanel {
-  padding: 20px;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 343px);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  justify-content: center;
   gap: 15px;
 }
 

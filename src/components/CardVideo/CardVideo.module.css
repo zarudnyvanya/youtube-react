@@ -1,6 +1,7 @@
 .block__video {
   position: relative;
   width: 100%;
+  cursor: pointer;
 }
 .block__video span {
   position: absolute;
@@ -13,10 +14,6 @@
   padding: 3px 4px;
   right: 7px;
   bottom: 10px;
-}
-.block__video__poster__wide {
-  width: 100%;
-  border-radius: 15px;
 }
 .block__video__poster {
   width: 100%;
@@ -34,6 +31,7 @@
   flex-direction: column;
 }
 .description p {
+  cursor: pointer;
   font-size: 16px;
   line-height: 18px;
   font-weight: 400;
@@ -50,6 +48,7 @@
   font-weight: 400;
   color: #AAAAAA;
   word-spacing: -3px;
+  cursor: pointer;
 }
 
 .channel {

@@ -1,0 +1,55 @@
+.genres {
+  width: 100%;
+  overflow-y: hidden;
+  text-align: center;
+  padding: 10px 0;
+}
+.genres::-webkit-scrollbar {
+  height: 6px;
+}
+.genres::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+.genres::-webkit-scrollbar-thumb {
+  background: #565555;
+  border-radius: 10px;
+}
+.genres::-webkit-scrollbar-thumb:hover {
+  background-color: #343434;
+}
+
+.genres__list {
+  display: inline-block;
+}
+
+.genres__items {
+  display: flex;
+  white-space: nowrap;
+}
+
+.genres__item {
+  background: #303030;
+  border: 0.3px solid #AAAAAA;
+  border-radius: 32px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.genres__item:not(:last-child) {
+  margin-right: 12px;
+}
+
+.genres__active {
+  background-color: #ffffff;
+}
+.genres__active a {
+  color: #030303;
+}
+
+.genres__link {
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+/*# sourceMappingURL=Genres.module.css.map */

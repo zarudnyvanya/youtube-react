@@ -17,12 +17,12 @@
 
     }
     &::-webkit-scrollbar-track{
-        background-color: #fff;
+
         border-radius: 10px;
         }
 
     &::-webkit-scrollbar-thumb{
-        background: #464646;
+        background: #565555;
         border-radius: 10px;
     }
 
@@ -78,11 +78,7 @@
     white-space: nowrap;
 }
 
-@media (max-width: 1200px) {
-    .genres {
-        // max-width:calc(100% - 250px);
-    }
-}
+
 
 
 
