@@ -64,7 +64,16 @@ export const Main = () => {
             <Genres setVideos={setVideos} />
 
             {isLoading ? (
-              [...new Array(8)].map((_, Index) => <Skeleton key={Index} />)
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+                  gap: 10,
+                }}>
+                {[...new Array(8)].map((_, Index) => (
+                  <Skeleton key={Index} />
+                ))}
+              </div>
             ) : (
               <Home
                 videos={videos}
