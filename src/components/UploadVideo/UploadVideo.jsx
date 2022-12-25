@@ -39,7 +39,7 @@ const UploadVideo = () => {
 
         <div className={s.video__main}>
           <div className={s.video__text}>
-            Перетащите файлы сюда или нажмите кнопку ниже, чтобы выбрать их на компьютере.
+            Перетащите файлы сюда или нажмите кнопку ниже: чтобы выбрать их на компьютере.
           </div>
           <input onChange={handleChangeFile} type="file" accept=".mp4" />
         </div>
