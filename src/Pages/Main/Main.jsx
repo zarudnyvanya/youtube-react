@@ -10,12 +10,14 @@ import Skeleton from '../../components/CardVideo/CardSkeleton'
 import { setNavIsOpen } from './../../redux/slices/navigationSlice'
 import doRequest from '../../components/doRequest/doRequest'
 import { useDispatch, useSelector } from 'react-redux'
+import UploadVideo from '../../components/UploadVideo/UploadVideo'
 
 export const Main = () => {
   const userToken = useSelector((state) => state.user.userToken)
   const navIsOpen = useSelector((state) => state.navigation.navIsOpen)
   const popup = useSelector((state) => state.userPopup.popup)
   const genreIsChecked = useSelector((state) => state.genres.genreIsChecked)
+  const isOpenVideoUpload = useSelector((state) => state.videoUpload.isOpenVideoUpload)
 
   const [videos, setVideos] = useState([])
   const [searchValue, setSearchValue] = useState('')
@@ -50,6 +52,8 @@ export const Main = () => {
     <div className="overlay">
       <>
         {popup && <Popup />}
+
+        {isOpenVideoUpload && <UploadVideo />}
 
         <Header onChangeSearchInput={onChangeSearchInput} searchValue={searchValue} />
 
