@@ -1,6 +1,10 @@
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.template.loader import render_to_string
 
 
-def sendMail(subject="Тема Письма", body="Сообщение", to:list=None):
-	mail = EmailMessage(subject, body, to=['fyfik105@gmail.com'])
-	mail.send()
+def sendMail(subject="Тема Письма", text_content="Сообщение",html_content=None, to:list=None):
+	message = EmailMultiAlternatives(subject, text_content, to=to)
+	message.mixed_subtype = 'related'
+	message.attach_alternative(html_content, "text/html")
+	message.send()
+
