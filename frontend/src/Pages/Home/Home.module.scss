@@ -46,9 +46,9 @@
 .video__list{
     width: 100%;
     display: grid;
-    //grid-template-columns: repeat(auto-fill,360px);
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 15px;
+    grid-row-gap: 50px;
+    grid-column-gap: 15px;
     padding: 0 20px;
 
 

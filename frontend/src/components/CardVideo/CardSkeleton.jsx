@@ -7,7 +7,7 @@ const Skeleton = (props) => (
         <ContentLoader
             className={s.video__item__skeleton}
             speed={1}
-            width={341}
+            width={310}
             height={293}
             viewBox="0 0 341 293"
             backgroundColor="#454545"

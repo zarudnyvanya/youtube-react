@@ -68,7 +68,7 @@ export const Main = () => {
                 style={{
                   display: 'grid',
                   gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                  gap: 10,
+                  justifyItems: 'center'
                 }}>
                 {[...new Array(8)].map((_, Index) => (
                   <Skeleton key={Index} />
