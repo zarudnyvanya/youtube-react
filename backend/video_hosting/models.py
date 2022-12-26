@@ -21,12 +21,12 @@ class Category(models.Model):
 
 
 class Video(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=130)
     description = models.TextField()
-    image = models.ImageField(upload_to='image/%Y/%m/%d/')
+    image = models.ImageField(upload_to='image/%Y/%m/%d/', null=True, blank=True)
     file = models.FileField(
         upload_to='video/%Y/%m/%d/',
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv"])],
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])],
 
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -48,6 +48,8 @@ class Video(models.Model):
         super(Video, self).save(*args, **kwargs)
         if self.image:
             image = Image.open(self.image.path)
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
             image = crop_center_v2(image, (16, 9))
             image.save(self.image.path)
 

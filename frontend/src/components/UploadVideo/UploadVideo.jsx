@@ -3,26 +3,53 @@ import { setVideoUpload, setIsUploaded } from './../../redux/slices/videoUploadS
 
 import s from './UploadVideo.module.scss'
 import { useEffect } from 'react'
+import { useState } from 'react'
 
 const UploadVideo = () => {
   const dispatch = useDispatch()
+  const userToken = useSelector((state) => state.user.userToken)
   const isOpenVideoUpload = useSelector((state) => state.videoUpload.isOpenVideoUpload)
   const isUploaded = useSelector((state) => state.videoUpload.isUploaded)
+
+  const [videoFile, setVideoFile] = useState(null)
 
   const closeVideoUpload = () => {
     dispatch(setVideoUpload(!isOpenVideoUpload))
   }
 
-  const handleChangeFile = (event) => {
+  const handleChangeFile = async (event) => {
     const file = event.target.files[0]
-    console.log(file)
     dispatch(setIsUploaded(true))
+    console.log(file)
+
+    const formData = new FormData()
+
+    formData.append('file', file)
+    formData.append('file', file.name)
+    // formData.append('image', null)
+
+    formData.append('title', 'Залил видео')
+    formData.append('description', 'Описание отсутствует')
+
+    const res = await fetch('api/v1/video/', {
+      method: 'POST',
+      headers: {
+        Authorization: `token ${userToken}`,
+      },
+      body: formData,
+    })
+
+    // const data = await res.json()
+
+    // console.log(data)
   }
 
-  useEffect(() => {
-    if (isUploaded) {
-    }
-  }, [isUploaded])
+  // useEffect(() => {
+  //   // if (isUploaded) {
+  //   //   const formData = new FormData()
+  //   //   formData.append('video', )
+  //   // }
+  // }, [isUploaded])
 
   return (
     <div className={s.overlay}>
@@ -41,7 +68,12 @@ const UploadVideo = () => {
           <div className={s.video__text}>
             Перетащите файлы сюда или нажмите кнопку ниже: чтобы выбрать их на компьютере.
           </div>
-          <input onChange={handleChangeFile} type="file" accept=".mp4" />
+          <input
+            onChange={handleChangeFile}
+            type="file"
+            accept=".mp4"
+            encType="multipart/form-data"
+          />
         </div>
 
         <div className={s.video__footer}>

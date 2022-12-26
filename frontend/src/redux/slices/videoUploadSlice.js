@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   isOpenVideoUpload: false,
   isUploaded: false,
+  videoFile: {},
 }
 
 const videoUploadSlice = createSlice({
@@ -15,9 +16,12 @@ const videoUploadSlice = createSlice({
     setIsUploaded(state, action) {
       state.isOpenVideoUpload = action.payload
     },
+    setVideoFile(state, action) {
+      state.videoFile = action.payload
+    },
   },
 })
 
-export const { setVideoUpload, setIsUploaded } = videoUploadSlice.actions
+export const { setVideoUpload, setIsUploaded, setVideoFile } = videoUploadSlice.actions
 
 export default videoUploadSlice.reducer

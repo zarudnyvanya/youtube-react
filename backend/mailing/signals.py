@@ -13,7 +13,7 @@ from video_hosting.models import Video, Channel, Subscribers
 @receiver(post_save, sender=Video)
 def save_user_channel(sender, instance,created, **kwargs):
 	if created:
-		print(instance.image, instance.image.url)
+		
 		channel = instance.channel
 		mylist = ChannelMailingList.objects.filter(channel=channel)
 		email = [elem.user.email for elem in mylist]

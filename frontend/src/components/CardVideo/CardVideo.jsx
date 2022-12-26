@@ -117,7 +117,7 @@ export const CardVideo = ({
       <div className={s.block__video}>
         <video
           className={s.block__video__poster}
-          src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
+          // src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
           poster={videoImage}
           ref={videoEl}
           onLoadedMetadata={handleLoadedMetadata}
