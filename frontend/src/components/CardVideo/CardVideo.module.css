@@ -14,10 +14,6 @@
   right: 7px;
   bottom: 10px;
 }
-.block__video__poster__wide {
-  width: 100%;
-  border-radius: 15px;
-}
 .block__video__poster {
   width: 100%;
   border-radius: 15px;
@@ -54,17 +50,6 @@
 
 .channel {
   margin-right: 12px;
-}
-
-.video__block__skeleton {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  justify-content: center;
-  justify-items: center;
-}
-
-.video__item__skeleton {
-  margin: 0 0 0 60px;
 }
 
 @media (max-width: 1120px) {

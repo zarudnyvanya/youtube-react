@@ -12,8 +12,9 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-row-gap: 50px;
+  grid-column-gap: 15px;
   padding: 0 20px;
-  gap: 15px;
 }
 
 /*# sourceMappingURL=Home.module.css.map */
