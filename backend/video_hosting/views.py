@@ -1,19 +1,16 @@
 from django.db.models import Q
-from django.http import StreamingHttpResponse, QueryDict
-from django.shortcuts import render, get_object_or_404
+from django.http import StreamingHttpResponse
+from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.viewsets import GenericViewSet
 
-from .models import *
 from .serializers import *
-from .services import open_file
-from rest_framework import generics, viewsets, mixins, status
+from .services import open_file, optimize_video_query, optimize_channel_query
+from rest_framework import viewsets, mixins, status
 
 from users.permissions import IsAuthenticatedOrOwnerOrReadOnly, IsAdminOrReadOnly
 from .permissions import *
-from rest_framework.permissions import SAFE_METHODS
-from django.db import connection
 
 User = get_user_model()
 
@@ -27,7 +24,7 @@ def add_view_video(request, pk: int):
 def get_streaming_video(request, pk: int):
     file, status_code, content_length, content_range = open_file(request, pk)
     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
-    if (not content_range):
+    if not content_range:
         add_view_video(request, pk)
     response['Accept-Ranges'] = 'bytes'
     response['Content-Length'] = str(content_length)
@@ -42,7 +39,7 @@ def get_streaming_video(request, pk: int):
 
 ##############
 class VideoViewSet(viewsets.ModelViewSet):
-    queryset = Video.objects.all().select_related('channel')
+    queryset = optimize_video_query(Video.objects.all())
     serializer_class = VideoSerializer
     permission_classes = (IsAuthenticatedOrOwnerOrReadOnly,)
     http_method_names = ('get', 'head', 'options', 'post', "patch", 'delete')
@@ -63,33 +60,32 @@ class VideoViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
-        video = Video.objects.filter(category__in=[pk])
+        video = optimize_video_query(Video.objects.filter(category__in=[pk]))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def channel(self, request, pk=None):
-        video = Video.objects.filter(channel=pk)
+        video = optimize_video_query(Video.objects.filter(channel=pk))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def last_views(self, request):
-        video = Video.objects.filter(views=request.user).order_by('-view_video__time').select_related(
-            'channel').prefetch_related('category').prefetch_related('views').prefetch_related('channel__subscribers')
+        video = optimize_video_query(Video.objects.filter(views=request.user).order_by('-view_video__time'))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def new(self, request):
-        video = Video.objects.filter(~Q(views=request.user))
+        video = optimize_video_query(Video.objects.filter(~Q(views=request.user)))
         serializer = VideoSerializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get', 'post', 'delete'])
     def like(self, request, pk=None):
         self.get_object = self.get_instance(pk)
-        like = Likes.objects.filter(video=self.get_object, user=request.user).exists()
+        like = Likes.objects.filter(video=pk, user=request.user).exists()
         subscribe = Subscribers.objects.filter(user=request.user, channel=self.get_object.channel).exists()
         if request.method == "GET":
             return Response({'like': like,
@@ -109,7 +105,6 @@ class ChannelViewSet(mixins.CreateModelMixin,
                      mixins.UpdateModelMixin,
                      mixins.ListModelMixin,
                      GenericViewSet):
-    queryset = Channel.objects.all()
     serializer_class = ChannelSerializer
     permission_classes = (IsOwnerOrReadOnly,)
 
@@ -117,9 +112,9 @@ class ChannelViewSet(mixins.CreateModelMixin,
         if self.action == 'create':
             raise PermissionDenied()
         if self.action == 'list':
-            return Channel.objects.filter(is_active=True)
+            return optimize_channel_query(Channel.objects.all())
         else:
-            return Channel.objects.all()
+            return optimize_channel_query(Channel.objects.all())
 
     def get_serializer_class(self):
         if self.action == 'subscribe':
@@ -128,13 +123,13 @@ class ChannelViewSet(mixins.CreateModelMixin,
             return ChannelSerializer
 
     def get_permissions(self):
-        if self.action in ["follow", 'subscribe','me']:
+        if self.action in ["follow", 'subscribe', 'me']:
             return (permissions.IsAuthenticated(),)
         else:
             return (IsOwnerOrReadOnly(),)
 
     def get_instance(self):
-        return Channel.objects.get(user=self.request.user)
+        return optimize_channel_query(Channel.objects.filter(user=self.request.user))[0]
 
     @action(detail=False, methods=['get', 'put', 'patch'])
     def me(self, request, *args, **kwargs):
@@ -146,14 +141,15 @@ class ChannelViewSet(mixins.CreateModelMixin,
         elif request.method == "PATCH":
             return self.partial_update(request, *args, **kwargs)
 
-    @action(detail=False, methods=['get'])
-    def subscribers(self, request, *args, **kwargs):
-        channels = Channel.objects.filter(user__in=self.get_instance().subscribers.all()).order_by('subscribers')
-        print(channels)
-        serializer = self.serializer_class(channels, many=True)
-        return Response(serializer.data)
+    # @action(detail=False, methods=['get'])
+    # def subscribers(self, request, *args, **kwargs):
+    #     channels = optimize_channel_query(
+    #         Channel.objects.filter(user__in=self.get_instance().subscribers.all()).order_by('subscribers'))
+    #     print(channels)
+    #     serializer = self.serializer_class(channels, many=True)
+    #     return Response(serializer.data)
 
-    @action(detail=True, methods=['get','post', 'delete'])
+    @action(detail=True, methods=['get', 'post', 'delete'])
     def subscribe(self, request, pk):
         channel = get_object_or_404(Channel, pk=pk)
         subscribe = Subscribers.objects.filter(user=request.user, channel=channel).exists()
@@ -161,17 +157,17 @@ class ChannelViewSet(mixins.CreateModelMixin,
             if not subscribe:
                 Subscribers.objects.create(user=request.user, channel=channel)
             return Response(status=status.HTTP_204_NO_CONTENT)
-        elif request.method=="DELETE":
+        elif request.method == "DELETE":
             if subscribe:
                 instance = get_object_or_404(Subscribers, user=request.user, channel=channel)
                 instance.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-        elif request.method=="GET":
-            return Response({"subscribe":subscribe})
+        elif request.method == "GET":
+            return Response({"subscribe": subscribe})
 
     @action(detail=False, methods=['get'])
     def follow(self, request):
-        channels = Channel.objects.filter(subscribers=request.user)
+        channels = optimize_channel_query(Channel.objects.filter(subscribers=request.user))
         serializer = ChannelSerializer(channels, many=True)
         return Response(serializer.data)
 

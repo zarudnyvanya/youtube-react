@@ -51,3 +51,13 @@ def open_file(request, video_pk: int) -> tuple:
         content_range = f'bytes {range_start}-{range_end}/{file_size}'
 
     return file, status_code, content_length, content_range
+
+
+def optimize_video_query(queryset):
+    return queryset.select_related(
+        'channel').prefetch_related('category').prefetch_related('views').prefetch_related(
+        'channel__subscribers').prefetch_related('likes')
+
+
+def optimize_channel_query(queryset):
+    return queryset.prefetch_related("subscribers").select_related("user")

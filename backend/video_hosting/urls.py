@@ -5,7 +5,7 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'video', VideoViewSet)
-router.register(r'channel', ChannelViewSet)
+router.register(r'channel', ChannelViewSet, basename="channel")
 router.register(r'category', CategoryViewSet)
 
 urlpatterns = [
