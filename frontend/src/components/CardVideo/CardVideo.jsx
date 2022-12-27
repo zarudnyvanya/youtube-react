@@ -1,6 +1,8 @@
 import s from './CardVideo.module.scss'
 import { useRef, useState } from 'react'
 import userLogo from '../../assets/svg__header/user.png'
+import {Link} from "react-router-dom";
+
 export const CardVideo = ({
   videoId,
   videoView,
@@ -115,6 +117,7 @@ export const CardVideo = ({
   return (
     <div className={s.video__item}>
       <div className={s.block__video}>
+        <Link to='videoPage'>
         <video
           className={s.block__video__poster}
           // src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
@@ -122,6 +125,7 @@ export const CardVideo = ({
           ref={videoEl}
           onLoadedMetadata={handleLoadedMetadata}
         />
+        </Link>
         <span>{videoDuration}</span>
       </div>
       <div className={s.video__info}>
