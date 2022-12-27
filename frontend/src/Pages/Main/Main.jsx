@@ -49,7 +49,7 @@ export const Main = () => {
   }
 
   return (
-    <div className="overlay">
+
       <>
         {popup && <Popup />}
 
@@ -85,6 +85,6 @@ export const Main = () => {
           </div>
         </div>
       </>
-    </div>
+
   )
 }

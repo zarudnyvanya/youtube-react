@@ -15,6 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
 import doRequest from './components/doRequest/doRequest'
+import VideoPage from "./Pages/VideoPage/VideoPage";
 
 function App() {
   const dispatch = useDispatch()
@@ -47,6 +48,7 @@ function App() {
         <Route path="/authorization" element={<Authorization />} />
         <Route path="/userSettings" element={<UserSettings />} />
         <Route path="/logout" element={<Logout />} />
+        <Route path="/videoPage" element={<VideoPage />} />
       </Routes>
     </div>
   )

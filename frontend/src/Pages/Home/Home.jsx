@@ -11,30 +11,30 @@ export const Home = ({ videos, searchValue }) => {
     <div className={s.video__content}>
       <div className={s.video__wrapper}>
         <div className={s.video__list}>
-          {isAuth ? (
-            videos
-              .filter((item) => {
-                return item.title.toLowerCase().includes(searchValue.toLowerCase())
-              })
-              .map((video) => {
-                return (
-                  <CardVideo
-                    key={video.id}
-                    videoId={video.id}
-                    videoView={video.views}
-                    videoFile={video.file}
-                    videoTitle={video.title}
-                    videoImage={video.image}
-                    videoOwner={video.owner}
-                    videoDate={video.created_at}
-                  />
-                )
-              })
-          ) : (
-            <h1 style={{ fontSize: '30px', position: 'absolute', left: '38%' }}>
-              Войдите или авторизируйтесь
-            </h1>
-          )}
+          {/*{isAuth ? (*/}
+          {/*  videos*/}
+          {/*    .filter((item) => {*/}
+          {/*      return item.title.toLowerCase().includes(searchValue.toLowerCase())*/}
+          {/*    })*/}
+          {/*    .map((video) => {*/}
+          {/*      return (*/}
+          {/*        <CardVideo*/}
+          {/*          key={video.id}*/}
+          {/*          videoId={video.id}*/}
+          {/*          videoView={video.views}*/}
+          {/*          videoFile={video.file}*/}
+          {/*          videoTitle={video.title}*/}
+          {/*          videoImage={video.image}*/}
+          {/*          videoOwner={video.owner}*/}
+          {/*          videoDate={video.created_at}*/}
+          {/*        />*/}
+          {/*      )*/}
+          {/*    })*/}
+          {/*) : (*/}
+          {/*  <h1 style={{ fontSize: '30px', position: 'absolute', left: '38%' }}>*/}
+          {/*    Войдите или авторизируйтесь*/}
+          {/*  </h1>*/}
+          {/*)}*/}
         </div>
       </div>
     </div>
