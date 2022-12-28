@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route} from 'react-router-dom'
 
 import { Main } from './Pages/Main/Main'
 import { Registration } from './Pages/Registration/Registration'
@@ -29,13 +29,6 @@ function App() {
     if (userToken) {
       dispatch(setIsAuth(true))
 
-      const getMyself = async () => {
-        const response = await doRequest('api/v1/auth/users/me/', userToken)
-        const result = await response.json()
-
-        dispatch(setUserData(result))
-      }
-      getMyself()
     }
   }, [userToken])
 
@@ -48,7 +41,7 @@ function App() {
         <Route path="/authorization" element={<Authorization />} />
         <Route path="/userSettings" element={<UserSettings />} />
         <Route path="/logout" element={<Logout />} />
-        <Route path="/videoPage" element={<VideoPage />} />
+        <Route path="/videoPage/:videoId" element={<VideoPage />} />
       </Routes>
     </div>
   )

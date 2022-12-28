@@ -2,22 +2,50 @@
 import s from './VideoPage.module.scss'
 import {Header} from "../../components/Header/Header";
 import {useSelector} from "react-redux";
-const VideoPage = ()=>{
+import {useParams } from 'react-router-dom';
+import {useEffect, useState} from "react";
+import doRequest from "../../components/doRequest/doRequest";
+import axios from "axios";
 
+const reDate = (date) => {
+    let fullDate = new Date(date)
+    let month = fullDate.getMonth()+1
+    let day = fullDate.getDate()
+    let year = fullDate.getFullYear()
+    if (month < 10) {
+        month = '0' + month
+    }
+    if (day < 10) {
+        day = '0' + day
+    }
+
+    return `${day}.${month}.${year}`
+
+}
+const VideoPage = ()=>{
+    const { videoId } = useParams()
+    console.log(videoId)
     const userVideos = useSelector(state=> state.user.userVideos)
     const userChanel = useSelector(state=> state.user.userChannel)
+    const [data, setData] = useState('')
+
+    useEffect(()=>{
+        fetch(`http://localhost:3000/api/v1/video/${videoId}/`).then(response => response.json).then(data=>setData(data))
+        // axios.get(`http://localhost:8000/api/v1/video/2/`)
+    },[])
+
 
     return (
 <>
         <Header/>
         <div className={s.block__video_wrapper}>
             <video className={s.block__video_player}
-                   src={userVideos[0].file}
+                   src={`http://localhost:3000/stream/${videoId}/`}
                    poster="assets/poster_for_video/poster_inst.png" controls></video>
 
             <div className={s.block__video_info}>
                 <div className={s.block__info_container}>
-                    <h1 className={s.title__for_video}>Название видеоролика</h1>
+                    <h1 className={s.title__for_video}></h1>
                     <div className={s.userChanel_info}>
                         <div className={s.wrapper__logo_name}>
                             <svg enable-background="new 0 0 50 50" height="40px" version="1.1" viewBox="0 0 50 50" width="40px" ><circle cx="25" cy="25" fill="none" r="24" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/><rect fill="none" height="40" width="40"/><path d="M29.933,35.528  c-0.146-1.612-0.09-2.737-0.09-4.21c0.73-0.383,2.038-2.825,2.259-4.888c0.574-0.047,1.479-0.607,1.744-2.818  c0.143-1.187-0.425-1.855-0.771-2.065c0.934-2.809,2.874-11.499-3.588-12.397c-0.665-1.168-2.368-1.759-4.581-1.759  c-8.854,0.163-9.922,6.686-7.981,14.156c-0.345,0.21-0.913,0.878-0.771,2.065c0.266,2.211,1.17,2.771,1.744,2.818  c0.22,2.062,1.58,4.505,2.312,4.888c0,1.473,0.055,2.598-0.091,4.21c-1.261,3.39-7.737,3.655-11.473,6.924  c3.906,3.933,10.236,6.746,16.916,6.746s14.532-5.274,15.839-6.713C37.688,39.186,31.197,38.93,29.933,35.528z" fill="none" stroke="white" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/></svg>
