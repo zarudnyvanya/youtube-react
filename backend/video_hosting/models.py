@@ -19,21 +19,24 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+
 
 class Video(models.Model):
-    title = models.CharField(max_length=130)
-    description = models.TextField()
-    image = models.ImageField(upload_to='image/%Y/%m/%d/', null=True, blank=True)
+    title = models.CharField(max_length=130, verbose_name="Название")
+    description = models.TextField(verbose_name="Описание")
+    image = models.ImageField(upload_to='image/%Y/%m/%d/', null=True, blank=True, verbose_name="Постер")
     file = models.FileField(
         upload_to='video/%Y/%m/%d/',
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])],
-
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])], verbose_name="Файл"
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    channel = models.ForeignKey("Channel", verbose_name="Канал", on_delete=models.CASCADE)
-    category = models.ManyToManyField(Category, related_name="category")
-    views = models.ManyToManyField(User, through='Views')
-    likes = models.ManyToManyField(User, related_name='likes', through="Likes")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
+    channel = models.ForeignKey("Channel", on_delete=models.CASCADE, verbose_name="Канал")
+    category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории")
+    views = models.ManyToManyField(User, through='Views', verbose_name="Просмотры")
+    likes = models.ManyToManyField(User, related_name='likes', through="Likes", verbose_name="Лайки")
 
     def __str__(self):
         return self.title
@@ -55,6 +58,8 @@ class Video(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
+        verbose_name = "Видео"
+        verbose_name_plural = "Видео"
 
 
 class Views(models.Model):
@@ -64,14 +69,27 @@ class Views(models.Model):
 
     class Meta:
         ordering = ('-time',)
+        verbose_name = "Просмотр"
+        verbose_name_plural = "Просмотры"
 
 
 class Likes(models.Model):
     user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
     video = models.ForeignKey(Video, related_name='video', on_delete=models.CASCADE)
+    class Meta:
+        verbose_name = "Лайк"
+        verbose_name_plural = "Лайки"
+
 
 
 class Channel(models.Model):
+    class Meta:
+        verbose_name = "Канал"
+        verbose_name_plural = "Каналы"
+
+    def __str__(self):
+        return f"{self.user.id}-{self.name}"
+
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=40, default="Channel Name")
     description = models.TextField(null=True)
@@ -95,6 +113,10 @@ class Channel(models.Model):
 class Subscribers(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sub_user')
     channel = models.ForeignKey('Channel', on_delete=models.CASCADE, related_name='sub_channel')
+
+    class Meta:
+        verbose_name = "Подписчик"
+        verbose_name_plural = "Подписчики"
 
 
 @receiver(post_save, sender=CustomUser)

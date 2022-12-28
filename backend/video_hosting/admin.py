@@ -1,11 +1,29 @@
 from django.contrib import admin
-from .models import Video, Channel, Category, Subscribers, Views
+from .models import Video, Channel, Category, Subscribers, Views, Likes
 
-class AdminCategory(admin.ModelAdmin):
+
+class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'description')
+
+
+class VideoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'title', 'created_at', 'channel', 'get_count_views')
+    list_display_links = ('id', 'title')
+    search_fields = ('title', 'description')
+    list_filter = ('created_at',)
+
+
+class ChannelAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'user', 'name', 'is_active')
+    list_display_links = ('pk', 'name')
+    list_editable = ('is_active',)
+    list_filter = ('is_active',)
+
+
 # Re
-admin.site.register(Video)
-admin.site.register(Channel)
-admin.site.register(Category, AdminCategory)
+admin.site.register(Video, VideoAdmin)
+admin.site.register(Channel, ChannelAdmin)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Views)
+admin.site.register(Likes)
 admin.site.register(Subscribers)

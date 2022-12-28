@@ -60,4 +60,5 @@ def optimize_video_query(queryset):
 
 
 def optimize_channel_query(queryset):
-    return queryset.prefetch_related("subscribers").select_related("user")
+    return sorted(queryset.prefetch_related("subscribers").select_related("user"),
+                  key=lambda channel: channel.get_count_subscribes())
