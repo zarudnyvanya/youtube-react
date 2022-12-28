@@ -2,6 +2,24 @@
 import s from './VideoPage.module.scss'
 import {Header} from "../../components/Header/Header";
 import {useSelector} from "react-redux";
+
+const reDate = (date) => {
+    let fullDate = new Date(date)
+    let month = fullDate.getMonth()+1
+    let day = fullDate.getDate()
+    let year = fullDate.getFullYear()
+    if (month < 10) {
+        month = '0' + month
+    }
+    if (day < 10) {
+        day = '0' + day
+    }
+
+    return `${day}.${month}.${year}`
+
+}
+
+
 const VideoPage = ()=>{
 
     const userVideos = useSelector(state=> state.user.userVideos)
@@ -61,7 +79,7 @@ const VideoPage = ()=>{
                     <div className={s.block__description}>
                         <div className={s.block__description_header}>
                             <p className={s.views}>{userVideos[0].views}</p>
-                            <p className={s.realise__date}>{userVideos[0].created_at}</p>
+                            <p className={s.realise__date}>{reDate(userVideos[0].created_at)}</p>
                         </div>
 
                         <div className={s.video__description}>

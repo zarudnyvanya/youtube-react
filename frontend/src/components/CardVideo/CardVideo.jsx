@@ -39,12 +39,14 @@ export const CardVideo = ({
   }
 
   const videoEl = useRef(null)
+
   const handleLoadedMetadata = () => {
     const video = videoEl.current
     if (video) {
       setVideoDuration(reDuration(video.duration))
     }
   }
+
 
   const reDate = (date) => {
     let reDate = new Date(date)
@@ -117,7 +119,7 @@ export const CardVideo = ({
   return (
     <div className={s.video__item}>
       <div className={s.block__video}>
-        <Link to='videoPage'>
+        <Link to="/videoPage">
         <video
           className={s.block__video__poster}
           // src={'http://127.0.0.1:8000/stream/' + videoId + '/'}

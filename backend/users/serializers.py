@@ -13,9 +13,9 @@ User = get_user_model()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = (
-            "pk",
-            "email",
+        fields = tuple(CustomUser.REQUIRED_FIELDS) + (
+                    settings.LOGIN_FIELD,
+                    settings.USER_ID_FIELD,
             'first_name',
             'last_name',
             'gender',

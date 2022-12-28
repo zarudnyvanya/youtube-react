@@ -24,7 +24,11 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsAuth(false))
-    dispatch(setUserToken(localStorage.getItem('user')))
+
+    // console.log('localStorage.getItem(user)', localStorage.getItem('user'))
+    if (localStorage.getItem('user')) {
+      dispatch(setUserToken(localStorage.getItem('user')))
+    }
 
     if (userToken) {
       dispatch(setIsAuth(true))
