@@ -26,7 +26,6 @@ SECRET_KEY = 'django-insecure-bf5g9=54fej+=3^rh0&eany+jpx-l&4svihm+br9emx57!jx!z
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '127.0.0.1'
 ]
 INTERNAL_IPS = ['127.0.0.1', ]
 
@@ -129,7 +128,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -176,10 +175,7 @@ REST_FRAMEWORK = {
 
     ),
 
-    'DEFAULT_PARSER_CLASSES': (
-        'rest_framework.parsers.FormParser',
-        'rest_framework.parsers.MultiPartParser'
-    )
+
 }
 
 EMAIL_USE_TLS = True

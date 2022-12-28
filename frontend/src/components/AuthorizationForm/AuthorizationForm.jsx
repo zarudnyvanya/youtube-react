@@ -65,7 +65,7 @@ export const AuthorizationForm = () => {
 
         dispatch(setUserData(data))
 
-        window.location.href = '/'
+        //window.location.href = '/'
       }
       getMyself()
     }

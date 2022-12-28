@@ -33,8 +33,10 @@ export const CardVideo = ({
       newSeconds = '0' + seconds
     }
     if (hours === 0) {
+      console.log(minutes + ':' + newSeconds)
       return minutes + ':' + newSeconds
     }
+    console.log(minutes + ':' + newSeconds)
     return '' + hours + ':' + newMinutes + ':' + newSeconds
   }
 
@@ -117,10 +119,10 @@ export const CardVideo = ({
   return (
     <div className={s.video__item}>
       <div className={s.block__video}>
-        <Link to='videoPage'>
+        <Link to={`videoPage/${videoId}`}>
         <video
           className={s.block__video__poster}
-          // src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
+          //src={'http://127.0.0.1:8000/stream/' + videoId + '/'}
           poster={videoImage}
           ref={videoEl}
           onLoadedMetadata={handleLoadedMetadata}
