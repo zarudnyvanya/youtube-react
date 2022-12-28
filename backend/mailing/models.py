@@ -8,6 +8,9 @@ User = get_user_model()
 
 
 class ChannelMailingList(models.Model):
-	user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_id')
-	channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='channel')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_id')
+    channel = models.ForeignKey(Channel, on_delete=models.CASCADE, related_name='channel')
 
+    class Meta:
+        verbose_name_plural = "Рассылка"
+        verbose_name = "Рассылка"

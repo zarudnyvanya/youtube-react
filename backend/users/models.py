@@ -59,3 +59,8 @@ class CustomUser(AbstractUser):
             image = Image.open(self.image.path)
             image = crop_center_v2(image)
             image.save(self.image.path)
+
+
+    class Meta:
+        verbose_name="Пользователь"
+        verbose_name_plural="Пользователи"
