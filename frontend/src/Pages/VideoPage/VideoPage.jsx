@@ -30,7 +30,7 @@ const VideoPage = ()=>{
 
     useEffect(()=>{
         const getVideo = async ()=> {
-            const response = await fetch(`http://localhost:8000/api/v1/video/${videoId}`)
+            const response = await fetch(`/api/v1/video/${videoId}/`)
             const data = await response.json()
             setData(data)
         }
@@ -47,7 +47,7 @@ const VideoPage = ()=>{
         <Header/>
         <div className={s.block__video_wrapper}>
             <video className={s.block__video_player}
-                   src={`http://localhost:8000/stream/${videoId}/`}
+                   src={`/stream/${videoId}/`}
                    poster="assets/poster_for_video/poster_inst.png" controls></video>
 
             <div className={s.block__video_info}>
