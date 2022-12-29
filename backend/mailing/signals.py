@@ -29,6 +29,6 @@ def save_user_channel(sender, instance,created, **kwargs):
 def delete_from_email(sender, instance, **kwargs):
 	user = instance.user
 	channel = instance.channel
-	obj = ChannelMailingList.objects.filter(user=user, channel=channel).limit(1)
+	obj = ChannelMailingList.objects.filter(user=user, channel=channel)[:1]
 	if obj:
 		obj[0].delete()
