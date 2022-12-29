@@ -24,8 +24,17 @@ const reDate = (date) => {
 const VideoPage = () => {
   const { videoId } = useParams()
 
+  const userToken = useSelector(state=>state.user.userToken)
+
+  const [disLikeIsActive, setDisLikeIsActive] = useState(false);
+
   const [data, setData] = useState()
+
   const [isLoading, setIsLoading] = useState(false)
+
+  const [isSubscribe,setIsSubscribe] = useState(false)
+
+  const [isLike,setIsLike] = useState(false)
 
   useEffect(() => {
     setIsLoading(false)
@@ -34,13 +43,56 @@ const VideoPage = () => {
       const response = await fetch(`/api/v1/video/${videoId}/`)
       const data = await response.json()
       setData(data)
-      console.log('owner', data.owner.description)
-      console.log('---------------')
+
       setIsLoading(true)
     }
 
     getVideo()
   }, [])
+
+  useEffect(() => {
+
+    const getLikes = async () => {
+      const response = await doRequest(`/api/v1/video/${videoId}/like/`, userToken)
+      const status = await response.json()
+      setIsLike(status.like)
+      setIsSubscribe(status.subscribe)
+
+    }
+
+    getLikes()
+  }, [userToken]);
+
+
+
+const handlerLike = ()=>{
+
+  if(isLike){
+    setIsLike(false)
+    doRequest(`/api/v1/video/${videoId}/like/`,userToken,'DELETE')
+
+  }else{
+    setIsLike(true)
+    doRequest(`/api/v1/video/${videoId}/like/`,userToken,'POST')
+
+  }
+
+}
+
+  const handlerSubscribe = ()=>{
+    if(isSubscribe){
+      setIsSubscribe(false)
+      doRequest(`/api/v1/channel/${data.owner.pk}/subscribe/`,userToken,'DELETE')
+    }else{
+      setIsSubscribe(true)
+      doRequest(`/api/v1/channel/${data.owner.pk}/subscribe/`,userToken,'POST')
+    }
+
+  }
+
+
+
+
 
   return (
     <>
@@ -95,26 +147,22 @@ const VideoPage = () => {
                 </div>
 
                 <div className={s.channel__sub}>
-                  <button className={s.btn__subscribe}>Подписаться</button>
+                  <button
+                      className={s.btn__subscribe}
+                      onClick={()=>handlerSubscribe()}
+                      style={isSubscribe ? {backgroundColor: "gray"} : {backgroundColor: 'red'}}
+                  >
+                    {isSubscribe ? 'Отписаться' : 'Подписаться'}</button>
 
-                  <button className={s.btn__like}>
+                  <button className={s.btn__like} onClick={()=>handlerLike()}>
                     <div className={s.wrapper__like_quantity}>
-                      <svg viewBox="0 0 512 512" fill="white" width="24px" height="24px">
-                        <g>
-                          <path d="M348.45,432.7H261.8a141.5,141.5,0,0,1-49.52-8.9l-67.5-25.07a15,15,0,0,1,10.45-28.12l67.49,25.07a111.79,111.79,0,0,0,39.08,7h86.65a14.21,14.21,0,1,0,0-28.42,15,15,0,0,1,0-30H368.9a14.21,14.21,0,1,0,0-28.42,15,15,0,0,1,0-30h20.44a14.21,14.21,0,0,0,10.05-24.26,14.08,14.08,0,0,0-10.05-4.16,15,15,0,0,1,0-30h20.45a14.21,14.21,0,0,0,10-24.26,14.09,14.09,0,0,0-10-4.17H268.15A15,15,0,0,1,255,176.74a100.2,100.2,0,0,0,9.2-29.33c3.39-21.87-.79-41.64-12.42-58.76a12.28,12.28,0,0,0-22.33,7c.49,51.38-23.25,88.72-68.65,108a15,15,0,1,1-11.72-27.61c18.72-8,32.36-19.75,40.55-35.08,6.68-12.51,10-27.65,9.83-45C199.31,77,211,61,229.18,55.34s36.81.78,47.45,16.46c24.71,36.36,20.25,74.1,13.48,97.21H409.79a44.21,44.21,0,0,1,19.59,83.84,44.27,44.27,0,0,1-20.44,58.42,44.27,44.27,0,0,1-20.45,58.43,44.23,44.23,0,0,1-40,63Z" />
-                          <path d="M155,410.49H69.13a15,15,0,0,1-15-15V189.86a15,15,0,0,1,15-15H155a15,15,0,0,1,15,15V395.49A15,15,0,0,1,155,410.49Zm-70.84-30H140V204.86H84.13Z" />
-                        </g>
-                      </svg>
+                      <svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" width='24px' height='24px' stroke='white' fill={isLike? 'white': 'none'} ><path d="M29.845,17.099l-2.489,8.725C26.989,27.105,25.804,28,24.473,28H11c-0.553,0-1-0.448-1-1V13  c0-0.215,0.069-0.425,0.198-0.597l5.392-7.24C16.188,4.414,17.05,4,17.974,4C19.643,4,21,5.357,21,7.026V12h5.002  c1.265,0,2.427,0.579,3.188,1.589C29.954,14.601,30.192,15.88,29.845,17.099z"/><path d="M7,12H3c-0.553,0-1,0.448-1,1v14c0,0.552,0.447,1,1,1h4c0.553,0,1-0.448,1-1V13C8,12.448,7.553,12,7,12z   M5,25.5c-0.828,0-1.5-0.672-1.5-1.5c0-0.828,0.672-1.5,1.5-1.5c0.828,0,1.5,0.672,1.5,1.5C6.5,24.828,5.828,25.5,5,25.5z" /></svg>
                       <span className={s.quantity__likes}>{data.likes}</span>
                     </div>
                   </button>
-                  <button className={s.btn__dislike}>
-                    <svg viewBox="0 0 512 512" fill="white" width="24px" height="24px">
-                      <g>
-                        <path d="M242.28,427.39a43.85,43.85,0,0,1-13.1-2c-18.22-5.69-29.87-21.64-29.69-40.62.16-17.35-3.15-32.5-9.83-45-8.19-15.33-21.83-27.13-40.55-35.08A15,15,0,1,1,160.83,277c45.4,19.26,69.14,56.6,68.65,108a12.28,12.28,0,0,0,22.33,7c28.34-41.71,3.47-87.63,3.22-88.09a15,15,0,0,1,13.12-22.27H409.79a14.22,14.22,0,0,0,0-28.43H389.34a15,15,0,1,1,0-30,14.2,14.2,0,0,0,14.21-14.21,14.23,14.23,0,0,0-14.21-14.21H368.9a15,15,0,0,1,0-30,14.21,14.21,0,1,0,0-28.42H348.45a15,15,0,0,1,0-30,14.21,14.21,0,1,0,0-28.42H261.8a111.69,111.69,0,0,0-39.07,7l-67.5,25.07A15,15,0,0,1,144.78,82l67.5-25.07A141.5,141.5,0,0,1,261.8,48h86.65a44.25,44.25,0,0,1,40,63,44.27,44.27,0,0,1,20.45,58.43,44.27,44.27,0,0,1,20.44,58.42,44.21,44.21,0,0,1-19.59,83.84H290.11c6.77,23.11,11.23,60.85-13.48,97.22A41.21,41.21,0,0,1,242.28,427.39Z" />
-                        <path d="M155,305.85H69.13a15,15,0,0,1-15-15V85.21a15,15,0,0,1,15-15H155a15,15,0,0,1,15,15V290.85A15,15,0,0,1,155,305.85Zm-70.84-30H140V100.21H84.13Z" />
-                      </g>
-                    </svg>
+                  <button className={s.btn__dislike} onClick={()=>setDisLikeIsActive(!disLikeIsActive)}>
+                    <svg enable-background="new 0 0 32 32" version="1.1" viewBox="0 0 32 32" width='24px' height='24px' stroke='white'
+                         fill={disLikeIsActive? 'white': 'none'}><path d="M2.156,14.901l2.489-8.725C5.012,4.895,6.197,4,7.528,4h13.473C21.554,4,22,4.448,22,5v14  c0,0.215-0.068,0.425-0.197,0.597l-5.392,7.24C15.813,27.586,14.951,28,14.027,28c-1.669,0-3.026-1.357-3.026-3.026V20H5.999  c-1.265,0-2.427-0.579-3.188-1.589C2.047,17.399,1.809,16.12,2.156,14.901z"/><path d="M25.001,20h4C29.554,20,30,19.552,30,19V5c0-0.552-0.446-1-0.999-1h-4c-0.553,0-1,0.448-1,1v14  C24.001,19.552,24.448,20,25.001,20z M27.001,6.5c0.828,0,1.5,0.672,1.5,1.5c0,0.828-0.672,1.5-1.5,1.5c-0.828,0-1.5-0.672-1.5-1.5  C25.501,7.172,26.173,6.5,27.001,6.5z" /></svg>
                   </button>
                 </div>
               </div>
