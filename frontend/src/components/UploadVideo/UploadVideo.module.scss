@@ -6,52 +6,142 @@
     top: 0;
     bottom: 0;
     z-index: 110;
+    height: 100%;
+
+
+
 }
+
 
 .videoUpload {
     position: absolute;
     z-index: 100;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -60%);
-    
+    transform: translate(-50%, -50%);
+
+    border-radius: 12px;
+
     width: 100%;
-    max-width: 1000px;
-    max-height: 1000px;
-    background-color: rgb(49, 49, 49);
+    max-width: 960px;
+    max-height: 660px;
+    background-color: #282828;
+
+
 }
 
 .video {
+    position: relative;
+
+    &__title{
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+
+        margin-right: 16px;
+    }
 
     &__header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 20px 20px;
+        padding: 16px 24px;
         font-size: 22px;
-        border-bottom: 1px solid gray;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
     }
 
     &__close {
         svg {
-            width: 30px;
-            height: 30px;
+            width: 24px;
+            height: 24px;
             cursor: pointer;
+            fill: rgba(255,255,255,0.6);
+            &:hover{
+                fill: rgba(255,255,255,1)
+            }
+
         }
     }
 
     &__main {
+        padding: 130px 0;
+
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 150px 0;
+        //padding: 100px 0 0 0;
+
+
+    }
+
+    &__text{
+        font-weight: 400;
+
+        font-size: 15px;
+        line-height: 24px;
+        margin-top: 43px;
     }
 
     &__footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
         padding: 20px 50px;
+        font-weight: 400;
+
+        letter-spacing: 0.011em;
+        font-size: 12px;
+
+        color: #aaa;
+
+        line-height: 16px;
+
+    }
+}
+.block__input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    svg{
+        transform: rotate(180deg);
+        width:136px;
+        height:136px;
+        padding: 25px;
+        background-color: rgba(0,0,0,0.3);
+        border-radius: 50%;
+        fill: rgba(255,255,255,0.6);
+        cursor: pointer;
+    }
+
+
+}
+
+.input__file{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.btn__input{
+    cursor: pointer;
+    font-weight: 500;
+    text-transform: uppercase ;
+    overflow: hidden;
+    display: block;
+    padding: 8px 16px;
+    margin: 26px 0 36px 0;
+    color: rgba(0,0,0,0.8);
+    border-radius: 4px;
+    background-color: #3ea6ff;
+
+    &:hover{
+        background-color: rgba(62, 166, 255, 0.9);
     }
 }
