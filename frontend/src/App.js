@@ -1,4 +1,4 @@
-import { Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import { Main } from './Pages/Main/Main'
 import { Registration } from './Pages/Registration/Registration'
@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
 import doRequest from './components/doRequest/doRequest'
-import VideoPage from "./Pages/VideoPage/VideoPage";
+import VideoPage from './Pages/VideoPage/VideoPage'
 
 function App() {
   const dispatch = useDispatch()
@@ -24,11 +24,11 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsAuth(false))
+
     dispatch(setUserToken(localStorage.getItem('user')))
 
     if (userToken) {
       dispatch(setIsAuth(true))
-
     }
   }, [userToken])
 

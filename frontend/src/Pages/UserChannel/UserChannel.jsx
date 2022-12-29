@@ -31,7 +31,7 @@ const UserChannel = () => {
 
   useEffect(() => {
     setIsLoading(true)
-    const url = 'api/v1/channel/me/'
+    const url = '/api/v1/channel/me/'
 
     const getUserVideos = async () => {
       const response = await doRequest(url, userToken)

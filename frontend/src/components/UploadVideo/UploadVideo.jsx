@@ -26,9 +26,8 @@ const UploadVideo = () => {
 
     formData.append('file', file)
     formData.append('file', file.name)
-    // formData.append('image', null)
 
-    formData.append('title', 'Залил видео')
+    formData.append('title', file.name)
     formData.append('description', 'Описание отсутствует')
 
     const res = await fetch('api/v1/video/', {

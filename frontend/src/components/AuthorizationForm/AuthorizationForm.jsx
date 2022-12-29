@@ -16,6 +16,7 @@ export const AuthorizationForm = () => {
   const userToken = useSelector((state) => state.user.userToken)
   const userId = useSelector((state) => state.user.userId)
   const userEmail = useSelector((state) => state.user.userEmail)
+  // const userEmail = useSelector((state) => state.user.userEmail)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -42,30 +43,13 @@ export const AuthorizationForm = () => {
     }
 
     if (userToken) {
-      console.log('Auth ->', authToken)
-
       const getMyself = async () => {
         const response = await fetch('api/v1/auth/users/me/', {
           headers: authToken,
         })
+
         const result = await response.json()
-
-        console.log('dispatch ---> resul', result)
-        console.log('dispatch ---> ID', result.id)
-        console.log('dispatch ---> email', result.email)
-
-        const data = {
-          id: result.id,
-          email: result.email,
-          first_name: result.first_name,
-          lastName: result.last_name,
-        }
-
-        console.log('data usera ->', data)
-
-        dispatch(setUserData(data))
-
-        //window.location.href = '/'
+        dispatch(setUserData(result))
       }
       getMyself()
     }
@@ -81,15 +65,20 @@ export const AuthorizationForm = () => {
     fetch('auth/token/login/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json;charset=utf-8',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(userData),
     })
       .then((response) => response.json())
       .then((response) => {
-        localStorage.setItem('user', response.auth_token)
-        // onToken(response.auth_token)
-        dispatch(setUserToken(response.auth_token))
+        if (response.auth_token) {
+          localStorage.setItem('user', response.auth_token)
+          dispatch(setUserToken(response.auth_token))
+        }
+
+        if (response.detail) {
+          console.log('Govno back')
+        }
       })
   }
 
