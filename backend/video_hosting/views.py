@@ -11,6 +11,7 @@ from rest_framework import viewsets, mixins, status
 
 from users.permissions import IsAuthenticatedOrOwnerOrReadOnly, IsAdminOrReadOnly
 from .permissions import *
+from mailing.models import ChannelMailingList
 
 User = get_user_model()
 
@@ -87,9 +88,11 @@ class VideoViewSet(viewsets.ModelViewSet):
         self.get_object = self.get_instance(pk)
         like = Likes.objects.filter(video=pk, user=request.user).exists()
         subscribe = Subscribers.objects.filter(user=request.user, channel=self.get_object.channel).exists()
+        mail = ChannelMailingList.objects.filter(user=request.user, channel=self.get_object.channel).exists()
         if request.method == "GET":
             return Response({'like': like,
-                             'subscribe': subscribe})
+                             'subscribe': subscribe,
+                             'mail': mail})
         elif request.method == "POST":
             if not like:
                 self.get_object.likes.add(request.user)
