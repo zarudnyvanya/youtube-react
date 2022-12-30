@@ -136,7 +136,7 @@ export const CardVideo = ({
             <img
               src={videoOwner.logo ? videoOwner.logo : userLogo}
               alt="profile"
-              style={{ width: '42px', height: '42px' }}
+              // style={{ width: '42px', height: '42px' }}
             />
           </a>
         </div>
