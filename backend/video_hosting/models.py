@@ -1,5 +1,6 @@
 from PIL import Image
 from django.contrib.auth import get_user_model
+from django.core.files import File
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -7,6 +8,8 @@ from django.dispatch import receiver
 
 from config.services import crop_center, crop_center_v2
 from users.models import CustomUser
+
+from moviepy.editor import VideoFileClip
 
 User = get_user_model()
 
@@ -27,11 +30,12 @@ class Category(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=130, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    image = models.ImageField(upload_to='image/%Y/%m/%d/', null=True, blank=True, verbose_name="Постер")
+    image = models.ImageField(upload_to='image/%Y/%m/%d/',null=True, blank=True, verbose_name="Постер")
     file = models.FileField(
         upload_to='video/%Y/%m/%d/',
         validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])], verbose_name="Файл"
     )
+    duration = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     channel = models.ForeignKey("Channel", on_delete=models.CASCADE, verbose_name="Канал")
     category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории")
@@ -49,6 +53,11 @@ class Video(models.Model):
 
     def save(self, *args, **kwargs):
         super(Video, self).save(*args, **kwargs)
+        video = VideoFileClip(self.file.path)
+        if not self.duration:
+            self.duration = video.duration
+            self.save()
+
         if self.image:
             image = Image.open(self.image.path)
             if image.mode in ("RGBA", "P"):

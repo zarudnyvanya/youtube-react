@@ -72,7 +72,7 @@ MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'config.middleware.BadRequest'
+    #'config.middleware.BadRequest'
 ]
 from django.contrib.messages.middleware import MessageMiddleware
 

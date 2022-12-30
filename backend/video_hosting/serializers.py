@@ -40,6 +40,7 @@ class ChannelSerializer(serializers.ModelSerializer):
 class VideoSerializer(serializers.ModelSerializer):
     file = serializers.FileField(
         validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])])
+    duration = serializers.CharField(max_length=100, read_only=True)
     channel = serializers.HiddenField(default=CurrentChannelDefault())
     owner = ChannelSerializer(many=False, source='channel', read_only=True)
     category = CategoryVideoSerializer(required=False, many=True, queryset=Category.objects.all())
@@ -61,7 +62,7 @@ class VideoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Video
-        fields = ['id', 'title', 'description', 'image', 'file', 'created_at', 'channel', 'owner', 'category',
+        fields = ['id', 'title', 'description', 'image', 'file', 'duration', 'created_at', 'channel', 'owner', 'category',
                   'views', 'likes']
 
 
