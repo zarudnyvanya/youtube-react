@@ -117,7 +117,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
         if self.action == 'list':
             return optimize_channel_query(Channel.objects.all())
         else:
-            return optimize_channel_query(Channel.objects.all())
+            return Channel.objects.all()
 
     def get_serializer_class(self):
         if self.action == 'subscribe':
