@@ -71,16 +71,19 @@
 
 .btn__subscribe {
 
-  outline: none;
-  border: none;
+    outline: none;
+    border: none;
   color: white;
-  padding: 8px 16px;
+  //padding: 8px 16px;
+  height: 100%;
+  width: 100%;
   border-radius: 18px;
-  font-size: 14px;
-  margin-right: 14px;
-  &:hover {
-    background-color: rgba(0,0,0,0.2);
-  }
+  background-color: transparent;
+  //font-size: 14px;
+  //margin-right: 14px;
+  //&:hover {
+  //  background-color: rgba(0,0,0,0.2);
+  //}
 }
 
 .btn__like {
@@ -113,6 +116,7 @@
   &:hover {
     background-color: #565555;
   }
+
 
 }
 
@@ -197,5 +201,33 @@
 
 
 .quantity__likes{
+  margin-left: 10px;
+}
+.wrapper__bell__following{
+  //border: 1px solid gray;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  outline: none;
+
+  color: white;
+  padding:  0 12px;
+  height: 100%;
+  font-size: 14px;
+  margin-right: 14px;
+  &:hover {
+    background-color: rgba(0,0,0,0.2);
+  }
+
+}
+.bell_notification{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
   margin-left: 10px;
 }
