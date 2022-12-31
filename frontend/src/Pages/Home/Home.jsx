@@ -27,6 +27,7 @@ export const Home = ({ videos, searchValue }) => {
                     videoImage={video.image}
                     videoOwner={video.owner}
                     videoDate={video.created_at}
+                    videoDuration={video.duration}
                   />
                 )
               })
