@@ -20,7 +20,7 @@
     position: absolute;
     background-color: rgba(#000000, 0.7);
     font-weight: 400;
-    font-size: calc(5px + 0.6vw);
+    font-size: calc(5px + 0.4vw);
 
     border-radius: 5px;
     //line-height: 12px;
@@ -30,12 +30,14 @@
     bottom: 10px;
 
 
+
   }
 
 
   &__poster {
     width: 100%;
     border-radius: 15px;
+
 
 
   }
@@ -94,38 +96,3 @@
 
 }
 
-// .video__block__skeleton{
-//     display: grid;
-//     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-//     justify-content: center;
-//     justify-items: center;
-// }
-
-// .video__item__skeleton{
-//     margin: 0 0 0 60px;
-// }
-
-
-//@media (max-width: 1840px) {
-//    .video__item {
-//        width: 30%;
-//    }
-//}
-//
-//@media (max-width: 1440px) {
-//    .video__item {
-//        width: 40%;
-//    }
-//}
-
-@media (max-width: 1120px) {
-  .video__item {
-    width: 100%;
-  }
-}
-
-// @media (max-width: 1080px) {
-//     .video__item {
-//         width: 100%;
-//     }
-// }
