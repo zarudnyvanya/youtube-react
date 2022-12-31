@@ -59,6 +59,7 @@ const VideoPage = () => {
             const status = await response.json()
             setIsLike(status.like)
             setIsSubscribe(status.subscribe)
+            setBellIsActive(status.mail)
 
         }
         if (userToken) {
@@ -66,18 +67,6 @@ const VideoPage = () => {
         }
     }, [userToken]);
 
-    useEffect(() => {
-        const getBell = async () => {
-            const response = await doRequest(`/api/v1/channel/${videoId}/mail/`, userToken)
-            const bellData = await response.json()
-            setBellIsActive(bellData.status)
-
-
-        }
-        if (userToken) {
-            getBell()
-        }
-    }, [userToken]);
 
     console.log(bellIsActive)
     const handlerLike = () => {
@@ -107,10 +96,10 @@ const VideoPage = () => {
     const handlerBell = () => {
         if (bellIsActive) {
             setBellIsActive(false)
-            doRequest(`/api/v1/channel/${videoId}/mail/`, userToken, 'DELETE')
+            doRequest(`/api/v1/channel/${data.owner.pk}/mail/`, userToken, 'DELETE')
         } else {
             setBellIsActive(true)
-            doRequest(`/api/v1/channel/${videoId}/mail/`, userToken, 'POST')
+            doRequest(`/api/v1/channel/${data.owner.pk}/mail/`, userToken, 'POST')
         }
 
     }
