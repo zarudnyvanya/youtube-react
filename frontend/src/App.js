@@ -28,6 +28,19 @@ function App() {
     dispatch(setUserToken(localStorage.getItem('user')))
 
     if (userToken) {
+      const authToken = {
+        Authorization: `token ${userToken}`,
+      }
+      const getMyself = async () => {
+        const response = await fetch('api/v1/auth/users/me/', {
+          headers: authToken,
+        })
+
+        const result = await response.json()
+        dispatch(setUserData(result))
+      }
+      getMyself()
+
       dispatch(setIsAuth(true))
     }
   }, [userToken])
