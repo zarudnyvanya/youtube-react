@@ -15,6 +15,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: all 0.2s;
     // padding-right: 40px;
     &:last-child{
         padding-bottom: 10px;
@@ -48,6 +49,7 @@
 .nav__list{
     padding: 0;
     margin: 0;
+
 }
 .nav__icons{
     // display: inline-block;
