@@ -5,21 +5,22 @@ import {useParams} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import doRequest from '../../components/doRequest/doRequest'
 import axios from 'axios'
-
-const reDate = (date) => {
-    let fullDate = new Date(date)
-    let month = fullDate.getMonth() + 1
-    let day = fullDate.getDate()
-    let year = fullDate.getFullYear()
-    if (month < 10) {
-        month = '0' + month
-    }
-    if (day < 10) {
-        day = '0' + day
-    }
-
-    return `${day}.${month}.${year}`
-}
+import {showViews, reDate} from "../../utils/api";
+import OtherVideos from "../../components/OtherVideos/OtherVideos";
+// const reDate = (date) => {
+//     let fullDate = new Date(date)
+//     let month = fullDate.getMonth() + 1
+//     let day = fullDate.getDate()
+//     let year = fullDate.getFullYear()
+//     if (month < 10) {
+//         month = '0' + month
+//     }
+//     if (day < 10) {
+//         day = '0' + day
+//     }
+//
+//     return `${day}.${month}.${year}`
+// }
 
 const VideoPage = () => {
     const {videoId} = useParams()
@@ -41,7 +42,7 @@ const VideoPage = () => {
     useEffect(() => {
         setIsLoading(false)
         const getVideo = async () => {
-            console.log('zapros')
+
             const response = await fetch(`/api/v1/video/${videoId}/`)
             const data = await response.json()
             setData(data)
@@ -68,7 +69,6 @@ const VideoPage = () => {
     }, [userToken]);
 
 
-    console.log(bellIsActive)
     const handlerLike = () => {
 
         if (isLike) {
@@ -112,10 +112,12 @@ const VideoPage = () => {
                 <div className={s.block__video_wrapper}>
                     <video
                         className={s.block__video_player}
-                        src={`/stream/${videoId}/`}
-                        poster="assets/poster_for_video/poster_inst.png"
                         autoPlay={false}
-                        controls></video>
+                        controls>
+                        <source src={`/stream/${videoId}/`} type="video/mp4"/>
+                            <source src={`/stream/${videoId}/`} type="video/webm"/>
+                            <source src={`/stream/${videoId}/`} type="video/mkv"/>
+                    </video>
 
                     <div className={s.block__video_info}>
                         <div className={s.block__info_container}>
@@ -123,7 +125,7 @@ const VideoPage = () => {
                             <div className={s.userChanel_info}>
                                 <div className={s.wrapper__logo_name}>
                                     {data.owner.logo ? (
-                                        data.owner.logo
+                                        <img src={data.owner.logo} />
                                     ) : (
                                         <svg
                                             enableBackground="new 0 0 50 50"
@@ -154,7 +156,8 @@ const VideoPage = () => {
                                     )}
                                     <div className={s.name__chanel_subscribe}>
                                         <h2 className={s.name__chanel_subscribe_title}>{data && data.owner.name}</h2>
-                                        <p className={s.quantity__subscribe}>{data && data.owner.subscribers}</p>
+                                        <p className={s.quantity__subscribe}>
+                                            {data && showViews(data.owner.subscribers,['подпиcчик','подпиcчика','подпиcчиков'])}</p>
                                     </div>
                                 </div>
 
@@ -172,8 +175,8 @@ const VideoPage = () => {
                                         {isSubscribe ?
                                             <button className={s.bell_notification} onClick={() => handlerBell()}>
                                                 <svg viewBox="0 0 32 32" width='24px' height='24px'
-                                                    fill={bellIsActive ? 'white' : 'none'}
-                                                    stroke={bellIsActive ? 'none' : 'white'}>
+                                                     fill={bellIsActive ? 'white' : 'none'}
+                                                     stroke={bellIsActive ? 'none' : 'white'}>
                                                     <g id="Bell">
                                                         <path
                                                             d="M16,8a3,3,0,1,1,3-3A3,3,0,0,1,16,8Zm0-4a1,1,0,1,0,1,1A1,1,0,0,0,16,4Z"/>
@@ -216,45 +219,16 @@ const VideoPage = () => {
 
                             <div className={s.block__description}>
                                 <div className={s.block__description_header}>
-                                    <p className={s.views}>{data.views}</p>
+                                    <p className={s.views}>{showViews(data.views)}</p>
                                     <p className={s.realise__date}>{reDate(data.created_at)}</p>
                                 </div>
 
                                 <div className={s.video__description}>
                                     {data.description}
-                                    <br/>я хороший классный дружелюбный frontend разработчик начинающий
                                 </div>
                             </div>
                         </div>
-                        <div className={s.block__other_video}>
-                            <ul className={s.other__video_list}>
-                                <li className={s.other__video_item}>
-                                    <video
-                                        className={s.other__video}
-                                        src="assets/mixkit-small-mountain-covered-with-vegetation-and-mist-44262.mp4"
-                                        poster="assets/poster_for_video/poster_inst.png"
-                                        controls></video>
-                                    <div className={s.wrapper__chanel_other}>
-                                        <p className={s.chanel__title_other}>youtube_clone</p>
-                                        <h1 className={s.chanel__name_other}>ladic</h1>
-                                        <p className={s.chanel__description_other}>32тыс 6 месяцев назад</p>
-                                    </div>
-                                </li>
-
-                                <li className={s.other__video_item}>
-                                    <video
-                                        className={s.other__video}
-                                        src="assets/mixkit-small-mountain-covered-with-vegetation-and-mist-44262.mp4"
-                                        poster="assets/poster_for_video/poster_inst.png"
-                                        controls></video>
-                                    <div className={s.wrapper__chanel_other}>
-                                        <p className={s.chanel__title_other}>youtube_clone</p>
-                                        <h1 className={s.chanel__name_other}>ladic</h1>
-                                        <p className={s.chanel__description_other}>32тыс 6 месяцев назад</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                        <OtherVideos />
                     </div>
                 </div>
             )}

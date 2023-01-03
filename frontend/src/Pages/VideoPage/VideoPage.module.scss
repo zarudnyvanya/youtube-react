@@ -1,15 +1,19 @@
 
 .block__video_wrapper {
-  //height: 100vh;
+  height: 100vh;
   width: 100%;
   display: block;
+
 }
 
 .block__video_player {
   width: 100%;
   height: 75vh;
   background-color: black;
-  padding: 20px;
+  //padding: 20px;
+  &:focus{
+    outline: none;
+  }
 }
 
 
@@ -42,7 +46,7 @@
 }
 .quantity__subscribe{
   font-size: 12px;
-  color: #f1f1f1;
+  color: #aaa;
 }
 
 .userChanel_info {
@@ -148,11 +152,17 @@
   margin-right: 16px;
   font-size: 14px;
   color: #ffffff;
+  word-spacing: -3px;
 }
 
 .realise__date{
   font-size: 14px;
   color: #ffffff;
+  word-spacing: -3px;
+}
+
+.quantity__subscribe{
+  word-spacing: -3px;
 }
 
 .video__description{
@@ -160,44 +170,7 @@
   color: #ffffff;
 }
 
-.block__other_video{
-  margin-top: 24px;
-  width: 25%;
-}
 
-.other__video {
-  width: 168px;
-  height: 94px;
-}
-
-.other__video_item{
-  display: flex;
-  margin-bottom: 6px;
-  video{
-    border-radius: 15px;
-    margin-right: 10px;
-  }
-}
-.other__video_list{
-  display: flex;
-  flex-direction: column;
-}
-.chanel__title_other{
-  font-size: 14px;
-  line-height: 2rem;
-  font-weight: 500;
-  overflow: hidden;
-}
-
-.chanel__name_other{
-  font-size: 12px;
-  color: #aaa;
-  margin: 0;
-}
-.chanel__description_other{
-  font-size: 12px;
-  color: #aaa;
-}
 
 
 .quantity__likes{

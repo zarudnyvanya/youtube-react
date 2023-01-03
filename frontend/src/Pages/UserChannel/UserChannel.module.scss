@@ -9,7 +9,7 @@
 
 
 .user__chanel{
-    padding: 16px calc((100% - 1100px)/2) 4px calc((100% - 1100px)/2);
+    //padding: 16px calc((100% - 1100px)/2) 4px calc((100% - 1100px)/2);
 }
 .container {
   width: 100%;
@@ -18,7 +18,8 @@
   
   
   .header__chanel{
-    padding: 0 0 4px 0;
+    padding: 16px calc((100% - 1000px)/2) 4px calc((100% - 1000px)/2);
+    //padding: 0 0 4px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,6 +28,9 @@
   
     & .header__leftpart__chanel{
       display: flex;
+      svg{
+        margin-right: 24px;
+      }
 
       & .logo__chanel{
         width: 80px;
@@ -51,6 +55,7 @@
       & p {
         font-size: 14px;
         color: #AAAAAA;
+        word-spacing: -3px;
       }
   
     }
@@ -72,7 +77,8 @@
   
   .select__options__chanel{
     width: 100%;
-    padding: 14px 0;
+    //padding: 14px 0;
+    padding: 16px calc((100% - 1100px)/2) 14px calc((100% - 1100px)/2);
   
     & .options__chanel{
       display: flex;
@@ -114,10 +120,11 @@
 
 .content__chanel{
   padding: 20px;
+
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill,343px);
 
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   gap: 15px;
 
 }
