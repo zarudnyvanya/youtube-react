@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import doRequest from "../../doRequest/doRequest";
 import {setUserChannel, setUserVideos} from "../../../redux/slices/userDataSlice";
-
+import {reCurrentDate,reGender} from "../../../utils/api";
 
 const UserInfoItem = ({isOpen, setIsOpen}) => {
     const dispatch = useDispatch()
@@ -38,30 +38,8 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
     //   } catch {}
     // }, [userChannel, userToken])
 
-    const reDate = (date) => {
-        let fullDate = new Date(date)
-        let month = fullDate.getMonth()
-        let day = fullDate.getDate()
-        let year = fullDate.getFullYear()
-        if (month < 10) {
-            month = '0' + month
-        }
-        if (day < 10) {
-            day = '0' + day
-        }
 
-        return `${day}.${month}.${year}`
 
-    }
-
-    const reGender = (gender) => {
-        if (gender === 'm') {
-            return 'Мужской'
-        }
-        if (gender === 'w') {
-            return 'Женский'
-        }
-    }
     const fieldsSettings = [
         {
             title: 'Имя',
@@ -69,7 +47,7 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
         },
         {
             title: 'Дата рождения',
-            description: reDate(userData.birth_date)
+            description: reCurrentDate(userData.birth_date)
         },
         {
             title: 'Пол',
