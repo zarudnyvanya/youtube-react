@@ -36,7 +36,7 @@
 
   &__poster {
     width: 100%;
-    border-radius: 15px;
+    border-radius: 10px;
 
 
 
@@ -45,8 +45,8 @@
 
 .video__info {
   display: flex;
-  padding-top: calc(1px + 0.1vh);
-  padding-right: calc(1px + 0.1vw);
+  padding-top: calc(1px + 0.6vh);
+  //padding-right: calc(1px + 0.4vw);
 }
 
 .description {
@@ -58,7 +58,7 @@
 
     height: 100%;
 
-    font-size: calc(1px + 0.6vh + 0.6vw);
+    font-size: calc(1px + 0.4vh + 0.6vw);
     //line-height: calc(20px + 0.8vh);
     font-weight: 400;
     color: #f1f1f1;
@@ -86,12 +86,19 @@
 }
 
 .channel {
-  margin-right: calc(12px + 0.5vw);
+  margin-right: calc(8px + 0.5vw);
+  margin-left: calc(4px + 0.5vw);
 
   img {
     object-fit: cover;
     width: calc(4px + 2vw + 2vh);
     height: calc(4px + 2vh + 2vw);
+  }
+
+  svg{
+
+    width: calc(4px + 2.5vw);
+    height: calc(4px + 2.5vw);
   }
 
 }

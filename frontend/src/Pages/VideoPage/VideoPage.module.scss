@@ -11,7 +11,7 @@
   height: 75vh;
   background-color: black;
   //padding: 20px;
-  &:focus{
+  &:focus {
     outline: none;
   }
 }
@@ -31,7 +31,6 @@
 }
 
 
-
 .title__for_video {
   font-size: 20px;
   line-height: 2.8rem;
@@ -39,12 +38,14 @@
   color: #f1f1f1;
   margin: 0;
 }
-.name__chanel_subscribe_title{
+
+.name__chanel_subscribe_title {
   font-size: 16px;
   font-weight: 500;
   margin-bottom: 4px;
 }
-.quantity__subscribe{
+
+.quantity__subscribe {
   font-size: 12px;
   color: #aaa;
 }
@@ -56,12 +57,12 @@
 
 }
 
-.wrapper__logo_name{
+.wrapper__logo_name {
   display: flex;
   align-items: center;
 }
 
-.channel__sub{
+.channel__sub {
   display: flex;
   align-items: center;
   height: 32px;
@@ -75,8 +76,8 @@
 
 .btn__subscribe {
 
-    outline: none;
-    border: none;
+  outline: none;
+  border: none;
   color: white;
   //padding: 8px 16px;
   height: 100%;
@@ -101,6 +102,7 @@
   border: 1px solid gray;
   border-radius: 18px 0 0 18px;
   padding: 3px 16px 3px 12px;
+
   &:hover {
     background-color: #565555;
   }
@@ -117,6 +119,7 @@
   border: 1px solid gray;
   border-radius: 0 18px 18px 0;
   border-left: none;
+
   &:hover {
     background-color: #565555;
   }
@@ -125,16 +128,14 @@
 }
 
 
-
-.wrapper__like_quantity{
+.wrapper__like_quantity {
   display: flex;
   align-items: center;
   color: #ffffff;
 }
 
 
-
-.block__description{
+.block__description {
   width: 100%;
   border-radius: 12px;
   background-color: rgba(255, 255, 255, 0.1);
@@ -142,41 +143,41 @@
   margin-top: 12px;
 }
 
-.block__description_header{
+.block__description_header {
   display: flex;
   align-items: center;
   margin-bottom: 16px;
 
 }
-.views{
+
+.views {
   margin-right: 16px;
   font-size: 14px;
   color: #ffffff;
   word-spacing: -3px;
 }
 
-.realise__date{
+.realise__date {
   font-size: 14px;
   color: #ffffff;
   word-spacing: -3px;
 }
 
-.quantity__subscribe{
+.quantity__subscribe {
   word-spacing: -3px;
 }
 
-.video__description{
+.video__description {
   font-size: 14px;
   color: #ffffff;
 }
 
 
-
-
-.quantity__likes{
+.quantity__likes {
   margin-left: 10px;
 }
-.wrapper__bell__following{
+
+.wrapper__bell__following {
   //border: 1px solid gray;
   border-radius: 18px;
   display: flex;
@@ -185,16 +186,18 @@
   outline: none;
 
   color: white;
-  padding:  0 12px;
+  padding: 0 12px;
   height: 100%;
   font-size: 14px;
   margin-right: 14px;
+
   &:hover {
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
   }
 
 }
-.bell_notification{
+
+.bell_notification {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -203,4 +206,17 @@
   border: none;
   padding: 0;
   margin-left: 10px;
+}
+
+
+@media (max-width: 1020px) {
+
+
+  .block__video_info {
+    flex-direction: column;
+  }
+  .block__info_container {
+    width: 100%;
+  }
+
 }

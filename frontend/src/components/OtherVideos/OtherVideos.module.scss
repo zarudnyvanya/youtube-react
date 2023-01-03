@@ -87,3 +87,16 @@
   color: #aaa;
   word-spacing: -3px;
 }
+
+
+@media(max-width: 1020px) {
+
+  .block__other_video{
+    width: 100%;
+  }
+
+  .other__video_list{
+    max-height: 100%;
+    overflow: hidden;
+  }
+}
