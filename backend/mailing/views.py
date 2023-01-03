@@ -4,8 +4,9 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 
 from mailing.models import ChannelMailingList
-from video_hosting.models import Channel
+from video_hosting.models import Channel, Subscribers
 
+from rest_framework.exceptions import ParseError
 
 # Create your views here.
 class MailViewSet(viewsets.ViewSet):
@@ -18,8 +19,11 @@ class MailViewSet(viewsets.ViewSet):
 		if request.method == "GET":
 			return Response({"status": stat})
 		elif request.method == "POST":
-			if not stat:
+			is_subscribe = Subscribers.objects.filter(user=request.user, channel=pk).exists()
+			if not stat and is_subscribe:
 				ChannelMailingList.objects.create(user=request.user, channel=get_object_or_404(Channel, pk=pk))
+			else:
+				return Response({'detail': "user is not subscribed"}, status=status.HTTP_403_FORBIDDEN )
 		elif request.method == "DELETE":
 			if stat:
 				obj[0].delete()
