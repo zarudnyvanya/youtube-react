@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { setVideoUpload, setIsUploaded } from './../../redux/slices/videoUploadSlice'
+
+import { setIsOpen, setVideoUpload, setVideoFile } from './../../redux/slices/videoUploadSlice'
 
 import s from './UploadVideo.module.scss'
 import { useEffect } from 'react'
@@ -7,48 +8,57 @@ import { useState } from 'react'
 
 const UploadVideo = () => {
   const dispatch = useDispatch()
-  const userToken = useSelector((state) => state.user.userToken)
-  const isOpenVideoUpload = useSelector((state) => state.videoUpload.isOpenVideoUpload)
+  const isOpen = useSelector((state) => state.videoUpload.isOpen)
+  const videoFile = useSelector((state) => state.videoUpload.videoFile)
   const isUploaded = useSelector((state) => state.videoUpload.isUploaded)
 
-  const [videoFile, setVideoFile] = useState(null)
+  const userToken = useSelector((state) => state.user.userToken)
 
-  const closeVideoUpload = () => {
-    dispatch(setVideoUpload(!isOpenVideoUpload))
-  }
+  const [videoName, setVideoName] = useState('')
+  const [dataForm, setDataForm] = useState()
 
-  const handleChangeFile = async (event) => {
-    const file = event.target.files[0]
-    dispatch(setIsUploaded(true))
-    console.log(file)
-
+  useEffect(() => {
     const formData = new FormData()
 
-    formData.append('file', file)
-    formData.append('file', file.name)
+    if (videoFile) {
+      formData.append('file', videoFile)
+      formData.append('title', videoFile.name)
+      formData.append('description', 'Описание отсутствует')
 
-    formData.append('title', file.name)
-    formData.append('description', 'Описание отсутствует')
+      setDataForm(formData)
+      setVideoName(videoFile.name)
+      dispatch(setVideoUpload(true))
+    }
+  }, [videoFile])
+
+  const closeVideoUpload = () => {
+    dispatch(setIsOpen(!isOpen))
+  }
+
+  const onVideoName = (event) => {
+    setVideoName(event.target.value)
+  }
+
+  const onSendVideo = async (event) => {
+    event.preventDefault()
 
     const res = await fetch('api/v1/video/', {
       method: 'POST',
       headers: {
         Authorization: `token ${userToken}`,
       },
-      body: formData,
+      body: dataForm,
     })
 
-    // const data = await res.json()
+    const data = await res.json()
 
-    // console.log(data)
+    console.log(data)
   }
 
-  // useEffect(() => {
-  //   // if (isUploaded) {
-  //   //   const formData = new FormData()
-  //   //   formData.append('video', )
-  //   // }
-  // }, [isUploaded])
+  const handleChangeFile = async (event) => {
+    const file = event.target.files[0]
+    dispatch(setVideoFile(file))
+  }
 
   return (
     <div className={s.overlay}>
@@ -80,6 +90,16 @@ const UploadVideo = () => {
             />
             <span className={s.btn__input}>Выбрать файлы</span>
           </label>
+
+          {isUploaded && (
+            <>
+              <div>
+                <label htmlFor="">Название видео:</label>
+                <input type="text" value={videoName} onChange={(event) => onVideoName(event)} />
+              </div>
+              <button onClick={onSendVideo}>onSendVideo</button>
+            </>
+          )}
         </div>
 
         <div className={s.video__footer}>
