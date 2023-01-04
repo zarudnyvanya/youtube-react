@@ -40,8 +40,13 @@
 		margin-right: 16px;
 	}
 
+	&:hover {
+		background: #303030;
+		border-radius: 40px;
+	}
+
 	&:active {
-		background: #181818;
+		background: #3f3e3e;
 		border-radius: 40px;
 	}
 }
