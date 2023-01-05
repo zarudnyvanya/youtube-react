@@ -6,6 +6,7 @@ import {useEffect, useState} from 'react'
 import doRequest from '../../components/doRequest/doRequest'
 import {reDate, showViews} from "../../utils/api";
 import OtherVideos from "../../components/OtherVideos/OtherVideos";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 // const reDate = (date) => {
 //     let fullDate = new Date(date)
 //     let month = fullDate.getMonth() + 1
@@ -50,7 +51,7 @@ const VideoPage = () => {
 		}
 		
 		getVideo()
-	}, [])
+	}, [videoId])
 	
 	useEffect(() => {
 		
@@ -109,14 +110,16 @@ const VideoPage = () => {
 			<Header/>
 			{isLoading && (
 				<div className={s.block__video_wrapper}>
-					<video
-						className={s.block__video_player}
-						autoPlay={false}
-						controls>
-						<source src={`/stream/${videoId}/`} type="video/mp4"/>
-						<source src={`/stream/${videoId}/`} type="video/webm"/>
-						<source src={`/stream/${videoId}/`} type="video/mkv"/>
-					</video>
+					<VideoPlayer videoId={videoId}/>
+					
+					{/*<video*/}
+					{/*	className={s.block__video_player}*/}
+					{/*	autoPlay={false}*/}
+					{/*	controls>*/}
+					{/*	<source src={`/stream/${videoId}/`} type="video/mp4"/>*/}
+					{/*	<source src={`/stream/${videoId}/`} type="video/webm"/>*/}
+					{/*	<source src={`/stream/${videoId}/`} type="video/mkv"/>*/}
+					{/*</video>*/}
 					
 					<div className={s.block__video_info}>
 						<div className={s.block__info_container}>
@@ -232,6 +235,8 @@ const VideoPage = () => {
 					</div>
 				</div>
 			)}
+		
+		
 		</>
 	)
 }
