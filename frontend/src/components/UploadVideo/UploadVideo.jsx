@@ -15,9 +15,12 @@ const UploadVideo = () => {
   const userToken = useSelector((state) => state.user.userToken)
 
   const [videoName, setVideoName] = useState('')
+  const [videoDescription, setVideoDescription] = useState('')
+  const [buttonDisabled, setButtonDisabled] = useState(false)
+
   const [dataForm, setDataForm] = useState()
 
-    // useEffect(() => {
+  // useEffect(() => {
   //   const formData = new FormData()
   //
   //   if (videoFile) {
@@ -38,17 +41,19 @@ const UploadVideo = () => {
     setVideoName(event.target.value)
   }
 
+  const onVideoDescription = (event) => {
+    setVideoDescription(event.target.value)
+  }
+
   const onSendVideo = async (event) => {
     event.preventDefault()
+    setButtonDisabled(true)
 
     const formData = new FormData()
 
-
     formData.append('file', videoFile)
     formData.append('title', videoName)
-    formData.append('description', 'Описание отсутствует')
-
-
+    formData.append('description', videoDescription || 'Без описания')
 
     const res = await fetch('/api/v1/video/', {
       method: 'POST',
@@ -60,15 +65,17 @@ const UploadVideo = () => {
 
     const data = await res.json()
 
+    window.location.href = '/'
+
     console.log(data)
   }
 
   const handleChangeFile = async (event) => {
     const file = event.target.files[0]
     setVideoName(file.name)
+
     dispatch(setVideoFile(file))
     dispatch(setVideoUpload(true))
-
   }
 
   return (
@@ -108,7 +115,17 @@ const UploadVideo = () => {
                 <label htmlFor="">Название видео:</label>
                 <input type="text" value={videoName} onChange={(event) => onVideoName(event)} />
               </div>
-              <button onClick={onSendVideo}>onSendVideo</button>
+              <div>
+                <label htmlFor="">Описание видео:</label>
+                <input
+                  type="text"
+                  value={videoDescription}
+                  onChange={(event) => onVideoDescription(event)}
+                />
+              </div>
+              <button onClick={onSendVideo} disabled={buttonDisabled}>
+                onSendVideo
+              </button>
             </>
           )}
         </div>
