@@ -1,6 +1,7 @@
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.db.models.signals import post_save
@@ -53,10 +54,23 @@ class Video(models.Model):
 
     def save(self, *args, **kwargs):
         super(Video, self).save(*args, **kwargs)
+
         video = VideoFileClip(self.file.path)
+
         if not self.duration:
             self.duration = video.duration
-            self.save()
+            #self.save()
+
+        if not self.image:
+            temp = NamedTemporaryFile()
+            video.save_frame(temp, 0)
+            temp.flush()
+            self.image.save(self.title + '.jpg', File(temp))
+            #self.save()
+            temp.close()
+
+
+
 
         if self.image:
             image = Image.open(self.image.path)
