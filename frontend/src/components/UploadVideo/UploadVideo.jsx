@@ -17,19 +17,18 @@ const UploadVideo = () => {
   const [videoName, setVideoName] = useState('')
   const [dataForm, setDataForm] = useState()
 
-  useEffect(() => {
-    const formData = new FormData()
-
-    if (videoFile) {
-      formData.append('file', videoFile)
-      formData.append('title', videoFile.name)
-      formData.append('description', 'Описание отсутствует')
-
-      setDataForm(formData)
-      setVideoName(videoFile.name)
-      dispatch(setVideoUpload(true))
-    }
-  }, [videoFile])
+    // useEffect(() => {
+  //   const formData = new FormData()
+  //
+  //   if (videoFile) {
+  //     formData.append('file', videoFile)
+  //     formData.append('title', videoName)
+  //     formData.append('description', 'Описание отсутствует')
+  //
+  //     setDataForm(formData)
+  //     dispatch(setVideoUpload(true))
+  //   }
+  //  }, [videoFile])
 
   const closeVideoUpload = () => {
     dispatch(setIsOpen(!isOpen))
@@ -42,12 +41,21 @@ const UploadVideo = () => {
   const onSendVideo = async (event) => {
     event.preventDefault()
 
-    const res = await fetch('api/v1/video/', {
+    const formData = new FormData()
+
+
+    formData.append('file', videoFile)
+    formData.append('title', videoName)
+    formData.append('description', 'Описание отсутствует')
+
+
+
+    const res = await fetch('/api/v1/video/', {
       method: 'POST',
       headers: {
         Authorization: `token ${userToken}`,
       },
-      body: dataForm,
+      body: formData,
     })
 
     const data = await res.json()
@@ -57,7 +65,10 @@ const UploadVideo = () => {
 
   const handleChangeFile = async (event) => {
     const file = event.target.files[0]
+    setVideoName(file.name)
     dispatch(setVideoFile(file))
+    dispatch(setVideoUpload(true))
+
   }
 
   return (
