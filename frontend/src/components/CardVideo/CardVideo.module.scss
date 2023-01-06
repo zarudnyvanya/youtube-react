@@ -20,7 +20,7 @@
 		position: absolute;
 		background-color: rgba(#000000, 0.7);
 		font-weight: 400;
-		font-size: calc(5px + 0.4vw);
+		font-size: calc(10px + 0.1vw);
 
 		border-radius: 5px;
 		//line-height: 12px;
@@ -56,7 +56,7 @@
 
 		height: 100%;
 
-		font-size: calc(1px + 1vw);
+		font-size: calc(14px + 0.2vw);
 		//line-height: calc(20px + 0.8vh);
 		font-weight: 400;
 		color: #f1f1f1;
@@ -74,12 +74,12 @@
 	& span {
 		//font-size: 14px;
 		height: 100%;
-		font-size: calc(1px + 0.9vw);
+		font-size: calc(12px + 0.1vw);
 		//line-height: calc(15px + 0.7vh);
 		font-weight: 400;
 		color: #AAAAAA;
 		word-spacing: calc(-3px - 0.1vw);
-		
+
 
 	}
 }
@@ -90,15 +90,24 @@
 
 	img {
 		object-fit: cover;
-		width: calc(4px + 2.5vw);
-		height: calc(4px + 2.5vw);
+		width: calc(20px + 2vw);
+		height: calc(20px + 2vw);
 	}
 
 	svg {
 
-		width: calc(4px + 2.5vw);
-		height: calc(4px + 2.5vw);
+		width: calc(20px + 1.5vw);
+		height: calc(20px + 1.5vw);
 	}
 
+}
+
+@media(max-width: 769px) {
+	.channel {
+		display: flex;
+		align-items: center;
+		margin-right: 15px;
+		margin-left: 20px;
+	}
 }
 
