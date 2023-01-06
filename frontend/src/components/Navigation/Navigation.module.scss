@@ -1,72 +1,100 @@
-.aside__nav{
-    
-    z-index: 99;
+.aside__nav {
 
-    // min-width: 240px;
-    // flex-shrink: 0;
+	z-index: 99;
+
+	// min-width: 240px;
+	// flex-shrink: 0;
 }
 
 .hidden {
-    // display: none;
-    visibility: hidden;
+	// display: none;
+	visibility: hidden;
 }
 
-.nav__items{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: all 0.2s;
-    // padding-right: 40px;
-    &:last-child{
-        padding-bottom: 10px;
-        border-bottom: 1px solid #303030;
-    }
-     &:hover{
+.nav__items {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	transition: all 0.2s;
+	// padding-right: 40px;
+	&:last-child {
+		padding-bottom: 10px;
+		border-bottom: 1px solid #303030;
+	}
 
-       cursor: pointer;
-    }
+	&:hover {
+
+		cursor: pointer;
+	}
 }
 
-.nav__item{
-    display: flex;
-    align-items: center;
-    padding: 8px 24px;
-    // padding-left: 8px;
-    &:hover{
+.nav__item {
+	display: flex;
+	align-items: center;
+	padding: 8px 24px;
+	// padding-left: 8px;
+	&:hover {
 
-        background: #303030;
-    }
+		background: #303030;
+	}
 
 
 }
-.nav__links{
-    color: #FFFFFF;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 16px;
+
+.nav__links {
+	color: #FFFFFF;
+	font-weight: 400;
+	font-size: 14px;
+	line-height: 16px;
 }
 
-.nav__list{
-    padding: 0;
-    margin: 0;
+.nav__list {
+	padding: 0;
+	margin: 0;
 
 }
-.nav__icons{
-    // display: inline-block;
-    margin-right: 24px;
-    padding-left: 8px;
+
+.nav__icons {
+	// display: inline-block;
+	margin-right: 24px;
+	padding-left: 8px;
 }
 
 
-
-.subscription__list{
+.subscription__list {
 
 }
-.title__sub{
 
-    padding: 8px 0 0 24px;
-    font-size: 16px;
-    line-height: 2.2rem;
-    font-weight: 400;
-    color: #f1f1f1;
+.title__sub {
+
+	padding: 8px 0 0 24px;
+	font-size: 16px;
+	line-height: 2.2rem;
+	font-weight: 400;
+	color: #f1f1f1;
+}
+
+
+@media(max-width: 769px) {
+	.aside__nav {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #0f0f0f;
+		border-radius: 6px 6px 0 0;
+		padding: 6px 0;
+	}
+	.nav__items {
+		flex-direction: row;
+		justify-content: space-evenly;
+		align-items: center;
+
+		&:last-child {
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+	}
+
+
 }
