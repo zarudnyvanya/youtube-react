@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bf5g9=54fej+=3^rh0&eany+jpx-l&4svihm+br9emx57!jx!z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    '139.59.147.181', '127.0.0.1'
 ]
 INTERNAL_IPS = ['127.0.0.1', ]
 
@@ -95,6 +96,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi:application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -168,6 +170,7 @@ STATIC_URL = '/static/'
 
 # STATIC_ROOT = [BASE_DIR, 'static']
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL = '/media/'
