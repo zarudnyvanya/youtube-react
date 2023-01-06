@@ -5,6 +5,9 @@
 	// display: flex;
 	// align-items: center;
 	// justify-content: space-between;
+	@media(max-width: 769px) {
+		padding: 10px 4px;
+	}
 }
 
 .header__inner {
@@ -186,6 +189,13 @@
 		background-color: transparent;
 	}
 	.micro__btn {
+		display: none;
+	}
+}
+
+
+@media(max-width: 769px) {
+	.burger {
 		display: none;
 	}
 }

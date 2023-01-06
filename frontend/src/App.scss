@@ -55,11 +55,20 @@ a {
 }
 
 
-@media (max-width: 1120px) {
-	.search {
-		width: 300px;
+//@media (max-width: 1120px) {
+//	.search {
+//		width: 300px;
+//	}
+//
+//}
+
+@media(max-width: 1025px) {
+	.container {
+		padding: 0;
+		flex-direction: column;
 	}
-
+	.main__content-nav {
+		max-width: 100%;
+	}
 }
-
 
