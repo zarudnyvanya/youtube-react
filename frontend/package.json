@@ -47,5 +47,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://fyfik1051.pythonanywhere.com/"
+  "proxy": "http://127.0.0.1:8000/"
 }
