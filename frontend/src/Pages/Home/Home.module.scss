@@ -73,17 +73,13 @@
 
 	}
 	@media (max-width: 768px) {
-		grid-template-columns: repeat(2, minmax(100px, 1fr));
-
+		grid-template-columns: repeat(1, minmax(100px, 1fr));
+		grid-row-gap: 20px;
+		padding: 0;
 	}
 
 
 }
 
 
-@media (max-width: 1415px) {
-	.video__list {
-		//grid-column-gap: 10px;
-	}
-}
 
