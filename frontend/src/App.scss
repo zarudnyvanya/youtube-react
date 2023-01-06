@@ -52,6 +52,11 @@ a {
 .main__content-nav {
 	width: 100%;
 	max-width: calc(100% - 73px);
+	@media (max-width: 1025px) {
+
+		max-width: 100%;
+	
+	}
 }
 
 
@@ -62,7 +67,7 @@ a {
 //
 //}
 
-@media(max-width: 1025px) {
+@media(max-width: 768px) {
 	.container {
 		padding: 0;
 		flex-direction: column;
