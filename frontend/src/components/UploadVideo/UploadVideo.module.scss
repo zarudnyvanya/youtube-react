@@ -25,6 +25,7 @@
     width: 100%;
     max-width: 960px;
     max-height: 660px;
+    min-height: 400px;
     background-color: #282828;
 
 
@@ -144,4 +145,111 @@
     &:hover{
         background-color: rgba(62, 166, 255, 0.9);
     }
+}
+
+.formatVideo {
+    width: 500px;
+    height: 500px;
+    padding: 50px;
+}
+
+.videoNameContent, .videoDescriptionContent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.videoNameInfo, .videoDescriptionInfo {
+    font-size: 25px;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.videoName, .videoDescription {
+    width: 860px;
+    // width: 100%;
+    border-radius: 5px;
+    border: 1px solid gray;
+    padding: 20px 20px;
+    background-color: #282828;
+    font-size: 16px;
+    color: #fff;
+    outline: none;
+    transition: border .3s ease-in-out;
+
+    &:hover {
+        border: 1px solid rgb(180, 180, 180);
+    }
+
+    &:focus {
+        border: 1px solid rgb(237, 172, 81);
+    }
+}
+
+.selectContainer {
+    position: relative;
+    display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     margin-top: 20px;
+     width: 200px;
+     height: 100px;
+     background-color: #282828;
+     border: 1px dashed gray;
+     color: #fff;
+    transition: background .3s ease-in-out;
+    
+     &:hover {
+        background-color: #1f1f1f;
+        cursor: pointer;
+     }
+}
+
+.addPoster {
+    margin-top: 20px;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    bottom: 0;
+    right: 0px;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.sendBtn {
+    margin-top: 20px;
+    padding: 10px;
+    width: 200px;
+    background-color: rgb(232, 180, 8);
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    font-size: 14px;
+    transition: background .3s ease-in-out;
+    cursor: pointer;
+
+
+    &:hover {
+        background-color: rgb(241, 199, 64);
+    }
+
+    &:disabled {
+        background-color: rgb(165, 133, 29);
+    }
+}
+
+// .videoHeader {
+//     width: 100%;
+//     display: flex;
+//     justify-content: end;
+// }
+
+.videoFormatClose {
+    cursor: pointer;
+    position: absolute;
+    right: 50px;
+    font-size: 20px;
+    top: 20px;
 }
