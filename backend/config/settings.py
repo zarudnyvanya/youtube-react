@@ -23,11 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bf5g9=54fej+=3^rh0&eany+jpx-l&4svihm+br9emx57!jx!z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    '139.59.147.181', '127.0.0.1'
 ]
-INTERNAL_IPS = ['127.0.0.1', ]
+INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
 
 # Application definition
 
@@ -38,40 +39,51 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
+
     'djoser',
     'debug_toolbar',
     # 'drf_recaptcha',
     'video_hosting',
     'users',
     'mailing',
-    'corsheaders',
 
     'django_cleanup.apps.CleanupConfig',
+    #'corsheaders',
 ]
 
+# CORS_ALLOWED_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000/',
-    'http://127.0.0.1:8000/',
+    'http://localhost:3000',
+    'http://127.0.0.1:8000',
+    'http://139.59.147.181',
+    'http://139.59.147.181:80',
+    'http://139.59.147.181:432'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000/',
     'http://127.0.0.1:8000/',
+    'http://139.59.147.181:80/',
+    'http://139.59.147.181/',
+    'http://139.59.147.181:432/',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+
+
     #'config.middleware.BadRequest'
 ]
 from django.contrib.messages.middleware import MessageMiddleware
@@ -95,16 +107,33 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+ASGI_APPLICATION = 'config.asgi:application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+DATABASES_NAME = os.environ['DATABASE_NAME']
+DATABASES_USER = os.environ['DATABASE_USER']
+DATABASES_PASSWORD = os.environ['DATABASE_PASSWORD']
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': DATABASES_NAME,
+        'USER': DATABASES_USER,
+        "PASSWORD": DATABASES_PASSWORD,
+        "HOST": '127.0.0.1',
+        'PORT': '5432'
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -152,6 +181,7 @@ STATIC_URL = '/static/'
 
 # STATIC_ROOT = [BASE_DIR, 'static']
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL = '/media/'

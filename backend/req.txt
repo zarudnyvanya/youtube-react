@@ -10,4 +10,5 @@ django-debug-toolbar==3.7.0
 django-cors-headers==3.13.0
 django-cleanup==6.0.0
 python-dotenv==0.21.0
-
+moviepy
+unicorn

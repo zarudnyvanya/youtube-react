@@ -59,13 +59,13 @@ class Video(models.Model):
 
         if not self.duration:
             self.duration = video.duration
-            #self.save()
+            self.save()
 
         if not self.image:
             temp = NamedTemporaryFile()
             video.save_frame(temp, 0)
             temp.flush()
-            self.image.save(self.title + '.jpg', File(temp))
+            self.image.save(self.title + '.png', File(temp))
             #self.save()
             temp.close()
 
