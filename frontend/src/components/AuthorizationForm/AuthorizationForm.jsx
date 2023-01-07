@@ -60,7 +60,7 @@ export const AuthorizationForm = () => {
 		
 		console.log('handle user data -<<', userData)
 		
-		fetch(HOST+'auth/token/login/', {
+		fetch(HOST+'/auth/token/login/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
