@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
 import VideoPage from './Pages/VideoPage/VideoPage'
-import {HOST} from '../HOST/HOST'
+import {HOST} from '../src/components/HOST/HOST'
 function App() {
   const dispatch = useDispatch()
   const userToken = useSelector((state) => state.user.userToken)
