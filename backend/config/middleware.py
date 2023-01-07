@@ -13,6 +13,6 @@ class BadRequest:
         response['Access-Control-Allow-Origin'] = "*"
         return response
 
-    def process_exception(self, request, exception):
-        print(f'Exception:  {exception}')
-        return HttpResponse(f"Бекенд не говно, идите нахуй. {exception}", status=status.HTTP_400_BAD_REQUEST)
+    # def process_exception(self, request, exception):
+    #     print(f'Exception:  {exception}')
+    #     return HttpResponse(f"Бекенд не говно, идите нахуй. {exception}", status=status.HTTP_400_BAD_REQUEST)
