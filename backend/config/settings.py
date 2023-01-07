@@ -61,11 +61,11 @@ CORS_ALLOW_CREDENTIALS = True
 # ]
 
 CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000/',
-    'http://127.0.0.1:8000/',
-    'http://139.59.147.181:80/',
-    'http://139.59.147.181/',
-    'http://139.59.147.181:432/',
+    # 'http://localhost:3000/',
+    # 'http://127.0.0.1:8000/',
+    # 'http://139.59.147.181:80/',
+    # 'http://139.59.147.181/',
+    # 'http://139.59.147.181:432/',
 ]
 
 MIDDLEWARE = [
