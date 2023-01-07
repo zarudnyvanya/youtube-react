@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'video_hosting',
     'users',
     'mailing',
-    #'corsheaders',
+    'corsheaders',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -61,11 +61,11 @@ CORS_ALLOW_CREDENTIALS = True
 # ]
 
 CSRF_TRUSTED_ORIGINS = [
-    # 'http://localhost:3000/',
-    # 'http://127.0.0.1:8000/',
-    # 'http://139.59.147.181:80/',
-    # 'http://139.59.147.181/',
-    # 'http://139.59.147.181:432/',
+    'http://localhost:3000/',
+    'http://127.0.0.1:8000/',
+    'http://139.59.147.181:80/',
+    'http://139.59.147.181/',
+    'http://139.59.147.181:432/',
 ]
 
 MIDDLEWARE = [
@@ -77,7 +77,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    #'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'config.middleware.BadRequest'
 ]
