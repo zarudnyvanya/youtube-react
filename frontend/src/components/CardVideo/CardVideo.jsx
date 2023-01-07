@@ -1,7 +1,7 @@
 import s from './CardVideo.module.scss'
 import {Link} from "react-router-dom";
 import {reDate, reDuration, showViews} from "../../utils/api";
-
+import {HOST} from '../HOST/HOST'
 export const CardVideo = ({
 	                          videoId,
 	                          videoView,
@@ -27,7 +27,7 @@ export const CardVideo = ({
 			</div>
 			<div className={s.video__info}>
 				<div className={s.channel}>
-					<Link to={`/channel/${videoOwner.pk}`} className={s.channel__link}>
+					<Link to={HOST+`/channel/${videoOwner.pk}`} className={s.channel__link}>
 						{
 							videoOwner.logo ?
 								

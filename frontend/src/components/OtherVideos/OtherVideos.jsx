@@ -39,7 +39,7 @@ const OtherVideos = () => {
                                 <div className={s.wrapper__other_video}>
                                     <video
                                         className={s.other__video}
-                                        poster={obj.image}></video>
+                                        poster={HOST+obj.image}></video>
                                     <span>{reDuration(obj.duration)}</span>
                                 </div>
                                 <div className={s.wrapper__chanel_other}>

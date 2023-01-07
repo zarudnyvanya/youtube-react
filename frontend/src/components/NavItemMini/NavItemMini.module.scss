@@ -1,14 +1,15 @@
 .nav__item {
 	display: flex;
-	align-items: center;
+	//align-items: center;
 	padding: 8px 0 8px 24px;
-
+	//justify-content: center;
 	border-radius: 10px;
 
 	&:hover {
 
 		background: #303030;
 	}
+
 
 
 }
@@ -24,6 +25,24 @@
 	display: inline-block;
 	margin-right: 24px;
 	padding-left: 0;
+	img{
+		//margin-left: 14px;
+	}
+
+	@media(max-width: 769px){
+		img{
+			width: 32px;
+			height: 32px;
+
+		}
+	}
+
+}
+.title_nav{
+
+	text-align: center;
+	font-size: 12px;
+	//margin-left: -14px;
 }
 
 @media(max-width: 769px) {
@@ -32,6 +51,7 @@
 		padding: 0;
 		display: flex;
 		align-items: center;
+		flex-direction: column;
 	}
 	.nav__item {
 		padding: 0 0 0 0;
