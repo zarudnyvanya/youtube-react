@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '139.59.147.181', '127.0.0.1'
 ]
-INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
+#INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
 
 # Application definition
 
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
 
@@ -51,31 +52,31 @@ INSTALLED_APPS = [
     'mailing',
 
     'django_cleanup.apps.CleanupConfig',
-    #'corsheaders',
+
 ]
 
-# CORS_ALLOWED_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:8000',
-    'http://139.59.147.181',
-    'http://139.59.147.181:80',
-    'http://139.59.147.181:432'
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://localhost:3000/',
-    'http://127.0.0.1:8000/',
-    'http://139.59.147.181:80/',
-    'http://139.59.147.181/',
-    'http://139.59.147.181:432/',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+#     'http://127.0.0.1:8000',
+#     'http://139.59.147.181',
+#     'http://139.59.147.181:80',
+#     'http://139.59.147.181:432'
+# ]
+#
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:3000/',
+#     'http://127.0.0.1:8000/',
+#     'http://139.59.147.181:80/',
+#     'http://139.59.147.181/',
+#     'http://139.59.147.181:432/',
+# ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
