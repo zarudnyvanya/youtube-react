@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '139.59.147.181', '127.0.0.1'
 ]
-INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
+# INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
 
 # Application definition
 
