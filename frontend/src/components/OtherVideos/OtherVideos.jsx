@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import doRequest from "../doRequest/doRequest";
-
+import {HOST} from '../HOST/HOST'
 const OtherVideos = () => {
     const [videos, setVideos] = useState([])
 
@@ -16,7 +16,7 @@ const OtherVideos = () => {
             if (userToken) {
                 response = await doRequest('/api/v1/video/new/', userToken)
             } else {
-                response = await fetch(`/api/v1/video/`)
+                response = await fetch(HOST+`/api/v1/video/`)
             }
             const data = await response.json()
             setVideos(data)

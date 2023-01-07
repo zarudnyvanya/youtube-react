@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-
+import {HOST} from '../HOST/HOST'
 export const Success = () => {
   // const [token, setToken] = useState('')
 
@@ -18,7 +18,7 @@ export const Success = () => {
         body: JSON.stringify({ uid: uid, token: token }),
       }
 
-      fetch('/api/v1/auth/users/activation/', requestOptions)
+      fetch(HOST+'/api/v1/auth/users/activation/', requestOptions)
         .then((response) => response.json())
         .then((data) => console.log(data))
     } catch (err) {

@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 
 import {setUserData, setUserToken} from '../../redux/slices/userDataSlice'
-
+import {HOST} from '../HOST/HOST'
 import s from './AuthorizationForm.module.scss'
 import {useDispatch, useSelector} from 'react-redux'
 
@@ -41,7 +41,7 @@ export const AuthorizationForm = () => {
 		
 		if (userToken) {
 			const getMyself = async () => {
-				const response = await fetch('api/v1/auth/users/me/', {
+				const response = await fetch(HOST+'api/v1/auth/users/me/', {
 					headers: authToken,
 				})
 				
@@ -60,7 +60,7 @@ export const AuthorizationForm = () => {
 		
 		console.log('handle user data -<<', userData)
 		
-		fetch('auth/token/login/', {
+		fetch(HOST+'auth/token/login/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',

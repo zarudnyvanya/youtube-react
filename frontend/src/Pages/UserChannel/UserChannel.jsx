@@ -15,7 +15,7 @@ import {CardVideo} from '../../components/CardVideo/CardVideo'
 
 import userLogo from '../../../src/assets/svg__header/user.png'
 import {useParams} from "react-router-dom";
-
+import {HOST} from '../HOST/HOST'
 const options = ['Главная', 'Плейлисты', 'Каналы', 'О канале']
 
 const UserChannel = () => {
@@ -55,7 +55,7 @@ const UserChannel = () => {
 	useEffect(() => {
 		
 		const getVideos = async () => {
-			const response = await fetch(`/api/v1/video/${pk}/channel/`)
+			const response = await fetch(HOST+`/api/v1/video/${pk}/channel/`)
 			const data = await response.json()
 			dispatch(setUserVideos(data))
 		}

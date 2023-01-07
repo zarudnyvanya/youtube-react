@@ -12,7 +12,7 @@ import s from './UploadVideo.module.scss'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import FromatVideo from './FormatVideo'
-
+import {HOST} from '../HOST/HOST'
 const UploadVideo = () => {
   const dispatch = useDispatch()
   const isOpen = useSelector((state) => state.videoUpload.isOpen)
@@ -51,7 +51,7 @@ const UploadVideo = () => {
       formData.append('image', poster)
     }
 
-    const res = await fetch('/api/v1/video/', {
+    const res = await fetch(HOST+'/api/v1/video/', {
       method: 'POST',
       headers: {
         Authorization: `token ${userToken}`,
