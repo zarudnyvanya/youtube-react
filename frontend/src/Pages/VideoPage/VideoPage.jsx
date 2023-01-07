@@ -7,7 +7,8 @@ import doRequest from '../../components/doRequest/doRequest'
 import {reDate, showViews} from "../../utils/api";
 import OtherVideos from "../../components/OtherVideos/OtherVideos";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-import {HOST} from '../HOST/HOST'
+import {HOST} from '../../components/HOST/HOST'
+
 // const reDate = (date) => {
 //     let fullDate = new Date(date)
 //     let month = fullDate.getMonth() + 1

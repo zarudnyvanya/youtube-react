@@ -15,7 +15,7 @@ import {CardVideo} from '../../components/CardVideo/CardVideo'
 
 import userLogo from '../../../src/assets/svg__header/user.png'
 import {useParams} from "react-router-dom";
-import {HOST} from '../HOST/HOST'
+import {HOST} from '../../components/HOST/HOST'
 const options = ['Главная', 'Плейлисты', 'Каналы', 'О канале']
 
 const UserChannel = () => {
