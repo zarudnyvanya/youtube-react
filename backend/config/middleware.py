@@ -8,6 +8,9 @@ class BadRequest:
         self._get_response = get_response
     def __call__(self, request):
         response = self._get_response(request)
+        response['Access-Control-Allow-Headers'] = "*"
+        response['Access-Control-Allow-Methods'] = "*"
+        response['Access-Control-Allow-Origin'] = "*"
         return response
 
     def process_exception(self, request, exception):
