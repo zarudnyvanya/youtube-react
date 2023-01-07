@@ -1,28 +1,61 @@
+.logo {
+  color: black;
+  display: flex;
+  align-items: center;
+  span {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    animation: bink 2s infinite alternate ease-in-out;
+  }
 
+  @keyframes bink {
+
+    to {
+      opacity: 0.2;
+    }
+    from {
+      opacity: 1;
+    }
+  }
+
+}
 
 .registration{
   background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  
+  transform: translate(-50%, -50%);
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 }
 .container{
-  padding:48px 40px 36px 40px;
+  padding: 48px 40px 36px 40px;
   border-radius: 8px;
   border: 1px solid #dadce0;
   min-width: 400px;
   min-height: 400px;
   position: relative;
+
+  @media (max-width: 480px) {
+    min-width: 100%;
+    padding: 10px 0;
+  }
 }
 
 
 
 .wrapper{
-  
+
   display: flex;
   flex-direction: column;
+  @media (max-width: 480px) {
+
+    padding: 0 10px;
+  }
  
 }
 .header{

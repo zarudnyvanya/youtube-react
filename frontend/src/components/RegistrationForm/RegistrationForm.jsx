@@ -137,7 +137,7 @@ export const RegistrationForm = () => {
       </div>
       <div className={s.createacc_futher}>
         <Link to="/authorization" className={s.log_in}>
-          In
+          Войти
         </Link>
         <Link to="/" class={s.create_account}>
           Назад

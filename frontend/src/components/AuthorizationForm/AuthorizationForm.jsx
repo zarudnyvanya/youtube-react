@@ -128,7 +128,7 @@ export const AuthorizationForm = () => {
 	return (
 		<form onSubmit={handleSubmit} class={s.form} method="post">
 			Token: {userToken}
-			<div class={s.form__group}>
+			<div className={s.form__group}>
 				<input
 					onBlur={(event) => blurHandler(event)}
 					onChange={(event) => emailHandler(event)}
@@ -136,10 +136,10 @@ export const AuthorizationForm = () => {
 					type="text"
 					id="login"
 					name="email"
-					class={s.input_authoriz}
+					className={s.input_authoriz}
 					placeholder=""
 				/>
-				<label for="login" class={s.form__label}>
+				<label htmlFor="login" className={s.form__label}>
 					{emailDirty && emailError ? (
 						<p style={{color: '#eb0052', fontSize: '14px'}}>{emailError}</p>
 					) : (
@@ -147,7 +147,7 @@ export const AuthorizationForm = () => {
 					)}
 				</label>
 			</div>
-			<div class={s.form__group}>
+			<div className={s.form__group}>
 				<input
 					onBlur={(event) => blurHandler(event)}
 					onChange={(event) => passwordHandler(event)}
@@ -155,7 +155,7 @@ export const AuthorizationForm = () => {
 					type={type}
 					id="pass"
 					name="password"
-					class={s.input_authoriz}
+					className={s.input_authoriz}
 					placeholder=""
 				/>
 				<span className={s.input_pass_display} onClick={() => handlerState()}>
@@ -189,7 +189,7 @@ export const AuthorizationForm = () => {
 	          </svg>
           )}
         </span>
-				<label for="pass" class={s.form__label}>
+				<label htmlFor="pass" className={s.form__label}>
 					{passwordDirty && passwordError ? (
 						<p style={{color: '#eb0052', fontSize: '14px'}}>{passwordError}</p>
 					) : (
@@ -197,17 +197,17 @@ export const AuthorizationForm = () => {
 					)}
 				</label>
 			</div>
-			<a href="#" class={s.recover_pass}>
+			<a href="#" className={s.recover_pass}>
 				Забыли адрес электронной почты или пароль?
 			</a>
-			<div class={s.createacc_futher}>
-				<Link to="/" class={s.create_account}>
+			<div className={s.createacc_futher}>
+				<Link to="/" className={s.create_account}>
 					Назад
 				</Link>
-				<Link to="/registration" class={s.create_account}>
+				<Link to="/registration" className={s.create_account}>
 					Создать аккаунт
 				</Link>
-				<button className={s.next} disabled={!formValid} class={s.futherbtn}>
+				<button className={s.next} disabled={!formValid} className={s.futherbtn}>
 					Далее
 				</button>
 			</div>
