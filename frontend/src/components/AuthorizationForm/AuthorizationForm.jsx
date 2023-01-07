@@ -41,7 +41,7 @@ export const AuthorizationForm = () => {
 		
 		if (userToken) {
 			const getMyself = async () => {
-				const response = await fetch(HOST+'api/v1/auth/users/me/', {
+				const response = await fetch(HOST+'/api/v1/auth/users/me/', {
 					headers: authToken,
 				})
 				
