@@ -34,7 +34,7 @@ class Video(models.Model):
     image = models.ImageField(upload_to='image/%Y/%m/%d/',null=True, blank=True, verbose_name="Постер")
     file = models.FileField(
         upload_to='video/%Y/%m/%d/',
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR"])], verbose_name="Файл"
+        validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR", 'Mov', 'mov'])], verbose_name="Файл"
     )
     duration = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
