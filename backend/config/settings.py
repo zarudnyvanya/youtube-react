@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '139.59.147.181', '127.0.0.1'
 ]
-INTERNAL_IPS = ['127.0.0.1', ]
+INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
 
 # Application definition
 
@@ -48,18 +48,21 @@ INSTALLED_APPS = [
     'users',
     'mailing',
     'corsheaders',
-
     'django_cleanup.apps.CleanupConfig',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000/',
     'http://127.0.0.1:8000/',
+    'http://139.59.147.181:80',
+    'http://139.59.147.181:432'
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000/',
     'http://127.0.0.1:8000/',
+    'http://139.59.147.181:80',
+    'http://139.59.147.181:432',
 ]
 
 MIDDLEWARE = [
