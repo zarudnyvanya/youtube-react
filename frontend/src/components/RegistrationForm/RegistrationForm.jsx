@@ -1,5 +1,5 @@
 import { useEffect,useState,useRef } from 'react'
-
+import {HOST} from '../HOST/HOST'
 import s from './RegistrationForm.module.scss'
 import {Link} from "react-router-dom";
 
@@ -74,7 +74,7 @@ export const RegistrationForm = () => {
 
 
   return (
-    <form action="/api/v1/auth/users/" className={s.form} method="post">
+    <form action={HOST+"/api/v1/auth/users/"} className={s.form} method="post">
       <div className={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}

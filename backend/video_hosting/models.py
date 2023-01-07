@@ -66,8 +66,8 @@ class Video(models.Model):
             video.save_frame(temp, 0)
             temp.flush()
             self.image.save(self.title + '.png', File(temp))
-            #self.save()
             temp.close()
+            self.save()
 
 
 
