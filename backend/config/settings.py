@@ -28,7 +28,7 @@ DEBUG = False
 ALLOWED_HOSTS = [
     '139.59.147.181', '127.0.0.1'
 ]
-# INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
+INTERNAL_IPS = ['127.0.0.1', '139.59.147.181']
 
 # Application definition
 
@@ -39,19 +39,22 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'rest_framework',
     'rest_framework.authtoken',
+
     'djoser',
     'debug_toolbar',
     # 'drf_recaptcha',
     'video_hosting',
     'users',
     'mailing',
-    #'corsheaders',
+
     'django_cleanup.apps.CleanupConfig',
+    #'corsheaders',
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOWED_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
