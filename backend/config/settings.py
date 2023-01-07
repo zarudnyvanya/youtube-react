@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'video_hosting',
     'users',
     'mailing',
-    'corsheaders',
+    #'corsheaders',
     'django_cleanup.apps.CleanupConfig',
 ]
 
@@ -74,7 +74,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    #'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     #'config.middleware.BadRequest'
 ]
