@@ -20,7 +20,7 @@
     "react-player": "^2.11.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.4.2",
-    "react-scripts": "^5.0.1",
+    "react-scripts": "4.0.3",
     "screenfull": "^6.0.2",
     "web-vitals": "^2.1.4"
   },
@@ -47,6 +47,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy": "http://139.59.147.181:8432"
+  }
 }
