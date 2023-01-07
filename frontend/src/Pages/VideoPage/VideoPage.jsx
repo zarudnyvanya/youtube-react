@@ -7,6 +7,7 @@ import doRequest from '../../components/doRequest/doRequest'
 import {reDate, showViews} from "../../utils/api";
 import OtherVideos from "../../components/OtherVideos/OtherVideos";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
+import {HOST} from '../HOST/HOST'
 // const reDate = (date) => {
 //     let fullDate = new Date(date)
 //     let month = fullDate.getMonth() + 1
@@ -43,7 +44,7 @@ const VideoPage = () => {
 		setIsLoading(false)
 		const getVideo = async () => {
 			
-			const response = await fetch(`/api/v1/video/${videoId}/`)
+			const response = await fetch(HOST+`/api/v1/video/${videoId}/`)
 			const data = await response.json()
 			setData(data)
 			

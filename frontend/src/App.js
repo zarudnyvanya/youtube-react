@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
 import VideoPage from './Pages/VideoPage/VideoPage'
-
+import {HOST} from '../HOST/HOST'
 function App() {
   const dispatch = useDispatch()
   const userToken = useSelector((state) => state.user.userToken)
@@ -31,11 +31,11 @@ function App() {
       }
 
       const getMyself = async () => {
-        const response = await fetch('/api/v1/auth/users/me/', {
+        const response = await fetch(HOST+'/api/v1/auth/users/me/', {
           headers: authToken,
         })
 
-        const response2 = await fetch('/api/v1/channel/me/', {
+        const response2 = await fetch(HOST+'/api/v1/channel/me/', {
           headers: authToken,
         })
 

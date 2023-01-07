@@ -1,5 +1,5 @@
 
-
+import {HOST} from '../HOST/HOST'
 const doRequest = (url, userToken, method = 'GET', obj = null) => {
     let headers = {}
     try {
@@ -20,7 +20,7 @@ const doRequest = (url, userToken, method = 'GET', obj = null) => {
     }
     data.method = method
     try {
-        return fetch(url, data)
+        return fetch(HOST+url, data)
     } catch {
         console.log('error_request')
     }

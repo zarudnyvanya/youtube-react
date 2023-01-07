@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 import { Genre } from './../Genre/Genre'
 import s from './Genres.module.scss'
 import { useSelector, useDispatch } from 'react-redux'
-
+import {HOST} from '../HOST/HOST'
 const genresBase = [
   {
     id: 0,
@@ -36,7 +36,7 @@ export const Genres = () => {
   }
 
   useEffect(() => {
-    fetch('/api/v1/category/')
+    fetch(HOST+'/api/v1/category/')
       .then((res) => res.json())
       .then((data) => dispatch(setGenres(data)))
   }, [])
