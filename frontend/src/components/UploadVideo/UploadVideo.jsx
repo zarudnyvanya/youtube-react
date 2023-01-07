@@ -61,7 +61,7 @@ const UploadVideo = () => {
 
     const data = await res.json()
 
-    //window.location.href = '/'
+    window.location.href = '/'
   }
 
   const handleChangeFile = async (event) => {
