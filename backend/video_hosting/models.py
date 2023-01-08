@@ -75,7 +75,7 @@ class Video(models.Model):
             self.image.save(self.title + '.png', File(temp))
             temp.close()
             self.save()
-        video=None
+        del video
 
 
 
