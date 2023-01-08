@@ -21,16 +21,21 @@
 	align-items: center;
 	justify-content: space-evenly;
 	background-color: #0f0f0f;
-	height: 30px;
+	height: 40px;
 	z-index: 40;
 
 	.mobile__search {
 		width: 80%;
 		background-color: transparent;
+
 		outline: none;
 		border: 1px solid rgba(48, 48, 48, 1);
 		padding: 5px;
-		border-radius: 0;
+		border-radius: 8px;
+		color: white;
+		&::placeholder{
+			color: white;
+		}
 
 	}
 }
@@ -206,7 +211,7 @@
 }
 
 
-@media(max-width: 480px) {
+@media(max-width: 768px) {
 	.search {
 		display: none;
 		margin-left: 0;
@@ -215,7 +220,7 @@
 	.search__btn {
 		border: none;
 		background-color: transparent;
-
+		margin-left: 60px;
 
 	}
 	.micro__btn {

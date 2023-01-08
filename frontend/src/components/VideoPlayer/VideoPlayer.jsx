@@ -5,7 +5,7 @@ const VideoPlayer = ({videoId}) => {
 	
 	
 	return (
-		<Video>
+		<Video autoPlay>
 			
 			<source src={`${HOST}/stream/${videoId}/`} type="video/mp4"/>
 			<source src={`${HOST}/stream/${videoId}/`} type="video/webm"/>

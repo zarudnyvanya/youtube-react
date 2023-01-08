@@ -1,19 +1,21 @@
 import s from './CardVideo.module.scss'
 import {Link} from "react-router-dom";
 import {reDate, reDuration, showViews} from "../../utils/api";
-import {HOST} from '../HOST/HOST'
+// import {HOST} from '../HOST/HOST'
+
 export const CardVideo = ({
 	                          videoId,
 	                          videoView,
 	                          videoFile,
 	                          videoTitle,
 	                          videoImage,
+														
 	                          videoOwner,
 	                          videoDate,
-	                          videoDuration
+	                          videoDuration,
                           }) => {
 	
-	
+	console.log(videoImage)
 	return (
 		<div className={s.video__item}>
 			<div className={s.block__video}>
@@ -27,7 +29,7 @@ export const CardVideo = ({
 			</div>
 			<div className={s.video__info}>
 				<div className={s.channel}>
-					<Link to={HOST+`/channel/${videoOwner.pk}`} className={s.channel__link}>
+					<Link to={`/channel/${videoOwner.pk}`} className={s.channel__link}>
 						{
 							videoOwner.logo ?
 								

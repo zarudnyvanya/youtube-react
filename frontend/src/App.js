@@ -19,7 +19,7 @@ function App() {
   const dispatch = useDispatch()
   const userToken = useSelector((state) => state.user.userToken)
   const isOpen = useSelector((state) => state.videoUpload.isOpen)
-
+  
   useEffect(() => {
     dispatch(setIsAuth(false))
 
