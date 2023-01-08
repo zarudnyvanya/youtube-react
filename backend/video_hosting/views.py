@@ -50,7 +50,7 @@ class VideoViewSet(viewsets.ModelViewSet):
         return serializer_class
 
     def get_permissions(self):
-        if self.action in ['last_views', 'new', 'like']:
+        if self.action in ['last_views', 'new', 'like', 'view']:
             return (permissions.IsAuthenticated(),)
         return (IsAuthenticatedOrOwnerOrReadOnly(),)
 
@@ -99,7 +99,12 @@ class VideoViewSet(viewsets.ModelViewSet):
             if like:
                 self.get_object.likes.remove(request.user)
             return Response(status=status.HTTP_204_NO_CONTENT)
-
+    @action(detail=True, methods=['post'])
+    def view(self, request, pk=None):
+        video = get_object_or_404(Video, pk=pk)
+        video.views.remove(request.user)
+        video.views.add(request.user)
+        return Response(status=status.HTTP_201_CREATED)
 
 class ChannelViewSet(mixins.CreateModelMixin,
                      mixins.RetrieveModelMixin,
