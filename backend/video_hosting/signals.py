@@ -1,3 +1,4 @@
+import multiprocessing
 import os
 import random
 import string
@@ -15,7 +16,7 @@ def to_mp4(inputfile, bias):
     with open(inputfile, 'r') as f:
         _format = '.' + inputfile.split('.')[-1]
         outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
-        subprocess.call(['ffmpeg', '-i', inputfile, '-vcodec', 'h264',  outputfile])
+        p = subprocess.call(['ffmpeg', '-i', inputfile, '-vcodec', 'h264',  outputfile])
         f.close()
         #'-acodec', 'mp2',
     return outputfile
@@ -66,12 +67,10 @@ def save_user_channel(sender, instance, **kwargs):
 def video_processing(sender, instance, created, **kwargs):
     if created:
         _format = instance.file.path.split('.')[-1]
-        if _format != 'mp4':
-            output = to_mp4(instance.file.path, bias=random_char(6))
-            os.remove(instance.file.path)
-
-            with open(output, 'rb') as fi:
-                instance.file = File(fi, name=os.path.basename(fi.name))
-                instance.save()
-            os.remove(output)
+        output = to_mp4(instance.file.path, bias=random_char(6))
+        os.remove(instance.file.path)
+        with open(output, 'rb') as fi:
+            instance.file = File(fi, name=os.path.basename(fi.name))
+            instance.save()
+        os.remove(output)
 
