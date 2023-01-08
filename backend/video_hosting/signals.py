@@ -17,7 +17,7 @@ from .models import Video, Channel
 def to_mp4(inputfile, bias):
     _format = '.' + inputfile.split('.')[-1]
     outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
-    proc = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", outputfile], stdout=subprocess.PIPE, shell=True)
+    proc = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", outputfile], stdout=subprocess.PIPE)
     #subprocess.check_output("Taskkill /PID %d /F" % proc.pid)
     proc.stdout.read()
 
@@ -86,4 +86,4 @@ class LikeThread(threading.Thread):
 def video_processing(sender, instance, created, **kwargs):
     if created:
         pass
-        #LikeThread(instance).start()
+        LikeThread(instance).start()
