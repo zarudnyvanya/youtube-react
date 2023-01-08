@@ -8,7 +8,7 @@ import {reDate, showViews} from "../../utils/api";
 import OtherVideos from "../../components/OtherVideos/OtherVideos";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import {HOST} from '../../components/HOST/HOST'
-
+import debounce from 'lodash.debounce'
 // const reDate = (date) => {
 //     let fullDate = new Date(date)
 //     let month = fullDate.getMonth() + 1
@@ -23,6 +23,8 @@ import {HOST} from '../../components/HOST/HOST'
 //
 //     return `${day}.${month}.${year}`
 // }
+
+
 
 const VideoPage = () => {
 	const {videoId} = useParams()
@@ -41,19 +43,34 @@ const VideoPage = () => {
 	
 	const [bellIsActive, setBellIsActive] = useState(false);
 	
+	
+	
+
+	setTimeout( ()=>{
+		
+		doRequest(`/api/v1/video/${videoId}/view/`,userToken,'POST')
+		
+		
+	},1000)
+	
+	
+	
 	useEffect(() => {
 		setIsLoading(false)
 		const getVideo = async () => {
 			
-			const response = await fetch(HOST+`/api/v1/video/${videoId}/`)
+			const response = await doRequest(`/api/v1/video/${videoId}/`)
 			const data = await response.json()
 			setData(data)
 			
 			setIsLoading(true)
+			
 		}
 		
 		getVideo()
 	}, [videoId])
+	
+	
 	
 	useEffect(() => {
 		
@@ -105,6 +122,9 @@ const VideoPage = () => {
 		}
 		
 	}
+	
+	
+	
 	
 	
 	return (

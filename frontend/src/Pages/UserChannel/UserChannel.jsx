@@ -89,7 +89,7 @@ const UserChannel = () => {
 								{
 									currentChannel.logo ?
 										<img
-											src={userLogo}
+											src={HOST+userLogo}
 											alt="logo"
 											className={s.logo__chanel}/>
 										:
@@ -182,6 +182,7 @@ const UserChannel = () => {
 											videoOwner={video.owner}
 											videoDate={video.created_at}
 											videoDuration={video.duration}
+											
 										/>
 									)
 								})}

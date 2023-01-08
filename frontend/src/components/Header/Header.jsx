@@ -21,7 +21,7 @@ export const Header = ({searchValue, onChangeSearchInput}) => {
 	const handlerSearch = () => {
 		let screenWidth = window.screen.availWidth
 		
-		if (screenWidth <= 480) {
+		if (screenWidth <= 768) {
 			dispatch(setSearch(!search))
 		}
 	}
@@ -37,17 +37,8 @@ export const Header = ({searchValue, onChangeSearchInput}) => {
 						className={s.mobile__search}
 						placeholder="Search"
 					/>
-					<svg
-						onClick={() => handlerSearch()}
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg">
-						<path
-							d="M20.87 20.17L15.28 14.58C16.35 13.35 17 11.75 17 10C17 6.13 13.87 3 10 3C6.13 3 3 6.13 3 10C3 13.87 6.13 17 10 17C11.75 17 13.35 16.35 14.58 15.29L20.17 20.88L20.87 20.17ZM10 16C6.69 16 4 13.31 4 10C4 6.69 6.69 4 10 4C13.31 4 16 6.69 16 10C16 13.31 13.31 16 10 16Z"
-							fill="white"
-						/>
+					<svg onClick={()=>handlerSearch()} enableBackground="new 0 0 100 100" fill='white' width='24px' height='24px' version="1.1" viewBox="0 0 100 100">
+						<polygon points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 " />
 					</svg>
 				</div>}
 			<div className={s.header__inner}>
