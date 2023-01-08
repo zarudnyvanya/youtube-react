@@ -37,9 +37,9 @@ class Category(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=130, verbose_name="Название")
     description = models.TextField(verbose_name="Описание")
-    image = models.ImageField(upload_to='image/%Y/%m/%d/',null=True, blank=True, verbose_name="Постер")
+    image = models.ImageField(upload_to='vid/image/%Y/%m/%d/',null=True, blank=True, verbose_name="Постер")
     file = models.FileField(
-        upload_to='video/%Y/%m/%d/',
+        upload_to='vid/video/%Y/%m/%d/',
         validators=[FileExtensionValidator(allowed_extensions=['mp4', "mkv", "DVR", 'Mov', 'mov'])], verbose_name="Файл"
     )
     duration = models.CharField(max_length=100, null=True, blank=True)
@@ -124,9 +124,9 @@ class Channel(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=40, default="Channel Name")
     description = models.TextField(null=True, blank=True)
-    image = models.ImageField(upload_to='image/profile/image/%Y/%m/', null=True, blank=True)
-    banner = models.ImageField(upload_to='image/profile/banner/%Y/%m/', null=True, blank=True)
-    logo = models.ImageField(upload_to='image/profile/logo/%Y/%m/', null=True, blank=True)
+    image = models.ImageField(upload_to='channel/image/profile/image/%Y/%m/', null=True, blank=True)
+    banner = models.ImageField(upload_to='channel/image/profile/banner/%Y/%m/', null=True, blank=True)
+    logo = models.ImageField(upload_to='channel/image/profile/logo/%Y/%m/', null=True, blank=True)
     is_active = models.BooleanField(default=0)
     subscribers = models.ManyToManyField(User, through="Subscribers", related_name='subs')
 

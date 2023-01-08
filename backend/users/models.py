@@ -43,7 +43,7 @@ class CustomUser(AbstractUser):
 
     gender = models.CharField(choices=GENDERS, max_length=1, default='')
     birth_date = models.DateField(default="2000-09-12")
-    image = models.ImageField(upload_to='image/user/logo/%Y/%m/', null=True, blank=True)
+    image = models.ImageField(upload_to='user/image/logo/%Y/%m/', null=True, blank=True)
     is_block = models.BooleanField(default=0)
 
     REQUIRED_FIELDS = []
