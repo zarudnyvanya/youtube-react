@@ -2,6 +2,8 @@ import { useEffect,useState,useRef } from 'react'
 import {HOST} from '../HOST/HOST'
 import s from './RegistrationForm.module.scss'
 import {Link} from "react-router-dom";
+import {setUserToken} from "../../redux/slices/userDataSlice";
+import doRequest from "../doRequest/doRequest";
 
 export const RegistrationForm = () => {
   const [email, setEmail] = useState('')
@@ -15,6 +17,8 @@ export const RegistrationForm = () => {
 
   const [formValid, setFormValid] = useState(false)
 
+  const [userExist,setUserExist] = useState('')
+  
   useEffect(() => {
     if (emailError || passwordError) {
       setFormValid(false)
@@ -23,9 +27,7 @@ export const RegistrationForm = () => {
     }
   }, [emailError, passwordError])
 
-  const handleForm = () => {
-    console.log(email, password)
-  }
+  
 
   const emailHandler = (event) => {
     setEmail(event.target.value)
@@ -71,10 +73,18 @@ export const RegistrationForm = () => {
      setType('text')
    }
  }
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    const userData = {email,password}
+    await doRequest('/api/v1/auth/users/',null,'POST',userData)
+     window.location.href = '/'
+  }
 
 
   return (
-    <form action={HOST+"/api/v1/auth/users/"} className={s.form} method="post">
+    <form onSubmit={handleSubmit} className={s.form} method="post">
       <div className={s.form__group}>
         <input
           onBlur={(event) => blurHandler(event)}
@@ -139,11 +149,11 @@ export const RegistrationForm = () => {
         <Link to="/authorization" className={s.log_in}>
           Войти
         </Link>
-        <Link to="/" class={s.create_account}>
+        <Link to="/" className={s.create_account}>
           Назад
         </Link>
-        <button type="submit" disabled={!formValid} className={s.futherbtn}>
-          Next
+        <button type='submit' disabled={!formValid} className={s.futherbtn}>
+          Создать
         </button>
       </div>
     </form>

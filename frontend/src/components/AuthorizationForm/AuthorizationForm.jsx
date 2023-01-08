@@ -126,7 +126,7 @@ export const AuthorizationForm = () => {
 	}
 	
 	return (
-		<form onSubmit={handleSubmit} class={s.form} method="post">
+		<form onSubmit={handleSubmit} className={s.form} method="post">
 			Token: {userToken}
 			<div className={s.form__group}>
 				<input
@@ -137,7 +137,7 @@ export const AuthorizationForm = () => {
 					id="login"
 					name="email"
 					className={s.input_authoriz}
-					placeholder=""
+					placeholder=" "
 				/>
 				<label htmlFor="login" className={s.form__label}>
 					{emailDirty && emailError ? (
@@ -197,9 +197,9 @@ export const AuthorizationForm = () => {
 					)}
 				</label>
 			</div>
-			<a href="#" className={s.recover_pass}>
-				Забыли адрес электронной почты или пароль?
-			</a>
+			{/*<a href="#" className={s.recover_pass}>*/}
+			{/*	Забыли адрес электронной почты или пароль?*/}
+			{/*</a>*/}
 			<div className={s.createacc_futher}>
 				<Link to="/" className={s.create_account}>
 					Назад

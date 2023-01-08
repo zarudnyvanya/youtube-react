@@ -11,6 +11,7 @@ import { setNavIsOpen } from './../../redux/slices/navigationSlice'
 import doRequest from '../../components/doRequest/doRequest'
 import { useDispatch, useSelector } from 'react-redux'
 import UploadVideo from '../../components/UploadVideo/UploadVideo'
+import Anonymous from "../../components/Anonymous/Anonymous";
 
 export const Main = () => {
   const userToken = useSelector((state) => state.user.userToken)
@@ -22,7 +23,11 @@ export const Main = () => {
   const [videos, setVideos] = useState([])
   const [searchValue, setSearchValue] = useState('')
   const [isLoading, setIsLoading] = useState(true)
-
+  
+  const isAuth = useSelector((state) => state.user.isAuth)
+  
+  
+  
   useEffect(() => {
     let url = '/api/v1/video/'
     if (userToken) {
@@ -58,7 +63,10 @@ export const Main = () => {
         {isOpenVideoUpload && <UploadVideo />}
 
         <Header onChangeSearchInput={onChangeSearchInput} searchValue={searchValue} />
-
+        
+        {!isAuth &&
+          <Anonymous/>}
+        
         <div className="container">
           <Navigation />
 

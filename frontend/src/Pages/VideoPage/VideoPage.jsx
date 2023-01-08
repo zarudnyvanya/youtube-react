@@ -25,7 +25,6 @@ import debounce from 'lodash.debounce'
 // }
 
 
-
 const VideoPage = () => {
 	const {videoId} = useParams()
 	
@@ -44,15 +43,9 @@ const VideoPage = () => {
 	const [bellIsActive, setBellIsActive] = useState(false);
 	
 	
-	
-
-	setTimeout( ()=>{
-		
-		doRequest(`/api/v1/video/${videoId}/view/`,userToken,'POST')
-		
-		
-	},1000)
-	
+	setTimeout(() => {
+		doRequest(`/api/v1/video/${videoId}/view/`, userToken, 'POST')
+	}, 10000)
 	
 	
 	useEffect(() => {
@@ -69,7 +62,6 @@ const VideoPage = () => {
 		
 		getVideo()
 	}, [videoId])
-	
 	
 	
 	useEffect(() => {
@@ -122,9 +114,6 @@ const VideoPage = () => {
 		}
 		
 	}
-	
-	
-	
 	
 	
 	return (

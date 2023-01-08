@@ -1,16 +1,20 @@
 .nav__item {
 	display: flex;
 	//align-items: center;
-	padding: 8px 0 8px 24px;
+	//padding: 8px 0 8px 24px;
 	//justify-content: center;
 	border-radius: 10px;
+	margin-top: 2px;
+	margin-left: 6px;
+
+		margin-bottom: 12px;
+
+
 
 	&:hover {
 
 		background: #303030;
 	}
-
-
 
 }
 
@@ -22,26 +26,32 @@
 }
 
 .nav__icons {
-	display: inline-block;
-	margin-right: 24px;
+	//display: inline-block;
+	//margin-right: 24px;
 	padding-left: 0;
+
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	img{
-		//margin-left: 14px;
+		width: 24px;
+		height: 24px;
+		margin:6px 0;
+
 	}
 
-	@media(max-width: 769px){
-		img{
-			width: 24px;
-			height: 24px;
 
-		}
-	}
 
 }
 .title_nav{
 
 	text-align: center;
-	font-size: 8px;
+	font-size: 10px;
+	font-weight: 400;
+	@media (max-width: 769px) {
+		font-size: 8px;
+	}
 	//margin-left: -14px;
 }
 
@@ -52,9 +62,17 @@
 		display: flex;
 		align-items: center;
 		flex-direction: column;
+		img{
+			width: 24px;
+			height: 24px;
+			margin: 0;
+		}
 	}
 	.nav__item {
 		padding: 0 0 0 0;
 		border-bottom: none;
+		margin-bottom: 0;
+		margin-top: 0;
+		margin-left: 0;
 	}
 }

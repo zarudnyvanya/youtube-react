@@ -63,6 +63,14 @@
 .wrapper__logo_name {
 	display: flex;
 	align-items: center;
+
+		img {
+			object-fit: cover;
+			width: calc(24px + 1.5vw);
+			height: calc(24px + 1.5vw);
+			border-radius: 50%;
+		}
+
 }
 
 .channel__sub {
