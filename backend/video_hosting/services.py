@@ -12,7 +12,7 @@ def ranged(
         file: IO[bytes],
         start: int = 0,
         end: int = None,
-        block_size: int = 8192,
+        block_size: int = 16384,
 ) -> Generator[bytes, None, None]:
     consumed = 0
 
