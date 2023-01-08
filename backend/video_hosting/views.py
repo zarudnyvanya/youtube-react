@@ -25,8 +25,6 @@ def add_view_video(request, pk: int):
 def get_streaming_video(request, pk: int):
     file, status_code, content_length, content_range = open_file(request, pk)
     response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
-    if not content_range:
-        add_view_video(request, pk)
     response['Accept-Ranges'] = 'bytes'
     response['Content-Length'] = str(content_length)
     response['Cache-Control'] = 'no-cache'
