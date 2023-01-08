@@ -21,8 +21,9 @@ class UserSerializer(serializers.ModelSerializer):
             'gender',
             'birth_date',
             'is_block',
+            'is_staff',
         )
-        read_only_fields = (settings.LOGIN_FIELD, 'is_block')
+        read_only_fields = (settings.LOGIN_FIELD, 'is_block','is_staff')
 
     def update(self, instance, validated_data):
         email_field = get_user_email_field_name(User)

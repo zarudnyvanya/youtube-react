@@ -4,6 +4,7 @@ import ContentLoader from "react-content-loader"
 import s from './CardVideo.module.scss'
 const Skeleton = (props) => (
 
+  
         <ContentLoader
             className={s.video__item__skeleton}
             speed={1}
