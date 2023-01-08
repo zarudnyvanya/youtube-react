@@ -1,3 +1,8 @@
+import os
+import random
+import string
+import subprocess
+
 from PIL import Image
 from django.contrib.auth import get_user_model
 from django.core.files import File
@@ -13,6 +18,7 @@ from users.models import CustomUser
 from moviepy.editor import VideoFileClip
 
 User = get_user_model()
+
 
 
 # Create your models here.
@@ -57,6 +63,7 @@ class Video(models.Model):
 
         video = VideoFileClip(self.file.path)
 
+
         if not self.duration:
             self.duration = video.duration
             self.save()
@@ -68,6 +75,7 @@ class Video(models.Model):
             self.image.save(self.title + '.png', File(temp))
             temp.close()
             self.save()
+        video=None
 
 
 
@@ -115,10 +123,10 @@ class Channel(models.Model):
 
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, primary_key=True)
     name = models.CharField(max_length=40, default="Channel Name")
-    description = models.TextField(null=True)
-    image = models.ImageField(upload_to='image/profile/image/%Y/%m/', null=True)
-    banner = models.ImageField(upload_to='image/profile/banner/%Y/%m/', null=True)
-    logo = models.ImageField(upload_to='image/profile/logo/%Y/%m/', null=True)
+    description = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='image/profile/image/%Y/%m/', null=True, blank=True)
+    banner = models.ImageField(upload_to='image/profile/banner/%Y/%m/', null=True, blank=True)
+    logo = models.ImageField(upload_to='image/profile/logo/%Y/%m/', null=True, blank=True)
     is_active = models.BooleanField(default=0)
     subscribers = models.ManyToManyField(User, through="Subscribers", related_name='subs')
 
@@ -142,12 +150,4 @@ class Subscribers(models.Model):
         verbose_name_plural = "Подписчики"
 
 
-@receiver(post_save, sender=CustomUser)
-def create_user_channel(sender, instance, created, **kwargs):
-    if created:
-        Channel.objects.create(user=instance)
 
-
-@receiver(post_save, sender=CustomUser)
-def save_user_channel(sender, instance, **kwargs):
-    instance.channel.save()

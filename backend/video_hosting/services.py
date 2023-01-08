@@ -4,6 +4,9 @@ from django.shortcuts import get_object_or_404
 
 from .models import Video
 
+import subprocess
+import os
+
 
 def ranged(
         file: IO[bytes],
