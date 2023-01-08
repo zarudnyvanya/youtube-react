@@ -85,4 +85,5 @@ class LikeThread(threading.Thread):
 @receiver(post_save, sender=Video)
 def video_processing(sender, instance, created, **kwargs):
     if created:
-        LikeThread(instance).start()
+        pass
+        #LikeThread(instance).start()
