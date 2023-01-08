@@ -13,7 +13,7 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
 	
 	useEffect(() => {
 		
-		const url = 'api/v1/channel/me/'
+		const url = '/api/v1/channel/me/'
 		
 		const getUser = async () => {
 			const response = await doRequest(url, userToken)

@@ -55,9 +55,10 @@
 	& p {
 
 		height: 100%;
+		word-spacing: calc(-3px - 0.1vw);
 
 		font-size: calc(14px + 0.2vw);
-		//line-height: calc(20px + 0.8vh);
+		line-height: calc(10px + 0.5vw);
 		font-weight: 400;
 		color: #f1f1f1;
 		margin-bottom: calc(1px + 0.1vw);
@@ -78,7 +79,7 @@
 		//line-height: calc(15px + 0.7vh);
 		font-weight: 400;
 		color: #AAAAAA;
-		//word-spacing: calc(-3px - 0.1vw);
+		word-spacing: calc(-3px - 0.1vw);
 
 
 	}
@@ -90,8 +91,9 @@
 
 	img {
 		object-fit: cover;
-		width: calc(24px + 2vw);
-		height: calc(24px + 2vw);
+		width: calc(32px + 1vw);
+		height: calc(32px + 1vw);
+		border-radius: 50%;
 	}
 
 	svg {
