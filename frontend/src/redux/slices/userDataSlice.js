@@ -9,6 +9,7 @@ const initialState = {
 		gender: '',
 		birth_date: '',
 		image: '',
+		is_staff: false,
 	},
 	
 	userChannel: {

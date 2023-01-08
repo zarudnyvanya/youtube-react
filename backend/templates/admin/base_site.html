@@ -9,7 +9,10 @@
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}
-<h1 id="site-name"><a href="{% url 'admin:index' %}"> MyYouTube Administration</a></h1>
+<div style="display:flex; align-items: center;">
+	<h1 id="site-name"><a href="{% url 'admin:index' %}">MyYouTube Administration</a></h1>
+	<h1 id="site-name"><a href="http://139.59.147.181/">LOSTI</a></h1>
+</div>
 {% endblock %}
 
 {% block nav-global %}{% endblock %}

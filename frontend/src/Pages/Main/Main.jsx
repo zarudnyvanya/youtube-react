@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Genres } from '../../components/Genres/Genres'
-
+import s from './Main.module.scss'
 import { Header } from '../../components/Header/Header'
 import { Navigation } from '../../components/Navigation/Navigation'
 import { Popup } from '../../components/Popup/Popup'
@@ -74,12 +74,7 @@ export const Main = () => {
             <Genres setVideos={setVideos} />
 
             {isLoading ? (
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-                  justifyItems: 'center'
-                }}>
+              <div className={s.skeleton__wrapper}>
                 {[...new Array(8)].map((_, Index) => (
                   <Skeleton key={Index} />
                 ))}
