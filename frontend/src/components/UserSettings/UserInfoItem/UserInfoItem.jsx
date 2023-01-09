@@ -10,7 +10,7 @@ const UserInfoItem = ({isOpen, setIsOpen,isOpenLogo,setIsOpenLogo}) => {
 	const userChannel = useSelector(state => state.user.userChannel)
 	const userToken = useSelector(state => state.user.userToken)
 	const userData = useSelector(state => state.user.userData)
-	console.log(userChannel)
+	
 	useEffect(() => {
 		
 		const url = '/api/v1/channel/me/'
@@ -19,7 +19,7 @@ const UserInfoItem = ({isOpen, setIsOpen,isOpenLogo,setIsOpenLogo}) => {
 			const response = await doRequest(url, userToken)
 			const data = await response.json()
 			
-			console.log(data)
+			
 			dispatch(setUserChannel(data))
 			
 			// setVideos(data)

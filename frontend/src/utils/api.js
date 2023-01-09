@@ -122,8 +122,8 @@ export const reDuration = (secs) => {
     const minutes = Math.floor(divisorForMinutes / 60)
 
     const divisorForSeconds = divisorForMinutes % 60
-    const seconds = Math.ceil(divisorForSeconds)
-
+    const seconds = Math.floor(divisorForSeconds)
+    
     let newMinutes = minutes
     let newSeconds = seconds
 

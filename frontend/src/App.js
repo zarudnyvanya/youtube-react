@@ -15,6 +15,7 @@ import './App.scss'
 import UserChannel from './Pages/UserChannel/UserChannel'
 import VideoPage from './Pages/VideoPage/VideoPage'
 import {HOST} from '../src/components/HOST/HOST'
+import {setEdit} from "./redux/slices/manageVideoSlice";
 function App() {
   const dispatch = useDispatch()
   const userToken = useSelector((state) => state.user.userToken)
@@ -22,7 +23,7 @@ function App() {
   
   useEffect(() => {
     dispatch(setIsAuth(false))
-
+    
     dispatch(setUserToken(localStorage.getItem('user')))
 
     if (userToken) {

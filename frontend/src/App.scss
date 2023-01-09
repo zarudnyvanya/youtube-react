@@ -44,7 +44,7 @@ a {
 
 .main__content {
 	width: 100%;
-	max-width: calc(100% - 208px);
+	//max-width: calc(100% - 208px);
 	// display: flex;
 	// justify-content: center;
 	// background-color: aqua;
@@ -52,7 +52,7 @@ a {
 
 .main__content-nav {
 	width: 100%;
-	max-width: calc(100% - 73px);
+	//max-width: calc(100% - 73px);
 	@media (max-width: 1025px) {
 
 		max-width: 100%;

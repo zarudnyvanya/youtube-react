@@ -1,5 +1,6 @@
 import s from './SubscribeItem.module.scss'
 import {Link} from "react-router-dom";
+import {HOST} from "../HOST/HOST";
 
 const SubscribeItem = ({image, nameChannel, pkChannel}) => {
 	

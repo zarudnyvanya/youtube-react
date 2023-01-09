@@ -7,11 +7,12 @@ import { Popup } from '../../components/Popup/Popup'
 import { Home } from '../Home/Home'
 import Skeleton from '../../components/CardVideo/CardSkeleton'
 
-import { setNavIsOpen } from './../../redux/slices/navigationSlice'
+
 import doRequest from '../../components/doRequest/doRequest'
-import { useDispatch, useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import UploadVideo from '../../components/UploadVideo/UploadVideo'
 import Anonymous from "../../components/Anonymous/Anonymous";
+
 
 export const Main = () => {
   const userToken = useSelector((state) => state.user.userToken)
@@ -28,7 +29,9 @@ export const Main = () => {
   
   
   
+  
   useEffect(() => {
+    
     let url = '/api/v1/video/'
     if (userToken) {
       const apiRequest = async () => {

@@ -170,6 +170,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
     def subscribe(self, request, pk):
         channel = get_object_or_404(Channel, pk=pk)
         subscribe = Subscribers.objects.filter(user=request.user, channel=channel).exists()
+        mail = ChannelMailingList.objects.filter(user=request.user, channel=self.get_object.channel).exists()
         if request.method == 'POST':
             if not subscribe:
                 Subscribers.objects.create(user=request.user, channel=channel)
@@ -180,7 +181,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
                 instance.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
         elif request.method == "GET":
-            return Response({"subscribe": subscribe})
+            return Response({"subscribe": subscribe,'mail': mail})
 
     @action(detail=False, methods=['get'])
     def follow(self, request):
