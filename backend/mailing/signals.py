@@ -11,7 +11,13 @@ from video_hosting.models import Video, Subscribers
 @receiver(post_save, sender=Video)
 def send_mail(sender, instance, created, **kwargs):
     if created:
-        time.sleep(60)
+        while True:
+            try:
+                img = instance.image.url
+                break
+            except Exception as ex:
+                time.sleep(5)
+
         channel = instance.channel
         mylist = ChannelMailingList.objects.filter(channel=channel)
         email = [elem.user.email for elem in mylist]
@@ -22,7 +28,7 @@ def send_mail(sender, instance, created, **kwargs):
 					Выложил видео {instance.title} 
 					в {instance.created_at}</div> 
 					<a href='http://139.59.147.181/videoPage/{instance.pk}'>LOSTI</a>
-					<img src=http://139.59.147.181:8432{instance.image.url}>"""
+					<img src=http://139.59.147.181:8432{img}>"""
         print(kwargs)
         print('send', email)
         sendMail(text_content=text_content,
