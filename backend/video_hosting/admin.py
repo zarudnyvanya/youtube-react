@@ -19,11 +19,13 @@ class ChannelAdmin(admin.ModelAdmin):
     list_editable = ('is_active',)
     list_filter = ('is_active',)
 
+class ViewsAdmin(admin.ModelAdmin):
+    list_display = ('pk', 'user', 'video')
 
 # Re
 admin.site.register(Video, VideoAdmin)
 admin.site.register(Channel, ChannelAdmin)
 admin.site.register(Category, CategoryAdmin)
-admin.site.register(Views)
+admin.site.register(Views, ViewsAdmin)
 admin.site.register(Likes)
 admin.site.register(Subscribers)

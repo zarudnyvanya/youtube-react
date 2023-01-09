@@ -45,7 +45,7 @@ class Video(models.Model):
     duration = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     channel = models.ForeignKey("Channel", on_delete=models.CASCADE, verbose_name="Канал")
-    category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории")
+    category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории", blank=True)
     views = models.ManyToManyField(User, through='Views', verbose_name="Просмотры")
     likes = models.ManyToManyField(User, related_name='likes', through="Likes", verbose_name="Лайки")
 
@@ -96,12 +96,17 @@ class Video(models.Model):
 class Views(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="view_user")
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="view_video")
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('-time',)
         verbose_name = "Просмотр"
         verbose_name_plural = "Просмотры"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'video'], name='unique_migrationViews_user_video'
+            )
+        ]
 
 
 class Likes(models.Model):
@@ -110,6 +115,11 @@ class Likes(models.Model):
     class Meta:
         verbose_name = "Лайк"
         verbose_name_plural = "Лайки"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'video'], name='unique_migrationLikes_user_video'
+            )
+        ]
 
 
 
@@ -117,6 +127,7 @@ class Channel(models.Model):
     class Meta:
         verbose_name = "Канал"
         verbose_name_plural = "Каналы"
+
 
     def __str__(self):
         return f"{self.user.id}-{self.name}"
@@ -148,6 +159,11 @@ class Subscribers(models.Model):
     class Meta:
         verbose_name = "Подписчик"
         verbose_name_plural = "Подписчики"
+        constraints = [
+            models.UniqueConstraint(
+                fields=['user', 'channel'], name='unique_migrationSubscribers_user_channel'
+            )
+        ]
 
 
 
