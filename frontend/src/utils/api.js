@@ -80,6 +80,7 @@ export const reCurrentDate = (date) => {
 export const reDate = (date) => {
     let reDate = new Date(date)
     let dateSeconds = (Date.now() - reDate) / 1000
+    
     if (dateSeconds < 60) {
         return Math.floor(dateSeconds) + ' seconds ago'
     }
@@ -105,7 +106,7 @@ export const reDate = (date) => {
     let dateMonth = dateDay / 30
 
     if (dateMonth < 12) {
-        return Math.floor(dateMonth) + ' months ago'
+        return Math.floor(dateMonth) + ' month ago'
     }
 
     let dateYear = dateMonth / 12

@@ -2,7 +2,7 @@ import s from './InfoAboutUser.module.scss'
 
 import UserInfoItem from '../UserInfoItem/UserInfoItem'
 
-const InfoAboutUser = ({ isOpen ,setIsOpen }) => {
+const InfoAboutUser = ({ isOpen ,setIsOpen,isOpenLogo,setIsOpenLogo }) => {
 
   const fieldsSettings = [{}]
 
@@ -14,7 +14,7 @@ const InfoAboutUser = ({ isOpen ,setIsOpen }) => {
         </li>
         {fieldsSettings.map((field, index) => {
           return (
-            <UserInfoItem key={index} isOpen={isOpen} setIsOpen={setIsOpen} />
+            <UserInfoItem key={index} isOpen={isOpen} setIsOpen={setIsOpen} isOpenLogo={isOpenLogo} setIsOpenLogo={setIsOpenLogo}/>
           )
         })}
       </ul>

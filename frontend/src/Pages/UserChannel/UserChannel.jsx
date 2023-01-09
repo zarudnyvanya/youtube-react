@@ -13,7 +13,7 @@ import doRequest from './../../components/doRequest/doRequest'
 import s from './UserChannel.module.scss'
 import {CardVideo} from '../../components/CardVideo/CardVideo'
 
-import userLogo from '../../../src/assets/svg__header/user.png'
+
 import {useParams} from "react-router-dom";
 import {HOST} from '../../components/HOST/HOST'
 const options = ['Главная', 'Плейлисты', 'Каналы', 'О канале']
@@ -89,7 +89,7 @@ const UserChannel = () => {
 								{
 									currentChannel.logo ?
 										<img
-											src={HOST+userLogo}
+											src={userChannel.logo}
 											alt="logo"
 											className={s.logo__chanel}/>
 										:

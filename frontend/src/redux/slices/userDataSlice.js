@@ -61,6 +61,7 @@ const userSlice = createSlice({
 		setUserChannel(state, action) {
 			state.userChannel = action.payload
 		},
+		
 		setUserVideos(state, action) {
 			state.userVideos = action.payload
 		},
