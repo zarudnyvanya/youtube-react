@@ -170,7 +170,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
     def subscribe(self, request, pk):
         channel = get_object_or_404(Channel, pk=pk)
         subscribe = Subscribers.objects.filter(user=request.user, channel=channel).exists()
-        mail = ChannelMailingList.objects.filter(user=request.user, channel=self.get_object.channel).exists()
+        mail = ChannelMailingList.objects.filter(user=request.user, channel=channel).exists()
         if request.method == 'POST':
             if not subscribe:
                 Subscribers.objects.create(user=request.user, channel=channel)
