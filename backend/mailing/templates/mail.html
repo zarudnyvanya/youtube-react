@@ -9,15 +9,20 @@
 </head>
 <body>
 
-<div class="root">
-	<h1 class="losti">LOSTI</h1>
-	<div class="info">
-		<p>Пользователь <span class="user">{{ instance.channel.name }}</span> выложил видео <span class="title">{{ instance.title }}</span> в <span
-				class="time">{{ instance.created_at }}</span></p>
+<div class="root" style="background-color: rgba(1, 1, 1, 0.858);">
+	<h1 class="losti" style="text-align: center;color:rgba(188, 70, 70, 0.858);margin-bottom: 20px;">LOSTI</h1>
+	<div class="info" style="text-align: center;margin-bottom: 20px;">
+		<p>
+            Пользователь
+            <span class="user" style="font-weight: 700;color: rgba(255, 166, 0, 0.838);">{{ instance.channel.name }}</span>
+            выложил видео
+            <span class="title" style="font-weight: 700;color: rgba(255, 166, 0, 0.838);">{{ instance.title }}</span>
+            в
+            <span class="time" style="font-weight: 700;color: rgba(255, 166, 0, 0.838);">{{ instance.created_at }}</span></p>
 	</div>
-	<div class="video__block">
+	<div class="video__block" style="text-align: center;">
 		<a href="http://139.59.147.181/videoPage/{{ instance.pk }}">
-			<img src="http://139.59.147.181:8432{{ instance.image.url }}" alt="logo">
+			<img src="http://139.59.147.181:8432{{ instance.image.url }}" alt="logo" style="max-width: 100%;padding: 20px 100px;">
 		</a>
 	</div>
 </div>
