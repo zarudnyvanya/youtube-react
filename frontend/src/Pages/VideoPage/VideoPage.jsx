@@ -8,6 +8,7 @@ import {reDate, showViews} from "../../utils/api";
 import OtherVideos from "../../components/OtherVideos/OtherVideos";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import {Link} from "react-router-dom";
+import {duration} from "react-html5video";
 // const reDate = (date) => {
 //     let fullDate = new Date(date)
 //     let month = fullDate.getMonth() + 1
@@ -41,10 +42,6 @@ const VideoPage = () => {
 	
 	const [bellIsActive, setBellIsActive] = useState(false);
 	
-	
-	setTimeout(() => {
-		doRequest(`/api/v1/video/${videoId}/view/`, userToken, 'POST')
-	}, 10000)
 	
 	
 	useEffect(() => {
@@ -114,6 +111,19 @@ const VideoPage = () => {
 		
 	}
 	
+	useEffect(() => {
+		
+		const videoViews = ()=> {
+			const duration = Math.min(data.duration * 100,30000)
+			setTimeout(() => {
+				doRequest(`/api/v1/video/${videoId}/view/`, userToken, 'POST')
+			}, duration)
+		}
+		if(data) {
+			videoViews()
+		}
+	},[data]);
+	
 	
 	return (
 		<>
@@ -168,12 +178,12 @@ const VideoPage = () => {
 											</svg>
 										)}
 									</Link>
-										<div className={s.name__chanel_subscribe}>
-											<h2 className={s.name__chanel_subscribe_title}>{data && data.owner.name}</h2>
-											<p className={s.quantity__subscribe}>
-												{data && showViews(data.owner.subscribers, ['подпиcчик', 'подпиcчика', 'подпиcчиков'])}</p>
-										</div>
-									
+									<div className={s.name__chanel_subscribe}>
+										<h2 className={s.name__chanel_subscribe_title}>{data && data.owner.name}</h2>
+										<p className={s.quantity__subscribe}>
+											{data && showViews(data.owner.subscribers, ['подпиcчик', 'подпиcчика', 'подпиcчиков'])}</p>
+									</div>
+								
 								</div>
 								
 								
