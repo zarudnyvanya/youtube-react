@@ -1,5 +1,4 @@
-from django.core.mail import EmailMessage, EmailMultiAlternatives
-from django.template.loader import render_to_string
+from django.core.mail import EmailMultiAlternatives
 
 
 def sendMail(subject="Тема Письма", text_content="Сообщение",html_content=None, to:list=None):

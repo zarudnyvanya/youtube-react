@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from mailing.models import ChannelMailingList
 from video_hosting.models import Channel, Subscribers
 
-from rest_framework.exceptions import ParseError
+
 
 # Create your views here.
 class MailViewSet(viewsets.ViewSet):

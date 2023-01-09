@@ -1,9 +1,7 @@
-from django.core.validators import FileExtensionValidator
+
 
 from rest_framework import serializers
-from rest_framework.response import Response
 
-from users.models import CustomUser
 from .models import *
 
 from django.contrib.auth import get_user_model

@@ -1,6 +1,6 @@
 import threading
 import time
-import asyncio
+
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.template.loader import render_to_string

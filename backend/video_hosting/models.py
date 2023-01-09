@@ -1,7 +1,4 @@
-import os
-import random
-import string
-import subprocess
+
 
 from PIL import Image
 from django.contrib.auth import get_user_model
@@ -9,8 +6,7 @@ from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.core.validators import FileExtensionValidator
 from django.db import models
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 from config.services import crop_center, crop_center_v2
 from users.models import CustomUser

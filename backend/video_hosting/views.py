@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.viewsets import GenericViewSet
-from urllib3 import get_host
+
 
 from .serializers import *
 from .services import open_file, optimize_video_query, optimize_channel_query
