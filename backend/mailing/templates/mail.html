@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pismo</title>
+	<link rel="stylesheet" href="mail.css">
+</head>
+<body>
+
+<div class="root">
+	<h1 class="losti">LOSTI</h1>
+	<div class="info">
+		<p>Пользователь <span class="user">{{ instance.channel.name }}</span> выложил видео <span class="title">{{ instance.title }}</span> в <span
+				class="time">{{ instance.created_at }}</span></p>
+	</div>
+	<div class="video__block">
+		<a href="http://139.59.147.181/videoPage/{{ instance.pk }}">
+			<img src="http://139.59.147.181:8432{{ instance.image.url }}" alt="logo">
+		</a>
+	</div>
+</div>
+</body>
+</html>

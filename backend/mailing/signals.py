@@ -1,39 +1,47 @@
+import threading
 import time
-
+import asyncio
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from django.template.loader import render_to_string
 
 from mailing.models import ChannelMailingList
 from mailing.services import sendMail
 from video_hosting.models import Video, Subscribers
 
+class LikeThread(threading.Thread):
+    def __init__(self, obj, **kwargs):
+        self.instance  = obj
+        super(LikeThread, self).__init__(**kwargs)
+
+    def run(self):
+        while True:
+            try:
+                img = self.instance.image.url
+                break
+            except Exception as ex:
+                time.sleep(5)
+                print(ex)
+
+        channel = self.instance.channel
+        mylist = ChannelMailingList.objects.filter(channel=channel)
+        emails = [elem.user.email for elem in mylist]
+        text_content = 'This is an important message.'
+
+        html_content = render_to_string('mail.html', {'instance': self.instance})
+
+
+        for email in emails:
+            sendMail(text_content=text_content,
+                 html_content=html_content,
+                 to=[email])
+
 
 @receiver(post_save, sender=Video)
 def send_mail(sender, instance, created, **kwargs):
     if created:
-        while True:
-            try:
-                img = instance.image.url
-                break
-            except Exception as ex:
-                time.sleep(5)
+        LikeThread(instance).start()
 
-        channel = instance.channel
-        mylist = ChannelMailingList.objects.filter(channel=channel)
-        email = [elem.user.email for elem in mylist]
-        text_content = 'This is an important message.'
-
-        html_content = \
-            f"""<div>Канал {instance.channel.name} 
-					Выложил видео {instance.title} 
-					в {instance.created_at}</div> 
-					<a href='http://139.59.147.181/videoPage/{instance.pk}'>LOSTI</a>
-					<img src=http://139.59.147.181:8432{img}>"""
-        print(kwargs)
-        print('send', email)
-        sendMail(text_content=text_content,
-                 html_content=html_content,
-                 to=email)
 
 
 @receiver(post_delete, sender=Subscribers)
