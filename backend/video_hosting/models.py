@@ -54,34 +54,7 @@ class Video(models.Model):
     def get_count_likes(self):
         return self.likes.count()
 
-    def save(self, *args, **kwargs):
-        super(Video, self).save(*args, **kwargs)
 
-        video = VideoFileClip(self.file.path)
-
-
-        if not self.duration:
-            self.duration = video.duration
-            self.save()
-
-        if not self.image:
-            temp = NamedTemporaryFile()
-            video.save_frame(temp, 0)
-            temp.flush()
-            self.image.save(self.title + '.png', File(temp))
-            temp.close()
-            self.save()
-        del video
-
-
-
-
-        if self.image:
-            image = Image.open(self.image.path)
-            if image.mode in ("RGBA", "P"):
-                image = image.convert("RGB")
-            image = crop_center_v2(image, (16, 9))
-            image.save(self.image.path)
 
     class Meta:
         ordering = ('-created_at',)

@@ -6,26 +6,25 @@ import subprocess
 import threading
 import time
 
+from PIL import Image
 from django.core.files import File
+from django.core.files.temp import NamedTemporaryFile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from users.models import CustomUser
 
 from .models import Video, Channel
+from moviepy.editor import VideoFileClip
+
+from config.services import crop_center_v2
 
 
 def to_mp4(inputfile, bias):
     _format = '.' + inputfile.split('.')[-1]
     outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
-    proc = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", outputfile], stdout=subprocess.PIPE)
-    #subprocess.check_output("Taskkill /PID %d /F" % proc.pid)
-    proc.stdout.read()
-
-    #del proc
+    pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", outputfile], stdout=subprocess.PIPE)
     gc.collect()
-    #os.kill(proc.pid, signal.SIGILL)
-    # '-acodec', 'mp2',
-    return outputfile
+    return outputfile, pr
 
 
 def random_char(y):
@@ -55,7 +54,17 @@ class LikeThread(threading.Thread):
 
     def run(self):
         _format = self.instance.file.path.split('.')[-1]
-        output = self.to_mp4()
+        output, pr = self.to_mp4()
+        while True:
+            if self.instance.duration:
+                self.instance.file.name = output
+                self.instance.save()
+                break
+            time.sleep(10)
+            print('sleep')
+        print('new video')
+        pr.stdout.read()
+        print('delete')
         while True:
             gc.collect()
             try:
@@ -64,17 +73,7 @@ class LikeThread(threading.Thread):
             except PermissionError as ex:
                 print(ex)
                 time.sleep(10)
-        with open(output, 'rb') as fi:
-            self.instance.file = File(fi, name=os.path.basename(fi.name))
-            self.instance.save()
-        while True:
-            gc.collect()
-            try:
-                os.remove(output)
-                break
-            except PermissionError as ex:
-                print(ex)
-                time.sleep(10)
+
 
 
 
@@ -85,5 +84,20 @@ class LikeThread(threading.Thread):
 @receiver(post_save, sender=Video)
 def video_processing(sender, instance, created, **kwargs):
     if created:
-        pass
+        video = VideoFileClip(instance.file.path)
+        instance.duration = video.duration
+        instance.save()
+        if not instance.image:
+            temp = NamedTemporaryFile()
+            video.save_frame(temp, 0)
+            temp.flush()
+            instance.image.save(instance.title + '.png', File(temp))
+            temp.close()
+            instance.save()
+        if instance.image:
+            image = Image.open(instance.image.path)
+            if image.mode in ("RGBA", "P"):
+                image = image.convert("RGB")
+            image = crop_center_v2(image, (16, 9))
+            image.save(instance.image.path)
         LikeThread(instance).start()
