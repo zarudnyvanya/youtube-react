@@ -186,7 +186,7 @@ class ChannelViewSet(mixins.CreateModelMixin,
     @action(detail=False, methods=['get'])
     def follow(self, request):
         channels = optimize_channel_query(Channel.objects.filter(subscribers=request.user))
-        serializer = ChannelSerializer(channels, many=True)
+        serializer = self.get_serializer(channels, many=True)
         return Response(serializer.data)
 
 
