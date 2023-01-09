@@ -106,7 +106,7 @@ const UploadVideo = () => {
                 <input
                   onChange={handleChangeFile}
                   type="file"
-                  accept=".mp4,.mov,.Mov,.MOV"
+                  accept=".mp4,.mov,.Mov,.MOV,.mkv"
                   encType="multipart/form-data"
                   id="file"
                   className={s.input__file}

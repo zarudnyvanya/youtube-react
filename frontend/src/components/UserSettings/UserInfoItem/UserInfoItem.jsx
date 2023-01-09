@@ -5,12 +5,12 @@ import doRequest from "../../doRequest/doRequest";
 import {setUserChannel} from "../../../redux/slices/userDataSlice";
 import {reCurrentDate, reGender} from "../../../utils/api";
 
-const UserInfoItem = ({isOpen, setIsOpen}) => {
+const UserInfoItem = ({isOpen, setIsOpen,isOpenLogo,setIsOpenLogo}) => {
 	const dispatch = useDispatch()
 	const userChannel = useSelector(state => state.user.userChannel)
 	const userToken = useSelector(state => state.user.userToken)
 	const userData = useSelector(state => state.user.userData)
-	
+	console.log(userChannel)
 	useEffect(() => {
 		
 		const url = '/api/v1/channel/me/'
@@ -41,17 +41,10 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
 	
 	const fieldsSettings = [
 		{
-			title: 'Имя',
-			description: userData.first_name
+			title: 'Название канала',
+			description: userChannel.name
 		},
-		{
-			title: 'Дата рождения',
-			description: reCurrentDate(userData.birth_date)
-		},
-		{
-			title: 'Пол',
-			description: reGender(userData.gender)
-		},
+		
 		{
 			title: 'Электронная почта',
 			description: userData.email
@@ -61,20 +54,11 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
 	
 	return (
 		<>
-			<li className={s.item__info} onClick={() => setIsOpen(!isOpen)}>
+			<li className={s.item__info} onClick={() => setIsOpenLogo(!isOpenLogo)}>
 				<span className={s.title__person_info}>Логотип</span>
 				<div className={s.person__description}>
 					<span className={s.person__info}>Добавьте лого в аккаунт</span>
-					<span className={s.arrow}>
-          <svg
-	          xmlns="http://www.w3.org/2000/svg"
-	          width="24"
-	          height="24"
-	          fill="white"
-	          viewBox="0 0 24 24">
-            <polygon points="7.293 4.707 14.586 12 7.293 19.293 8.707 20.707 17.414 12 8.707 3.293 7.293 4.707"/>
-          </svg>
-        </span>
+					<img src={userChannel.logo} alt='logo'/>
 				</div>
 			</li>
 			
@@ -102,23 +86,23 @@ const UserInfoItem = ({isOpen, setIsOpen}) => {
 				
 			}
 			
-			<li className={s.item__info} onClick={() => setIsOpen(!isOpen)}>
-				<span className={s.title__person_info}>Пароль</span>
-				<div className={s.person__description}>
-					<span className={s.person__info}>********</span>
-					<span className={s.arrow}>
-                        <svg
-	                        xmlns="http://www.w3.org/2000/svg"
-	                        width="24"
-	                        height="24"
-	                        fill="white"
-	                        viewBox="0 0 24 24">
-                        <polygon
-	                        points="7.293 4.707 14.586 12 7.293 19.293 8.707 20.707 17.414 12 8.707 3.293 7.293 4.707"/>
-                        </svg>
-                    </span>
-				</div>
-			</li>
+			{/*<li className={s.item__info} onClick={() => setIsOpen(!isOpen)}>*/}
+			{/*	<span className={s.title__person_info}>Пароль</span>*/}
+			{/*	<div className={s.person__description}>*/}
+			{/*		<span className={s.person__info}>********</span>*/}
+			{/*		<span className={s.arrow}>*/}
+      {/*                  <svg*/}
+	    {/*                    xmlns="http://www.w3.org/2000/svg"*/}
+	    {/*                    width="24"*/}
+	    {/*                    height="24"*/}
+	    {/*                    fill="white"*/}
+	    {/*                    viewBox="0 0 24 24">*/}
+      {/*                  <polygon*/}
+	    {/*                    points="7.293 4.707 14.586 12 7.293 19.293 8.707 20.707 17.414 12 8.707 3.293 7.293 4.707"/>*/}
+      {/*                  </svg>*/}
+      {/*              </span>*/}
+			{/*	</div>*/}
+			{/*</li>*/}
 		
 		</>
 	)

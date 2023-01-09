@@ -8,7 +8,7 @@
 	transition: background-color 0.3s;
 
 	&:hover {
-		background-color: rgba(54, 54, 54, 0.2);
+		background-color: rgba(87, 87, 87, 0.2);
 	}
 
 	&:not(:last-child) {
@@ -46,6 +46,12 @@
 	align-items: center;
 	justify-content: space-between;
 
+	img{
+		width: calc(24px + 2.5vw);
+		height: calc(24px + 2.5vw);
+		border-radius: 50%;
+
+	}
 	@media(max-width: 480px) {
 		svg {
 			width: 12px;

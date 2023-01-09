@@ -1,11 +1,12 @@
 .anonim_wrapper {
 	background-color: #1f1f1f;
-	position: absolute;
+	position: fixed;
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 80%;
 	border-radius: 15px;
+
 
 
 }
@@ -95,7 +96,7 @@
 			25% {
 				transform: rotate(135deg) scale(1.5);
 				top: -40%;
-				left: 100%;
+				left: 85%;
 
 
 			}
@@ -103,7 +104,7 @@
 			50% {
 				transform: rotate(225deg);
 				top: 90%;
-				left: 95%;
+				left: 90%;
 			}
 			75% {
 				transform: rotate(315deg) scale(1.5);
@@ -203,7 +204,9 @@
 		}
 
 	}
-
+	.anonim_wrapper {
+		top: 55%;
+	}
 	.wrapper__link {
 		padding-top: 20px;
 	}

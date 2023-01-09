@@ -9,13 +9,12 @@ export const CardVideo = ({
 	                          videoFile,
 	                          videoTitle,
 	                          videoImage,
-														
 	                          videoOwner,
 	                          videoDate,
 	                          videoDuration,
                           }) => {
 	
-	console.log(videoImage)
+	
 	return (
 		<div className={s.video__item}>
 			<div className={s.block__video}>

@@ -86,11 +86,15 @@
   align-self: center;
   outline: none;
   border: none;
-  background-color: #303030;
+  background-color: #1a73e8;
   color: #ffffff;
   border-radius: 5px;
   font-size:16px;
   padding:6px;
   margin-top: 15px;
+  transition: background-color .3s;
+  &:hover{
+    background-color: #3ea6ff;
+  }
 }
 

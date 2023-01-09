@@ -22,7 +22,7 @@ export const Popup = () => {
 			<div className={s.popup_registr_authoriz}>
 				<div className="wrapper_popup">
 					<div className={s.user_info}>
-						<img src={userImg} alt="profile"/>
+						<img src={userChannel.logo} alt="profile" style={{width:'32px',height:'32px',borderRadius: '50%'}}/>
 						<span>{userData && userData.email ? userData.email : 'Anonymous'}</span>
 					</div>
 					
