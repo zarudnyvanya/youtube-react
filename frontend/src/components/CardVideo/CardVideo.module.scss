@@ -20,12 +20,12 @@
 		position: absolute;
 		background-color: rgba(#000000, 0.7);
 		font-weight: 400;
-		font-size: calc(12px + 0.1vw);
+		font-size: calc(12px + 0.05vw);
 
 		border-radius: 5px;
 		//line-height: 12px;
 		color: #f1f1f1;
-		padding: calc(1px + 0.1vw) calc(3px + 0.1vw);
+		padding: calc(1px + 0.05vw) calc(2px + 0.1vw);
 		right: 6px;
 		bottom: 9px;
 
@@ -69,7 +69,7 @@
 	& p {
 
 		height: 100%;
-		word-spacing: calc(1px + 0.05vw);
+		//word-spacing: calc(1px + 0.05vw);
 
 
 		font-size: calc(14px + 0.2vw);
@@ -94,7 +94,7 @@
 		//line-height: calc(15px + 0.7vh);
 		font-weight: 400;
 		color: #AAAAAA;
-		word-spacing: calc(1px + 0.05vw);
+		//word-spacing: calc(1px + 0.05vw);
 
 
 	}
