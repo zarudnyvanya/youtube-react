@@ -33,11 +33,25 @@
 	}
 
 
+
+
 	&__poster {
 		width: 100%;
 		border-radius: 10px;
 
 
+	}
+}
+
+.video__edit{
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	cursor: pointer;
+	svg{
+		fill: red;
+		width: 20px;
+		height: 20px;
 	}
 }
 
@@ -55,7 +69,8 @@
 	& p {
 
 		height: 100%;
-		word-spacing: calc(-3px - 0.1vw);
+		word-spacing: calc(-3px + 0.2vw);
+
 
 		font-size: calc(14px + 0.2vw);
 		line-height: calc(14px + 0.5vw);
@@ -79,7 +94,7 @@
 		//line-height: calc(15px + 0.7vh);
 		font-weight: 400;
 		color: #AAAAAA;
-		word-spacing: calc(-3px - 0.1vw);
+		word-spacing: calc(-3px + 0.2vw);
 
 
 	}

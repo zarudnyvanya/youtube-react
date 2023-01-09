@@ -16,12 +16,13 @@ import {CardVideo} from '../../components/CardVideo/CardVideo'
 
 import {useParams} from "react-router-dom";
 import {HOST} from '../../components/HOST/HOST'
+
 const options = ['Главная', 'Плейлисты', 'Каналы', 'О канале']
 
 const UserChannel = () => {
 	const dispatch = useDispatch()
 	
-	const userData = useSelector((state) => state.user.userData)
+	
 	const userToken = useSelector((state) => state.user.userToken)
 	const userChannel = useSelector((state) => state.user.userChannel)
 	const userVideos = useSelector((state) => state.user.userVideos)
@@ -29,12 +30,18 @@ const UserChannel = () => {
 	
 	const [isLoading, setIsLoading] = useState(true)
 	const [value, setValue] = useState(0)
-	const [userId, setUserId] = useState()
+	
 	const [currentChannel, setCurrentChannel] = useState({});
+	
+	const [isSubscribe, setIsSubscribe] = useState(false)
+	const [bellIsActive, setBellIsActive] = useState(false);
+	
+	const [edit, setEdit] = useState(false);
 	
 	const {pk} = useParams()
 	
 	useEffect(() => {
+		setEdit(false)
 		setIsLoading(true)
 		const url = `/api/v1/channel/${pk}/`
 		
@@ -51,6 +58,8 @@ const UserChannel = () => {
 			getUserVideos()
 		}
 	}, [pk, userToken])
+	
+	
 	
 	useEffect(() => {
 		
@@ -74,7 +83,42 @@ const UserChannel = () => {
 		setValue(index)
 	}
 	
-	console.log('pk', pk, 'userChannel', userChannel.pk)
+	useEffect(() => {
+		
+		const getSubscribe = async () => {
+			const response = await doRequest(`/api/v1/channel/${pk}/subscribe/`, userToken)
+			const status = await response.json()
+			setIsSubscribe(status.subscribe)
+			setBellIsActive(status.mail)
+			
+		}
+		if (userToken) {
+			getSubscribe()
+		}
+	}, [userToken]);
+	
+	const handlerSubscribe = () => {
+		if (isSubscribe) {
+			setIsSubscribe(false)
+			doRequest(`/api/v1/channel/${pk}/subscribe/`, userToken, 'DELETE')
+		} else {
+			setIsSubscribe(true)
+			doRequest(`/api/v1/channel/${pk}/subscribe/`, userToken, 'POST')
+		}
+		
+	}
+	const handlerBell = () => {
+		if (bellIsActive) {
+			setBellIsActive(false)
+			doRequest(`/api/v1/channel/${pk}/mail/`, userToken, 'DELETE')
+		} else {
+			setBellIsActive(true)
+			doRequest(`/api/v1/channel/${pk}/mail/`, userToken, 'POST')
+		}
+		
+	}
+	
+	
 	
 	return (
 		<>
@@ -89,7 +133,7 @@ const UserChannel = () => {
 								{
 									currentChannel.logo ?
 										<img
-											src={userChannel.logo}
+											src={currentChannel.logo}
 											alt="logo"
 											className={s.logo__chanel}/>
 										:
@@ -130,11 +174,42 @@ const UserChannel = () => {
 							
 							{
 								pk == userChannel.pk ?
-									<div className={s.manager__wrapper}>
-										<a href="#" className={s.video__management}>
-											Управление видео
-										</a>
-									</div> : ''}
+									<div className={s.manager__wrapper}
+									     onClick={()=>setEdit(!edit)}
+									     style={!edit ? {backgroundColor: '#3ea6ff'} : {backgroundColor: 'orange'}}>
+										<span className={s.video__management}>
+											{!edit ? 'Управление видео' : 'Закрыть управление'}
+										</span>
+									</div>
+									
+									:
+									
+									<div className={s.wrapper__bell__following}
+									     style={isSubscribe ? {backgroundColor: "gray"} : {backgroundColor: 'red'}}>
+										<button
+											className={s.btn__subscribe}
+											onClick={() => handlerSubscribe()}
+										
+										>
+											{isSubscribe ? 'Отписаться' : 'Подписаться'}
+										</button>
+										{isSubscribe ?
+											<button className={s.bell_notification} onClick={() => handlerBell()}>
+												<svg viewBox="0 0 32 32" width='24px' height='24px'
+												     fill={bellIsActive ? 'white' : 'none'}
+												     stroke={bellIsActive ? 'none' : 'white'}>
+													<g id="Bell">
+														<path
+															d="M16,8a3,3,0,1,1,3-3A3,3,0,0,1,16,8Zm0-4a1,1,0,1,0,1,1A1,1,0,0,0,16,4Z"/>
+														<path
+															d="M19,24H13a1,1,0,0,0-1,1v1a4,4,0,0,0,8,0V25A1,1,0,0,0,19,24Z"/>
+														<path
+															d="M28.45,24.11A6.21,6.21,0,0,1,25,18.53V15A9,9,0,0,0,7,15v3.53a6.21,6.21,0,0,1-3.45,5.58A1,1,0,0,0,4,26H28a1,1,0,0,0,.45-1.89Z"/>
+													</g>
+												</svg>
+											</button> : ''}
+									</div>
+							}
 						</div>
 						
 						<div className={s.select__options__chanel}>
@@ -182,7 +257,8 @@ const UserChannel = () => {
 											videoOwner={video.owner}
 											videoDate={video.created_at}
 											videoDuration={video.duration}
-											
+											edit={edit}
+											setEdit={setEdit}
 										/>
 									)
 								})}

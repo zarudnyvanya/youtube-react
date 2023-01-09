@@ -12,7 +12,7 @@ import explorer from '../../assets/svg__aside/explore.svg'
 import library from '../../assets/svg__aside/library.svg'
 import subscriptions from '../../assets/svg__aside/subscriptions.svg'
 
-console.log(home)
+
 const navItems = [
 	{
 		id: 1,

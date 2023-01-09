@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {useSelector} from "react-redux";
 import doRequest from "../doRequest/doRequest";
 import {HOST} from '../HOST/HOST'
-const OtherVideos = () => {
+const OtherVideos = ({videoId}) => {
     const [videos, setVideos] = useState([])
 
     const userToken = useSelector(state => state.user.userToken)
@@ -26,7 +26,7 @@ const OtherVideos = () => {
 
     }, []);
 
-    console.log(videos)
+   
 
     return (
         <div className={s.block__other_video}>
@@ -34,12 +34,13 @@ const OtherVideos = () => {
 
                 {videos.map((obj) => {
                     return (
+                      videoId !== obj.id && (
                         <Link to={`/videoPage/${obj.id}`} key={obj.id}>
                             <li className={s.other__video_item}>
                                 <div className={s.wrapper__other_video}>
                                     <video
                                         className={s.other__video}
-                                        poster={HOST+obj.image}></video>
+                                        poster={obj.image}></video>
                                     <span>{reDuration(obj.duration)}</span>
                                 </div>
                                 <div className={s.wrapper__chanel_other}>
@@ -50,6 +51,7 @@ const OtherVideos = () => {
                                 </div>
                             </li>
                         </Link>
+                      )
 
 
                     )

@@ -11,8 +11,7 @@ export const Popup = () => {
 	const isAuth = useSelector((state) => state.user.isAuth)
 	const userChannel = useSelector(state => state.user.userChannel)
 	
-	console.log('userChannel', userChannel)
-	console.log('userData', userData)
+
 	const outsideClick = () => {
 		dispatch(setUserPopup(false))
 	}

@@ -1,8 +1,7 @@
 import { CardVideo } from '../../components/CardVideo/CardVideo'
 
 import s from './Home.module.scss'
-import UserSettings from '../../components/UserSettings/UserSettings'
-import { User } from '../../components/User/User'
+
 import { useSelector } from 'react-redux'
 export const Home = ({ videos, searchValue }) => {
   const isAuth = useSelector((state) => state.user.isAuth)

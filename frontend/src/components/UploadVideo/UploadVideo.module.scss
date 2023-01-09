@@ -168,9 +168,10 @@
 }
 
 .formatVideo {
-    width: 500px;
-    height: 500px;
-    padding: 50px;
+    //width: 500px;
+    //height: 500px;
+    padding: 20px;
+
 }
 
 .videoNameContent, .videoDescriptionContent {
@@ -180,17 +181,17 @@
 }
 
 .videoNameInfo, .videoDescriptionInfo {
-    font-size: 25px;
+    font-size: calc(14px + 0.6vw);
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .videoName, .videoDescription {
     //width: 860px;
-     width: 100%;
+    // width: 100%;
     border-radius: 5px;
     border: 1px solid gray;
-    padding: 20px 20px;
+    padding: calc(10px + 0.2vw) calc(10px + 0.2vw);
     background-color: #282828;
     font-size: 16px;
     color: #fff;
@@ -269,7 +270,7 @@
 .videoFormatClose {
     cursor: pointer;
     position: absolute;
-    right: 50px;
+    right: 20px;
     font-size: 20px;
     top: 20px;
 }
