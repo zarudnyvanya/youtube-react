@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.viewsets import GenericViewSet
+from urllib3 import get_host
 
 from .serializers import *
 from .services import open_file, optimize_video_query, optimize_channel_query
@@ -39,46 +40,55 @@ def get_streaming_video(request, pk: int):
 ##############
 class VideoViewSet(viewsets.ModelViewSet):
     queryset = optimize_video_query(Video.objects.all())
-    serializer_class = VideoSerializer
     permission_classes = (IsAuthenticatedOrOwnerOrReadOnly,)
     http_method_names = ('get', 'head', 'options', 'post', "patch", 'delete')
 
     def get_serializer_class(self):
-        serializer_class = self.serializer_class
+        serializer_class = VideoSerializer
         if self.request.method in ('PUT', 'PATCH'):
             serializer_class = VideoUpdateSerializer
         return serializer_class
 
+    def get_serializer(self, *args, **kwargs):
+        serializer_class = self.get_serializer_class()
+        kwargs['context'] = self.get_serializer_context()
+        return serializer_class(*args, **kwargs)
     def get_permissions(self):
         if self.action in ['last_views', 'new', 'like', 'view']:
             return (permissions.IsAuthenticated(),)
         return (IsAuthenticatedOrOwnerOrReadOnly(),)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
     def get_instance(self, pk=None):
         return get_object_or_404(Video, pk=pk)
 
     @action(detail=True, methods=['get'])
     def category(self, request, pk=None):
-        video = optimize_video_query(Video.objects.filter(category__in=[pk]))
-        serializer = VideoSerializer(video, many=True)
+        video = self.filter_queryset(optimize_video_query(Video.objects.filter(category__in=[pk])))
+        serializer = self.get_serializer(video, many=True, context = {'request':request})
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
     def channel(self, request, pk=None):
-        video = optimize_video_query(Video.objects.filter(channel=pk))
-        serializer = VideoSerializer(video, many=True)
+
+        video = self.filter_queryset(optimize_video_query(Video.objects.filter(channel=pk)))
+        serializer = self.get_serializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def last_views(self, request):
         video = optimize_video_query(Video.objects.filter(views=request.user).order_by('-view_video__time'))
-        serializer = VideoSerializer(video, many=True)
+        serializer = self.get_serializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=False, methods=['get'])
     def new(self, request):
         video = optimize_video_query(Video.objects.filter(~Q(views=request.user)))
-        serializer = VideoSerializer(video, many=True)
+        serializer = self.get_serializer(video, many=True)
         return Response(serializer.data)
 
     @action(detail=True, methods=['get', 'post', 'delete'])
@@ -102,8 +112,9 @@ class VideoViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def view(self, request, pk=None):
         video = get_object_or_404(Video, pk=pk)
-        video.views.remove(request.user)
-        video.views.add(request.user)
+        # video.views.remove(request.user)
+        # video.views.add(request.user)
+        Views.objects.update_or_create(user=request.user, video=video)
         return Response(status=status.HTTP_201_CREATED)
 
 class ChannelViewSet(mixins.CreateModelMixin,

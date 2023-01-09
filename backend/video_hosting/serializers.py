@@ -47,6 +47,8 @@ class VideoSerializer(serializers.ModelSerializer):
     views = serializers.IntegerField(source='get_count_views', read_only=True)
     likes = serializers.IntegerField(source='get_count_likes', read_only=True)
 
+
+
     def validate(self, attrs):
         category = attrs['category']
         if len(category) > 3:

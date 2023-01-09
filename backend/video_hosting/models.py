@@ -45,7 +45,7 @@ class Video(models.Model):
     duration = models.CharField(max_length=100, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     channel = models.ForeignKey("Channel", on_delete=models.CASCADE, verbose_name="Канал")
-    category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории")
+    category = models.ManyToManyField(Category, related_name="category", verbose_name="Категории", null=True, blank=True)
     views = models.ManyToManyField(User, through='Views', verbose_name="Просмотры")
     likes = models.ManyToManyField(User, related_name='likes', through="Likes", verbose_name="Лайки")
 
@@ -96,7 +96,7 @@ class Video(models.Model):
 class Views(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="view_user")
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="view_video")
-    time = models.DateTimeField(auto_now_add=True)
+    time = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ('-time',)
