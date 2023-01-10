@@ -57,7 +57,7 @@ class LikeThread(threading.Thread):
 
         for_delete = self.instance.file.path
 
-        self.instance.file.name = output
+        self.instance.file.name = "\\".join(output.split("\\")[-6:])
         self.instance.save()
 
         print('new video')
