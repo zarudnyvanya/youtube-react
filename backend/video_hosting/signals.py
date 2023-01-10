@@ -20,9 +20,11 @@ from .models import Video, Channel
 
 def to_mp4(inputfile, bias):
     _format = '.' + inputfile.split('.')[-1]
-    outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
-    pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264','-acodec', 'aac', "-r", "30", "-movflags", "frag_keyframe+empty_moov", "-vsync", "2", outputfile],
+    outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mpd"
+    pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', '-acodec' 'aac',"-r", "30", "-vsync", "2", outputfile],
                           stdout=subprocess.PIPE)
+
+
     gc.collect()
     return outputfile, pr
 
