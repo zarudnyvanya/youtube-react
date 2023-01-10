@@ -23,7 +23,7 @@ def to_mp4(inputfile, bias):
     outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mpd"
     pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', '-acodec' 'aac',"-r", "30", "-vsync", "2", outputfile],
                           stdout=subprocess.PIPE)
-
+    pr.stdout.read()
 
     gc.collect()
     return outputfile, pr
@@ -63,7 +63,6 @@ class LikeThread(threading.Thread):
         self.instance.save()
 
         print('new video')
-        pr.stdout.read()
         print('delete')
         while True:
             gc.collect()
