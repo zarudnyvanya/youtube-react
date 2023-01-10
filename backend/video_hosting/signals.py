@@ -7,22 +7,22 @@ import threading
 import time
 
 from PIL import Image
+from config.services import crop_center_v2
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from moviepy.editor import VideoFileClip
 from users.models import CustomUser
 
 from .models import Video, Channel
-from moviepy.editor import VideoFileClip
-
-from config.services import crop_center_v2
 
 
 def to_mp4(inputfile, bias):
     _format = '.' + inputfile.split('.')[-1]
     outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
-    pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", outputfile], stdout=subprocess.PIPE)
+    pr = subprocess.Popen(['ffmpeg', '-i', inputfile, '-vcodec', 'h264', "-r", "30", "-vsync", "2", outputfile],
+                          stdout=subprocess.PIPE)
     gc.collect()
     return outputfile, pr
 
@@ -44,38 +44,33 @@ def save_user_channel(sender, instance, **kwargs):
 
 class LikeThread(threading.Thread):
     def __init__(self, obj, **kwargs):
-        self.instance  = obj
+        self.instance = obj
 
         super(LikeThread, self).__init__(**kwargs)
 
     def to_mp4(self):
         return to_mp4(self.instance.file.path, bias=random_char(6))
 
-
     def run(self):
         _format = self.instance.file.path.split('.')[-1]
         output, pr = self.to_mp4()
-        while True:
-            if self.instance.duration:
-                self.instance.file.name = output
-                self.instance.save()
-                break
-            time.sleep(10)
-            print('sleep')
+
+        for_delete = self.instance.file.path
+
+        self.instance.file.name = output
+        self.instance.save()
+
         print('new video')
         pr.stdout.read()
         print('delete')
         while True:
             gc.collect()
             try:
-                os.remove(self.instance.file.path)
+                os.remove(for_delete)
                 break
             except PermissionError as ex:
                 print(ex)
                 time.sleep(10)
-
-
-
 
 
 # long running code here
