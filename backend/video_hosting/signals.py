@@ -17,7 +17,7 @@ from users.models import CustomUser
 
 from .models import Video, Channel
 
-
+## Форматы шалят, то звука нет, то файл сломан, связано с mkv
 def to_mp4(inputfile, bias):
     _format = '.' + inputfile.split('.')[-1]
     outputfile = ".".join(inputfile.replace(_format, ".mp4").split('.')[:-1]) + "_" + bias + ".mp4"
