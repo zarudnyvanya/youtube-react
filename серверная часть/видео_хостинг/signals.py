@@ -5,7 +5,6 @@ import string
 import subprocess
 import threading
 import time
-
 from PIL import Image
 from config.services import crop_center_v2
 from django.core.files import File
