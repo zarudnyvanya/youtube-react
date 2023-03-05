@@ -9,7 +9,10 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import setenv
+try:
+    import setenv
+except ImportError:
+    print("Warning: module enviroment is undefined")
 import os
 from pathlib import Path
 
@@ -111,26 +114,26 @@ ASGI_APPLICATION = 'config.asgi:application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
-DATABASES_NAME = os.environ['DATABASE_NAME']
-DATABASES_USER = os.environ['DATABASE_USER']
-DATABASES_PASSWORD = os.environ['DATABASE_PASSWORD']
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': DATABASES_NAME,
-        'USER': DATABASES_USER,
-        "PASSWORD": DATABASES_PASSWORD,
-        "HOST": '127.0.0.1',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES_NAME = os.environ['DATABASE_NAME']
+# DATABASES_USER = os.environ['DATABASE_USER']
+# DATABASES_PASSWORD = os.environ['DATABASE_PASSWORD']
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': DATABASES_NAME,
+#         'USER': DATABASES_USER,
+#         "PASSWORD": DATABASES_PASSWORD,
+#         "HOST": '127.0.0.1',
+#         'PORT': '5432'
+#     }
+# }
 
 
 
@@ -209,10 +212,10 @@ REST_FRAMEWORK = {
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.mail.ru'
-EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER','')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = os.environ['DEFAULT_FROM_EMAIL']
+DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', '')
 DOMAIN = 'localhost:3000'
 SITE_NAME = 'YouTube_Clone'
 

@@ -5,3 +5,4 @@ setenv.py
 db.sqlite3
 media/
 staticfiles/
+.idea/
